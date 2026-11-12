@@ -8,7 +8,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from app.api import analytics, batches, complaints, issues
+from app.api import analytics, batches, channels, complaints, issues
 from app.core.config import Settings, get_settings
 from app.core.lifespan import make_lifespan
 
@@ -37,14 +37,14 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         return JSONResponse(status_code=422, content={"error": {"code": 422, "message": "Validation error",
                                                                 "details": jsonable(exc.errors())}})
 
-    for r in (complaints.router, batches.router, issues.router, analytics.router):
+    for r in (complaints.router, channels.router, batches.router, issues.router, analytics.router):
         app.include_router(r)
 
     @app.get("/health", tags=["meta"])
     def health() -> dict:
         c = app.state.container
         return {"status": "ok", "llm_available": c.classifier.available, "embedding_model": c.embedder.encoder.model_name,
-                "vectors": c.store.count()}
+                "vectors": c.store.count(), "transcriber": c.transcriber.describe()}
 
     return app
 

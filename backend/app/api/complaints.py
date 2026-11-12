@@ -100,4 +100,9 @@ def similar_complaints(
         hits = c.similarity.find_similar_complaints(complaint_id, top_k)
     except ComplaintNotEmbeddedError as exc:
         raise HTTPException(status_code=409, detail="Complaint has not been embedded yet") from exc
+    # SQLite is the source of truth for identity (customers can be relinked after embedding).
+    current = c.repo.get_complaints([h["complaint_id"] for h in hits])
+    for h in hits:
+        if h["complaint_id"] in current:
+            h["customer_id"] = current[h["complaint_id"]]["customer_id"]
     return envelope(hits, top_k=top_k, note="Semantic similarity only; does not imply the same customer or incident.")

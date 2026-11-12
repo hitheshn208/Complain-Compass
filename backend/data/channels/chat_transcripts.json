@@ -1,0 +1,492 @@
+{
+  "conversations": [
+    {
+      "conversation_id": "CHAT-D01",
+      "customer_id": "CUST-1078",
+      "started_at": "2026-09-12T19:54:02Z",
+      "messages": [
+        {
+          "role": "bot",
+          "text": "Hi! I'm ShopBot. How can I help you today?",
+          "timestamp": "2026-09-12T19:54:02Z"
+        },
+        {
+          "role": "customer",
+          "text": "hi",
+          "timestamp": "2026-09-12T19:55:26Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-09-12T19:55:31Z"
+        },
+        {
+          "role": "customer",
+          "text": "The blender I received smells like burning and started smoking on first use. Order ORD-636073.",
+          "timestamp": "2026-09-12T19:56:56Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-09-12T19:57:01Z"
+        },
+        {
+          "role": "customer",
+          "text": "This is the second time I'm contacting you about this.",
+          "timestamp": "2026-09-12T19:57:46Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-09-12T19:57:51Z"
+        },
+        {
+          "role": "agent",
+          "text": "Thanks for your patience, I have escalated this.",
+          "timestamp": "2026-09-12T20:00:51Z"
+        }
+      ]
+    },
+    {
+      "conversation_id": "CHAT-D02",
+      "customer_email": "farah.1225@example.com",
+      "started_at": "2026-10-12T11:05:14Z",
+      "messages": [
+        {
+          "role": "bot",
+          "text": "Hi! I'm ShopBot. How can I help you today?",
+          "timestamp": "2026-10-12T11:05:14Z"
+        },
+        {
+          "role": "customer",
+          "text": "hi",
+          "timestamp": "2026-10-12T11:06:31Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-10-12T11:06:36Z"
+        },
+        {
+          "role": "customer",
+          "text": "My package ORD-893365 was supposed to arrive 12 days ago and tracking hasn't updated.",
+          "timestamp": "2026-10-12T11:08:01Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-10-12T11:08:06Z"
+        },
+        {
+          "role": "customer",
+          "text": "This is the second time I'm contacting you about this.",
+          "timestamp": "2026-10-12T11:09:34Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-10-12T11:09:39Z"
+        },
+        {
+          "role": "agent",
+          "text": "Thanks for your patience, I have escalated this.",
+          "timestamp": "2026-10-12T11:12:39Z"
+        }
+      ]
+    },
+    {
+      "conversation_id": "CHAT-D03",
+      "customer_id": "CUST-1203",
+      "started_at": "2026-10-06T16:44:47Z",
+      "messages": [
+        {
+          "role": "bot",
+          "text": "Hi! I'm ShopBot. How can I help you today?",
+          "timestamp": "2026-10-06T16:44:47Z"
+        },
+        {
+          "role": "customer",
+          "text": "hi",
+          "timestamp": "2026-10-06T16:46:11Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-10-06T16:46:16Z"
+        },
+        {
+          "role": "customer",
+          "text": "Still waiting on refund for cancelled order ORD-207282, support keeps saying it is processing.",
+          "timestamp": "2026-10-06T16:47:07Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-10-06T16:47:12Z"
+        },
+        {
+          "role": "customer",
+          "text": "This is the second time I'm contacting you about this.",
+          "timestamp": "2026-10-06T16:48:38Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-10-06T16:48:43Z"
+        },
+        {
+          "role": "agent",
+          "text": "Thanks for your patience, I have escalated this.",
+          "timestamp": "2026-10-06T16:51:43Z"
+        }
+      ]
+    },
+    {
+      "conversation_id": "CHAT-D04",
+      "customer_email": "chen.1251@example.com",
+      "started_at": "2026-10-15T13:51:25Z",
+      "messages": [
+        {
+          "role": "bot",
+          "text": "Hi! I'm ShopBot. How can I help you today?",
+          "timestamp": "2026-10-15T13:51:25Z"
+        },
+        {
+          "role": "customer",
+          "text": "hi",
+          "timestamp": "2026-10-15T13:52:18Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-10-15T13:52:23Z"
+        },
+        {
+          "role": "customer",
+          "text": "My payment failed at checkout but \u00a3249 was deducted from my bank account. Order ORD-962767. You can reach me at user988@example.com or +1 555-755-8742.",
+          "timestamp": "2026-10-15T13:53:08Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-10-15T13:53:13Z"
+        },
+        {
+          "role": "customer",
+          "text": "This is the second time I'm contacting you about this.",
+          "timestamp": "2026-10-15T13:54:30Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-10-15T13:54:35Z"
+        },
+        {
+          "role": "agent",
+          "text": "Thanks for your patience, I have escalated this.",
+          "timestamp": "2026-10-15T13:57:35Z"
+        }
+      ]
+    },
+    {
+      "conversation_id": "CHAT-D05",
+      "customer_id": "CUST-1239",
+      "started_at": "2026-11-07T14:22:45Z",
+      "messages": [
+        {
+          "role": "bot",
+          "text": "Hi! I'm ShopBot. How can I help you today?",
+          "timestamp": "2026-11-07T14:22:45Z"
+        },
+        {
+          "role": "customer",
+          "text": "hi",
+          "timestamp": "2026-11-07T14:23:20Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-11-07T14:23:25Z"
+        },
+        {
+          "role": "customer",
+          "text": "Refund was approved but the money never reached my account. Order ORD-768914.",
+          "timestamp": "2026-11-07T14:24:35Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-11-07T14:24:40Z"
+        },
+        {
+          "role": "customer",
+          "text": "This is the second time I'm contacting you about this.",
+          "timestamp": "2026-11-07T14:25:56Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-11-07T14:26:01Z"
+        },
+        {
+          "role": "agent",
+          "text": "Thanks for your patience, I have escalated this.",
+          "timestamp": "2026-11-07T14:29:01Z"
+        }
+      ]
+    },
+    {
+      "conversation_id": "CHAT-N01",
+      "customer_id": "CUST-1028",
+      "started_at": "2026-11-02T18:33:55Z",
+      "messages": [
+        {
+          "role": "bot",
+          "text": "Hi! I'm ShopBot. How can I help you today?",
+          "timestamp": "2026-11-02T18:33:55Z"
+        },
+        {
+          "role": "customer",
+          "text": "My account was suspended without any explanation and I have an active order ORD-323021.",
+          "timestamp": "2026-11-02T18:35:01Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-11-02T18:35:06Z"
+        },
+        {
+          "role": "agent",
+          "text": "Thanks for your patience, I have escalated this.",
+          "timestamp": "2026-11-02T18:38:06Z"
+        }
+      ]
+    },
+    {
+      "conversation_id": "CHAT-N02",
+      "customer_id": "CUST-1067",
+      "started_at": "2026-10-31T02:54:23Z",
+      "messages": [
+        {
+          "role": "bot",
+          "text": "Hi! I'm ShopBot. How can I help you today?",
+          "timestamp": "2026-10-31T02:54:23Z"
+        },
+        {
+          "role": "customer",
+          "text": "Order ORD-330254 has not been delivered, the expected date passed 10 days ago.",
+          "timestamp": "2026-10-31T02:55:11Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-10-31T02:55:16Z"
+        },
+        {
+          "role": "agent",
+          "text": "Thanks for your patience, I have escalated this.",
+          "timestamp": "2026-10-31T02:58:16Z"
+        }
+      ]
+    },
+    {
+      "conversation_id": "CHAT-N03",
+      "customer_id": "CUST-1161",
+      "started_at": "2026-11-05T15:08:37Z",
+      "messages": [
+        {
+          "role": "bot",
+          "text": "Hi! I'm ShopBot. How can I help you today?",
+          "timestamp": "2026-11-05T15:08:37Z"
+        },
+        {
+          "role": "customer",
+          "text": "Shipping is taking forever, ordered two weeks ago and nothing has arrived.",
+          "timestamp": "2026-11-05T15:09:43Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-11-05T15:09:48Z"
+        },
+        {
+          "role": "agent",
+          "text": "Thanks for your patience, I have escalated this.",
+          "timestamp": "2026-11-05T15:12:48Z"
+        }
+      ]
+    },
+    {
+      "conversation_id": "CHAT-N04",
+      "customer_id": "CUST-1120",
+      "started_at": "2026-11-04T04:13:52Z",
+      "messages": [
+        {
+          "role": "bot",
+          "text": "Hi! I'm ShopBot. How can I help you today?",
+          "timestamp": "2026-11-04T04:13:52Z"
+        },
+        {
+          "role": "customer",
+          "text": "The payment page hangs after I enter my OTP and then shows transaction failed.",
+          "timestamp": "2026-11-04T04:14:26Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-11-04T04:14:31Z"
+        },
+        {
+          "role": "agent",
+          "text": "Thanks for your patience, I have escalated this.",
+          "timestamp": "2026-11-04T04:17:31Z"
+        }
+      ]
+    },
+    {
+      "conversation_id": "CHAT-N05",
+      "customer_id": "CUST-1005",
+      "started_at": "2026-11-09T20:25:50Z",
+      "messages": [
+        {
+          "role": "bot",
+          "text": "Hi! I'm ShopBot. How can I help you today?",
+          "timestamp": "2026-11-09T20:25:50Z"
+        },
+        {
+          "role": "customer",
+          "text": "The item in order ORD-916838 arrived damaged, the box was crushed and the product is broken.",
+          "timestamp": "2026-11-09T20:26:43Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-11-09T20:26:48Z"
+        },
+        {
+          "role": "agent",
+          "text": "Thanks for your patience, I have escalated this.",
+          "timestamp": "2026-11-09T20:29:48Z"
+        }
+      ]
+    },
+    {
+      "conversation_id": "CHAT-N06",
+      "started_at": "2026-11-04T08:53:08Z",
+      "messages": [
+        {
+          "role": "bot",
+          "text": "Hi! I'm ShopBot. How can I help you today?",
+          "timestamp": "2026-11-04T08:53:08Z"
+        },
+        {
+          "role": "customer",
+          "text": "I've been on hold for over an hour and nobody answered.",
+          "timestamp": "2026-11-04T08:53:51Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-11-04T08:53:56Z"
+        },
+        {
+          "role": "agent",
+          "text": "Thanks for your patience, I have escalated this.",
+          "timestamp": "2026-11-04T08:56:56Z"
+        }
+      ]
+    },
+    {
+      "conversation_id": "CHAT-N07",
+      "started_at": "2026-11-07T16:27:57Z",
+      "messages": [
+        {
+          "role": "bot",
+          "text": "Hi! I'm ShopBot. How can I help you today?",
+          "timestamp": "2026-11-07T16:27:57Z"
+        },
+        {
+          "role": "customer",
+          "text": "Customer service agent was rude and hung up on me.",
+          "timestamp": "2026-11-07T16:28:50Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-11-07T16:28:55Z"
+        },
+        {
+          "role": "agent",
+          "text": "Thanks for your patience, I have escalated this.",
+          "timestamp": "2026-11-07T16:31:55Z"
+        }
+      ]
+    },
+    {
+      "conversation_id": "CHAT-N08",
+      "started_at": "2026-11-10T13:42:11Z",
+      "messages": [
+        {
+          "role": "bot",
+          "text": "Hi! I'm ShopBot. How can I help you today?",
+          "timestamp": "2026-11-10T13:42:11Z"
+        },
+        {
+          "role": "customer",
+          "text": "You promised a refund in 5-7 business days, it's been 8 days. Still nothing.",
+          "timestamp": "2026-11-10T13:43:38Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-11-10T13:43:43Z"
+        },
+        {
+          "role": "agent",
+          "text": "Thanks for your patience, I have escalated this.",
+          "timestamp": "2026-11-10T13:46:43Z"
+        }
+      ]
+    },
+    {
+      "conversation_id": "CHAT-N09",
+      "started_at": "2026-10-30T05:33:26Z",
+      "messages": [
+        {
+          "role": "bot",
+          "text": "Hi! I'm ShopBot. How can I help you today?",
+          "timestamp": "2026-10-30T05:33:26Z"
+        },
+        {
+          "role": "customer",
+          "text": "The item in order ORD-289945 arrived damaged, the box was crushed and the product is broken.",
+          "timestamp": "2026-10-30T05:34:12Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-10-30T05:34:17Z"
+        },
+        {
+          "role": "agent",
+          "text": "Thanks for your patience, I have escalated this.",
+          "timestamp": "2026-10-30T05:37:17Z"
+        }
+      ]
+    },
+    {
+      "conversation_id": "CHAT-BOTONLY",
+      "started_at": "2026-11-08T22:00:00Z",
+      "messages": [
+        {
+          "role": "bot",
+          "text": "Hi! I'm ShopBot. How can I help you today?"
+        },
+        {
+          "role": "bot",
+          "text": "Are you still there?"
+        }
+      ]
+    }
+  ]
+}

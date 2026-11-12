@@ -98,3 +98,12 @@ def validate_row(
         source_row=row_number,
     )
     return complaint, customer, []
+
+
+def merge_profiles(a: CustomerProfile, b: CustomerProfile) -> CustomerProfile:
+    """Merge two profiles for the same id; later non-null values win, nulls never erase."""
+    data = a.model_dump()
+    for key, value in b.model_dump().items():
+        if value is not None:
+            data[key] = value
+    return CustomerProfile(**data)

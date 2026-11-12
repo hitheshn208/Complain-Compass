@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS ingestion_batches (
     batch_id        TEXT PRIMARY KEY,
     filename        TEXT NOT NULL,
     file_hash       TEXT NOT NULL UNIQUE,
+    channel         TEXT NOT NULL DEFAULT 'CSV',
     total_rows      INTEGER NOT NULL DEFAULT 0 CHECK (total_rows >= 0),
     accepted_rows   INTEGER NOT NULL DEFAULT 0 CHECK (accepted_rows >= 0),
     rejected_rows   INTEGER NOT NULL DEFAULT 0 CHECK (rejected_rows >= 0),
@@ -32,6 +33,16 @@ CREATE TABLE IF NOT EXISTS ingestion_batches (
     created_at      TEXT NOT NULL,
     updated_at      TEXT NOT NULL
 );
+
+-- Cross-channel identity directory. Raw contact values are never stored, only salted hashes.
+CREATE TABLE IF NOT EXISTS customer_contacts (
+    contact_type    TEXT NOT NULL CHECK (contact_type IN ('email','phone','social_handle')),
+    contact_hash    TEXT NOT NULL,
+    customer_id     TEXT NOT NULL REFERENCES customers(customer_id) ON DELETE CASCADE,
+    created_at      TEXT NOT NULL,
+    PRIMARY KEY (contact_type, contact_hash)
+);
+CREATE INDEX IF NOT EXISTS idx_contacts_customer ON customer_contacts(customer_id);
 
 CREATE TABLE IF NOT EXISTS batch_row_errors (
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -51,6 +62,7 @@ CREATE TABLE IF NOT EXISTS complaints (
     pii_masked        INTEGER NOT NULL DEFAULT 0,
     reference_ids     TEXT NOT NULL DEFAULT '[]',
     timestamp         TEXT NOT NULL,
+    timestamp_inferred INTEGER NOT NULL DEFAULT 0,  -- 1 = no timestamp in the source; upload time used
     batch_id          TEXT NOT NULL REFERENCES ingestion_batches(batch_id) ON DELETE CASCADE,
     source_row        INTEGER,
     created_at        TEXT NOT NULL,
@@ -208,7 +220,18 @@ class Database:
     def init_schema(self) -> None:
         conn = self.connect()
         conn.executescript(SCHEMA)
+        self._migrate(conn)
         conn.commit()
+
+    @staticmethod
+    def _migrate(conn: sqlite3.Connection) -> None:
+        """Additive migrations for databases created by earlier versions."""
+        cols = {r[1] for r in conn.execute("PRAGMA table_info(ingestion_batches)")}
+        if "channel" not in cols:
+            conn.execute("ALTER TABLE ingestion_batches ADD COLUMN channel TEXT NOT NULL DEFAULT 'CSV'")
+        cols = {r[1] for r in conn.execute("PRAGMA table_info(complaints)")}
+        if "timestamp_inferred" not in cols:
+            conn.execute("ALTER TABLE complaints ADD COLUMN timestamp_inferred INTEGER NOT NULL DEFAULT 0")
 
     def close(self) -> None:
         conn = getattr(self._local, "conn", None)

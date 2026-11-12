@@ -15,7 +15,13 @@ from app.inference.classifier import LLMClassifier
 from app.inference.embeddings import EmbeddingEngine, HashingEncoder, SentenceTransformerEncoder
 from app.inference.similarity import SimilarityService
 from app.inference.vector_store import VectorStore
+from app.ingestion.chat_ingestion import ChatIngestionAdapter
 from app.ingestion.csv_ingestion import CSVIngestionAdapter
+from app.ingestion.email_ingestion import EmailIngestionAdapter
+from app.ingestion.identity import ContactResolver
+from app.ingestion.social_ingestion import SocialIngestionAdapter
+from app.ingestion.transcription import Transcriber, build_transcriber
+from app.ingestion.voice_ingestion import VoiceIngestionAdapter
 from app.services.analytics_service import AnalyticsService
 from app.services.ingestion_service import IngestionService
 from app.services.pipeline import PipelineOrchestrator, PipelineState
@@ -35,6 +41,7 @@ class Container:
     pipeline: PipelineOrchestrator
     analytics: AnalyticsService
     ingestion: IngestionService
+    transcriber: Transcriber
 
 
 def build_container(settings: Settings) -> Container:
@@ -54,6 +61,16 @@ def build_container(settings: Settings) -> Container:
     if not classifier.available:
         logger.warning("OPENAI_API_KEY not set or LLM disabled: using deterministic fallback classification/labels.")
     pipeline = PipelineOrchestrator(settings, repo, embedder, classifier, PipelineState())
+    resolver = ContactResolver(repo.lookup_contacts, settings.identity_salt)
+    transcriber = build_transcriber(settings)
+    if not transcriber.available:
+        logger.warning("Voice ingestion unavailable: %s", transcriber.unavailable_reason)
+    channels = {
+        "email": EmailIngestionAdapter(resolver),
+        "chat": ChatIngestionAdapter(resolver),
+        "social": SocialIngestionAdapter(resolver),
+        "voice": VoiceIngestionAdapter(resolver, transcriber),
+    }
     return Container(
         settings=settings,
         db=db,
@@ -64,7 +81,9 @@ def build_container(settings: Settings) -> Container:
         classifier=classifier,
         pipeline=pipeline,
         analytics=AnalyticsService(repo, settings),
-        ingestion=IngestionService(repo, CSVIngestionAdapter(int(settings.max_upload_mb * 1024 * 1024))),
+        ingestion=IngestionService(repo, CSVIngestionAdapter(int(settings.max_upload_mb * 1024 * 1024)),
+                                   channels, resolver),
+        transcriber=transcriber,
     )
 
 

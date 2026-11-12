@@ -124,6 +124,22 @@ def test_emerging_spike_detected():
     assert flags["A"]["is_emerging"] and not flags["B"]["is_emerging"]
 
 
+def test_undated_upload_does_not_shift_trend_window():
+    """An item without a timestamp gets the upload time; that must not move 'now' past a real spike."""
+    rows = [row(f"base{d}", "A", f"C{d}", d + 3.5) for d in range(25)]
+    rows += [row(f"b{d}", "B", f"D{d}", d + 3.5) for d in range(25)]
+    rows += [row(f"spike{i}", "A", f"S{i}", 0.5 + (i % 3) * 0.7) for i in range(15)]
+    df = frame(rows)
+    df["timestamp_inferred"] = 0
+    late = frame([row("undated", "B", "Z1", -5.0)])  # 5 days "after" the data: upload time
+    late["timestamp_inferred"] = 1
+    res = detect_emerging_issues(pd.concat([df, late], ignore_index=True))
+    flags = {i["issue_id"]: i for i in res["issues"]}
+    assert flags["A"]["is_emerging"]
+    assert res["excluded_inferred_timestamps"] == 1
+    assert res["as_of"] == df["timestamp"].max().isoformat()
+
+
 def test_volume_over_time_fills_gaps():
     df = frame([row("a", "A", "C1", 0), row("b", "A", "C1", 3, incident="inc-a")])
     series = volume_over_time(df)

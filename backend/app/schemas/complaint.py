@@ -37,11 +37,22 @@ class RowError(BaseModel):
     message: str
 
 
+class ItemReport(BaseModel):
+    """Per-item outcome for multi-file channels (one email, conversation, post or call)."""
+
+    item: int
+    label: str = Field(description="file name or message/conversation/post identifier")
+    accepted: bool
+    customer_link: str = Field(description="explicit | directory | pseudonymous | anonymous | -")
+    detail: str | None = None
+
+
 class IngestionResult(BaseModel):
     total_rows: int
     complaints: list[StandardComplaint]
     customers: list[CustomerProfile]
     errors: list[RowError]
+    items: list[ItemReport] = Field(default_factory=list)
 
     @property
     def rejected_row_numbers(self) -> set[int]:

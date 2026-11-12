@@ -126,6 +126,7 @@ class Repository:
         complaints: Sequence[StandardComplaint],
         customers: Sequence[CustomerProfile],
         errors: Sequence[RowError],
+        channel: str = "CSV",
     ) -> None:
         """Atomically persist a batch, its customers, valid complaints and row errors."""
         now = utcnow_iso()
@@ -134,17 +135,18 @@ class Repository:
         with self.db.transaction() as conn:
             conn.execute(
                 """INSERT INTO ingestion_batches
-                   (batch_id, filename, file_hash, total_rows, accepted_rows, rejected_rows, status, stage, progress,
-                    created_at, updated_at)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?, ?)""",
-                (batch_id, filename, file_hash, total_rows, accepted, rejected, BatchStatus.UPLOADED.value, "ingested", now, now),
+                   (batch_id, filename, file_hash, channel, total_rows, accepted_rows, rejected_rows, status, stage,
+                    progress, created_at, updated_at)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?, ?)""",
+                (batch_id, filename, file_hash, channel, total_rows, accepted, rejected, BatchStatus.UPLOADED.value,
+                 "ingested", now, now),
             )
             self._upsert_customers(conn, customers, now)
             conn.executemany(
                 """INSERT INTO complaints
-                   (complaint_id, customer_id, source, original_text, timestamp, batch_id, source_row, created_at,
-                    processing_status)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                   (complaint_id, customer_id, source, original_text, timestamp, timestamp_inferred, batch_id,
+                    source_row, created_at, processing_status)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                 [
                     (
                         c.complaint_id,
@@ -152,6 +154,7 @@ class Repository:
                         c.source.value,
                         c.original_text,
                         c.timestamp.replace(microsecond=0).isoformat(),
+                        int(c.timestamp_inferred),
                         batch_id,
                         c.source_row,
                         now,
@@ -186,6 +189,57 @@ class Repository:
     def upsert_customers(self, customers: Sequence[CustomerProfile]) -> None:
         with self.db.transaction() as conn:
             self._upsert_customers(conn, customers, utcnow_iso())
+
+    # ------------------------------------------------------------------ identity directory
+    def lookup_contacts(self, contact_type: str, hashes: Sequence[str]) -> dict[str, str]:
+        """{contact_hash: customer_id} for hashes present in the directory."""
+        if not hashes:
+            return {}
+        marks = ",".join("?" * len(hashes))
+        rows = self.conn.execute(
+            f"SELECT contact_hash, customer_id FROM customer_contacts WHERE contact_type = ? AND contact_hash IN ({marks})",
+            (contact_type, *hashes),
+        ).fetchall()
+        return {r["contact_hash"]: r["customer_id"] for r in rows}
+
+    def save_directory(
+        self, customers: Sequence[CustomerProfile], contacts: Sequence[tuple[str, str, str]]
+    ) -> None:
+        """Upsert customer profiles and (contact_type, contact_hash, customer_id) rows."""
+        now = utcnow_iso()
+        with self.db.transaction() as conn:
+            self._upsert_customers(conn, customers, now)
+            conn.executemany(
+                """INSERT INTO customer_contacts (contact_type, contact_hash, customer_id, created_at)
+                   VALUES (?, ?, ?, ?)
+                   ON CONFLICT(contact_type, contact_hash) DO UPDATE SET customer_id = excluded.customer_id""",
+                [(t, h, cid, now) for t, h, cid in contacts],
+            )
+
+    def relink_customers(self, mapping: dict[str, str]) -> int:
+        """Move complaints/incidents from pseudonymous IDs to directory customer IDs.
+        Returns the number of complaints relinked. Emptied pseudonymous customers are deleted."""
+        moved = 0
+        with self.db.transaction() as conn:
+            for old, new in mapping.items():
+                if old == new:
+                    continue
+                moved += conn.execute("UPDATE complaints SET customer_id = ? WHERE customer_id = ?", (new, old)).rowcount
+                conn.execute("UPDATE incidents SET customer_id = ? WHERE customer_id = ?", (new, old))
+                conn.execute(
+                    "DELETE FROM customers WHERE customer_id = ? AND NOT EXISTS "
+                    "(SELECT 1 FROM complaints WHERE customer_id = ?)", (old, old)
+                )
+        return moved
+
+    def directory_stats(self) -> dict[str, Any]:
+        rows = self.conn.execute(
+            "SELECT contact_type, COUNT(*) AS n, COUNT(DISTINCT customer_id) AS customers FROM customer_contacts "
+            "GROUP BY contact_type"
+        ).fetchall()
+        total = self.conn.execute("SELECT COUNT(DISTINCT customer_id) FROM customer_contacts").fetchone()[0]
+        return {"customers_with_contacts": total,
+                "by_type": {r["contact_type"]: {"contacts": r["n"], "customers": r["customers"]} for r in rows}}
 
     def get_customer(self, customer_id: str) -> dict[str, Any] | None:
         return _row(self.conn.execute("SELECT * FROM customers WHERE customer_id = ?", (customer_id,)).fetchone())
@@ -293,7 +347,8 @@ class Repository:
         """Flat analytics frame: one row per (non-empty) complaint with all joined attributes."""
         filters = filters or ComplaintFilters()
         where, params = filters.to_sql()
-        q = f"""SELECT c.complaint_id, c.customer_id, c.source, c.timestamp, c.batch_id, c.reference_ids,
+        q = f"""SELECT c.complaint_id, c.customer_id, c.source, c.timestamp, c.timestamp_inferred, c.batch_id,
+                       c.reference_ids,
                        c.normalized_text,
                        cu.country, cu.state, cu.age_group, cu.student_status, cu.income_bracket,
                        cl.category, cl.severity, cl.entities,

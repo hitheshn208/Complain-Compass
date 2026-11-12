@@ -35,3 +35,12 @@ def test_reference_extraction_variants():
 def test_mask_pii_ssn():
     text, found = mask_pii("ssn 123-45-6789")
     assert text == "ssn [SSN]" and found == ["SSN"]
+
+
+def test_spoken_reference_ids_match_written_form():
+    # numeric codes after a keyword get the written prefix, so channels agree on the same order
+    assert extract_reference_ids("my order number is 481234") == ["ORD-481234"]
+    assert extract_reference_ids("transaction 99887766 failed") == ["TXN-99887766"]
+    # a keyword followed by a non-ID word must not swallow the real ID that follows
+    assert extract_reference_ids("never ordered on invoice order number 239093") == ["ORD-239093"]
+    assert extract_reference_ids("order number pending") == []

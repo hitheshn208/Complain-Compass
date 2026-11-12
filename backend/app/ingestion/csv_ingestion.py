@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 import pandas as pd
 
 from app.ingestion.base import IngestionAdapter, IngestionError
-from app.ingestion.validator import missing_required_columns, validate_row
+from app.ingestion.validator import merge_profiles, missing_required_columns, validate_row
 from app.schemas.complaint import CustomerProfile, IngestionResult, RowError, StandardComplaint
 
 ALLOWED_EXTENSIONS = (".csv",)
@@ -16,15 +16,6 @@ ALLOWED_EXTENSIONS = (".csv",)
 
 def sha256_bytes(content: bytes) -> str:
     return hashlib.sha256(content).hexdigest()
-
-
-def merge_profiles(a: CustomerProfile, b: CustomerProfile) -> CustomerProfile:
-    """Merge two profiles for the same id; later non-null values win, nulls never erase."""
-    data = a.model_dump()
-    for key, value in b.model_dump().items():
-        if value is not None:
-            data[key] = value
-    return CustomerProfile(**data)
 
 
 class CSVIngestionAdapter(IngestionAdapter):

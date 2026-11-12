@@ -35,6 +35,7 @@ import numpy as np
 import pandas as pd
 
 from app.analytics.severity import severity_label, severity_score
+from app.analytics.trends import analysis_as_of
 
 BUSINESS_CATEGORY_WEIGHTS: dict[str, float] = {
     "Payments": 90, "Billing": 85, "Refunds": 80, "Account Status": 75, "Account Access": 70,
@@ -140,7 +141,7 @@ def compute_issue_scores(
     if data.empty:
         return []
     data["_incident"] = _incident_key(data)
-    as_of = as_of or df["timestamp"].max()
+    as_of = as_of or analysis_as_of(df)
     data_start = df["timestamp"].min()
     history_days = (as_of - data_start).total_seconds() / 86400.0
     total_weeks = max(1, math.ceil((history_days + 1) / 7))

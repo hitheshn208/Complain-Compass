@@ -3,7 +3,11 @@
 ## Pipeline
 
 ```
-CSV upload ──► IngestionAdapter (CSV) ──► StandardComplaint objects ──► SQLite (batch, customers, complaints, row errors)
+CSV ─────────► CSVIngestionAdapter ──┐
+.eml/.mbox ──► EmailIngestionAdapter ─┤   ContactResolver (customer directory,
+chat JSON ───► ChatIngestionAdapter ──┼─► salted hashes) ──► StandardComplaint ──► SQLite (batch, customers,
+social posts ► SocialIngestionAdapter ┤                                            complaints, row errors)
+audio ─► Whisper ► VoiceIngestionAdapter┘
                                                                               │  BackgroundTasks
                                                                               ▼
  preprocess ─► embed ─► cluster ─► classify ─► label ─► deduplicate ─► score      (PipelineOrchestrator)
@@ -21,6 +25,35 @@ stage lives in its own package. `services/pipeline.py` orchestrates them, and th
 routers in `api/` only parse requests and call services. All SQL is in `database/repository.py`
 and uses parameterized queries.
 
+**Channels.** Every channel adapter reuses the CSV row validator (`ResultBuilder` in `ingestion/base.py`),
+so text length, timestamp and customer-ID rules are identical everywhere. One email, conversation, post
+or call is one *item* (the equivalent of a CSV row). Item-level problems become row errors, and file-level
+problems reject the upload.
+
+| Channel | Text | Timestamp | Identity | Rejected items |
+|---|---|---|---|---|
+| CSV | `complaint_text` | `timestamp` | `customer_id` | invalid rows |
+| Email (`.eml`, `.mbox`) | subject + body (HTML converted; quotes/signatures removed in preprocessing) | `Date` | `X-Customer-ID`, else sender via directory | auto-replies, bounces, bulk, bad `Date` |
+| Chat (`.json`, `.jsonl`) | customer turns only (bot/agent dropped) | first customer message | `customer_id`, else email/phone via directory | no customer messages |
+| Social (`.json`, `.jsonl`, `.csv`) | post text | `created_at` | `customer_id`, else handle via directory | reposts / retweets |
+| Voice (audio + manifest CSV) | Whisper transcript, spoken digit runs joined | manifest `timestamp` | manifest `customer_id`, else phone via directory | no speech, undecodable audio |
+
+**Cross-channel identity** (`ingestion/identity.py`). Order: explicit customer ID, then a directory match of a
+normalized contact (lower-cased email, last 10 phone digits, handle without `@`), then a stable
+pseudonymous ID (`EMAIL-…`, `PHONE-…`, `SOCIAL-…`) so one sender's own reports still group together,
+otherwise anonymous. Contacts are stored only as HMAC-SHA256 hashes (`IDENTITY_SALT`). Uploading the
+directory later moves pseudonymous complaints to the real customer and re-runs dedup and scoring. Nothing is
+inferred from complaint text.
+
+**Reference IDs across channels.** A numeric code after a keyword gets the written prefix
+("order number 481234" → `ORD-481234`), so a spoken or typed order number matches the CSV's `ORD-481234`.
+A shared reference ID for the same customer merges reports (dedup rule T1), whatever the channel.
+
+**Voice transcription** (`ingestion/transcription.py`). `TRANSCRIBER=local` uses faster-whisper offline
+(model `WHISPER_MODEL`, loaded lazily once per process). `openai` uses the OpenAI transcription API, and `none`
+disables voice ingestion (the endpoint returns 503). Transcription runs during the upload request in a worker
+thread. There is no speaker separation, so agent speech is part of the transcript.
+
 **Singletons.** The embedding model, Chroma client, SQLite handle and OpenAI client are
 created once in `core/lifespan.py`, held in a `Container`, and injected through FastAPI
 `Depends(get_container)`.
@@ -29,7 +62,7 @@ created once in `core/lifespan.py`, held in a `Container`, and injected through 
 
 | Store | Contents |
 |---|---|
-| SQLite (`storage/complaint_compass.db`, WAL, `PRAGMA foreign_keys=ON`) | customers, ingestion_batches, batch_row_errors, complaints, issues, cluster_assignments, complaint_classifications, incidents, complaint_incident_links, duplicate_review_candidates, issue_metrics, segment_populations, llm_cache |
+| SQLite (`storage/complaint_compass.db`, WAL, `PRAGMA foreign_keys=ON`) | customers, customer_contacts (hashed), ingestion_batches (with `channel`), batch_row_errors, complaints, issues, cluster_assignments, complaint_classifications, incidents, complaint_incident_links, duplicate_review_candidates, issue_metrics, segment_populations, llm_cache |
 | ChromaDB (`storage/chroma`, collection `complaints`, `hnsw:space=cosine`) | one 384-d L2-normalized vector per complaint. **Vector ID = `complaint_id` (UUID)**. Metadata: customer_id, source, timestamp, batch_id |
 
 `complaints.embedded` mirrors whether a vector exists. Embedding is incremental: IDs

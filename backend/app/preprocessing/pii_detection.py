@@ -5,10 +5,15 @@ import re
 
 # Business reference identifiers: ORD-12345, order #12345, TXN-8899, transaction id 77ab12
 _REFERENCE = re.compile(
-    r"\b(?:(?P<prefix>ORD|ORDER|TXN|TRX|INV|REF|TKT|TICKET)[-_#: ]?(?P<code>[A-Z0-9]{4,}))\b"
-    r"|\b(?:order|transaction|txn|invoice|ref(?:erence)?)\s*(?:id|no\.?|number)?\s*[#:]?\s*(?P<code2>[A-Z0-9-]{5,})\b",
+    r"\b(?:(?P<prefix>ORD|ORDER|TXN|TRX|INV|REF|TKT|TICKET)[-_#: ]?(?P<code>(?=[A-Z]*\d)[A-Z0-9]{4,}))\b"
+    r"|\b(?P<word>order|transaction|txn|invoice|ref(?:erence)?)\s*(?:id|no\.?|number)?\s*(?:is\s+)?[#:]?\s*"
+    r"(?P<code2>(?=[A-Z-]*\d)[A-Z0-9-]{5,})\b",
     re.IGNORECASE,
 )
+
+# Spoken / written ID with a purely numeric code ("order number 481234") gets the same canonical
+# prefix as the written form ("ORD-481234") so the same order matches across channels.
+_WORD_PREFIX = {"order": "ORD", "transaction": "TXN", "txn": "TXN", "invoice": "INV", "ref": "REF", "reference": "REF"}
 
 _PII_PATTERNS: list[tuple[str, re.Pattern[str], str]] = [
     ("EMAIL", re.compile(r"\b[\w.+-]+@[\w-]+\.[\w.-]+\b"), "[EMAIL]"),
@@ -40,7 +45,9 @@ def extract_reference_ids(text: str) -> list[str]:
             code = m.group("code2")
             if not any(ch.isdigit() for ch in code):
                 continue
-            ref = code.upper()
+            ref = code.upper().strip("-")
+            if ref.isdigit():
+                ref = f"{_WORD_PREFIX[m.group('word').lower()]}-{ref}"
         if ref not in refs:
             refs.append(ref)
     return refs

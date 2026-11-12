@@ -9,8 +9,12 @@ Metrics:
   * Deduplication: pairwise precision / recall / F1 of "same incident" pairs
   * Severity classification: macro-F1 (and per-class report)
   * Ranking: NDCG@10 and Precision@10 against the ground-truth family priority ranking
+  * Multi-channel (``--channels``): after the CSV metrics are computed, ingests the customer
+    directory + email / chat / social / voice samples from data/channels/ and checks identity
+    linking, cross-channel duplicate merging, rejected items and voice reference-ID recovery
+    against data/channels/channel_ground_truth.csv
 
-Usage:  python scripts/evaluate.py [--write-report] [--sample 400]
+Usage:  python scripts/evaluate.py [--write-report] [--channels] [--sample 400]
 Settings can be overridden via env vars (e.g. DEDUP_SEMANTIC_THRESHOLD=0.6).
 """
 from __future__ import annotations
@@ -70,7 +74,102 @@ def ndcg_at_k(relevances: list[float], ideal: list[float], k: int = 10) -> float
     return dcg(relevances) / idcg if idcg else 0.0
 
 
-def run(sample: int, write_report: bool) -> dict:
+CHANNEL_DIR = BACKEND / "data" / "channels"
+
+
+def evaluate_channels(c) -> dict:
+    """Ingest the multi-channel samples on top of the processed CSV and score them vs channel ground truth."""
+    from app.ingestion.base import UploadedFile
+    from app.preprocessing.cleaner import clean_text
+
+    conn = c.db.connect()
+    from app.database.repository import ComplaintFilters
+
+    before = c.analytics.overview(ComplaintFilters())
+    directory = c.ingestion.import_directory((CHANNEL_DIR / "customer_directory.csv").read_bytes(),
+                                             "customer_directory.csv")
+    inputs = {
+        "email": sorted((CHANNEL_DIR / "email").iterdir()),
+        "chat": [CHANNEL_DIR / "chat_transcripts.json"],
+        "social": [CHANNEL_DIR / "social_posts.jsonl"],
+        "voice": sorted((CHANNEL_DIR / "voice").glob("*.wav")) + [CHANNEL_DIR / "voice" / "voice_manifest.csv"],
+    }
+    truth = pd.read_csv(CHANNEL_DIR / "channel_ground_truth.csv", dtype=str, keep_default_na=False)
+    label_to_complaint: dict[tuple[str, str], str | None] = {}
+    timings: dict[str, float] = {}
+    for channel, paths in inputs.items():
+        t0 = time.time()
+        res = c.ingestion.ingest_files(channel, [UploadedFile(p.name, p.read_bytes()) for p in paths])
+        c.pipeline.process_batch(res["batch_id"])
+        timings[channel] = round(time.time() - t0, 1)
+        by_row = dict(conn.execute("SELECT source_row, complaint_id FROM complaints WHERE batch_id = ?",
+                                   (res["batch_id"],)).fetchall())
+        mbox_names = iter(t for t in truth[truth.channel == "email"]["item"] if not (CHANNEL_DIR / "email" / t).exists())
+        for it in res["items"]:
+            label = it["label"]
+            if "#" in label:
+                file, key = label.split("#", 1)
+                label = next(mbox_names) if file.endswith(".mbox") else key
+            label_to_complaint[(channel, label)] = by_row.get(it["item"]) if it["accepted"] else None
+
+    links = pd.DataFrame(conn.execute(
+        "SELECT l.complaint_id, l.incident_id, c.batch_id, c.customer_id, c.reference_ids FROM complaint_incident_links l "
+        "JOIN complaints c USING (complaint_id)").fetchall(), columns=["cid", "incident", "batch", "customer", "refs"])
+    first_batch = conn.execute("SELECT batch_id FROM ingestion_batches WHERE channel = 'CSV'").fetchone()[0]
+    incident_of = dict(zip(links.cid, links.incident))
+    members = links.groupby("incident")
+    review = {r[0] for r in conn.execute("SELECT complaint_id FROM duplicate_review_candidates").fetchall()}
+
+    out: dict = {"directory": {k: directory[k] for k in ("customers", "contacts_stored", "complaints_relinked")},
+                 "seconds_per_channel": timings, "per_channel": {}}
+    dup_ok = dup_total = dup_review = new_false_merge = new_total = id_ok = id_total = 0
+    rej_ok = rej_total = voice_ref_ok = voice_ref_total = 0
+    for ch in inputs:
+        t = truth[truth.channel == ch]
+        stats = {"items": len(t), "accepted": 0, "rejected": 0}
+        for _, row in t.iterrows():
+            cid = label_to_complaint.get((ch, row["item"]), "MISSING")
+            if cid == "MISSING":
+                raise RuntimeError(f"{ch}/{row['item']} not found in ingestion output")
+            stats["accepted" if cid else "rejected"] += 1
+            if row["kind"] == "reject":
+                rej_total += 1
+                rej_ok += cid is None
+                continue
+            if cid is None:
+                continue
+            stored = conn.execute("SELECT customer_id, reference_ids FROM complaints WHERE complaint_id = ?", (cid,)).fetchone()
+            exp = row["customer_id"]
+            id_total += 1
+            id_ok += (stored[0] == exp) if exp.startswith("CUST-") else \
+                (stored[0] is None) if exp == "anonymous" else bool(stored[0]) and not stored[0].startswith("CUST-")
+            members_df = members.get_group(incident_of[cid]) if cid in incident_of else links.iloc[0:0]
+            if row["kind"] == "cross_channel_duplicate":
+                dup_total += 1
+                hit = ((members_df.batch == first_batch) & members_df.refs.str.contains(row["reference"])).any()
+                dup_ok += bool(hit)
+                dup_review += (not hit) and cid in review
+                if ch == "voice":
+                    voice_ref_total += 1
+                    voice_ref_ok += row["reference"] in json.loads(stored[1])
+            else:
+                new_total += 1
+                new_false_merge += len(members_df) > 1
+        out["per_channel"][ch] = stats
+    after = c.analytics.overview(ComplaintFilters())
+    out.update({
+        "rejects_correct": f"{rej_ok}/{rej_total}",
+        "identity_link_accuracy": round(id_ok / id_total, 4) if id_total else None,
+        "cross_channel_duplicates_merged": f"{dup_ok}/{dup_total}",
+        "cross_channel_duplicates_flagged_for_review": dup_review,
+        "new_complaints_wrongly_merged": f"{new_false_merge}/{new_total}",
+        "voice_reference_ids_recovered": f"{voice_ref_ok}/{voice_ref_total}",
+    })
+    out["overview_delta"] = {k: after[k] - before[k] for k in ("total_reports", "total_incidents", "duplicate_reports")}
+    return out
+
+
+def run(sample: int, write_report: bool, channels: bool = False) -> dict:
     tmp = Path(tempfile.mkdtemp(prefix="cc_eval_"))
     settings = Settings(db_path=tmp / "eval.db", chroma_dir=tmp / "chroma")
     t0 = time.time()
@@ -185,6 +284,8 @@ def run(sample: int, write_report: bool) -> dict:
         "predicted_top10": [(i["title"], majority.get(i["issue_id"]), round(i["priority_score"], 1))
                             for i in predicted[:10]],
     }
+    if channels:
+        results["channels"] = evaluate_channels(c)
     if write_report:
         write_markdown(results)
     return results
@@ -252,6 +353,31 @@ def write_markdown(r: dict) -> None:
         "- GPT-based severity/labels are only evaluated when `OPENAI_API_KEY` is set; that run is not included here "
         "unless 'LLM used' above says yes.",
     ]
+    if "channels" in r:
+        ch = r["channels"]
+        lines += [
+            "",
+            "## Multi-channel ingestion",
+            "",
+            "Run after the metrics above: the customer directory and the email / chat / social / voice samples in "
+            "`backend/data/channels/` are ingested and processed on top of the CSV, then compared with "
+            "`channel_ground_truth.csv` (never read by the pipeline). Voice uses real Whisper transcription of "
+            "synthesized (text-to-speech) calls.",
+            "",
+            "| Metric | Value |",
+            "|---|---|",
+            f"| Cross-channel re-reports merged into the original CSV incident | {ch['cross_channel_duplicates_merged']} |",
+            f"| ... of the unmerged, flagged for review | {ch['cross_channel_duplicates_flagged_for_review']} |",
+            f"| New complaints wrongly merged into another incident | {ch['new_complaints_wrongly_merged']} |",
+            f"| Customer identity resolved as expected (explicit / directory / pseudonymous / anonymous) | {ch['identity_link_accuracy']} |",
+            f"| Items that should be rejected (auto-reply, bot-only chat, retweet) and were | {ch['rejects_correct']} |",
+            f"| Order / transaction IDs recovered from voice transcripts | {ch['voice_reference_ids_recovered']} |",
+            f"| Dashboard change (reports / incidents / duplicate reports) | {ch.get('overview_delta')} |",
+            f"| Processing time per channel (s, incl. transcription) | {ch['seconds_per_channel']} |",
+            "",
+            "Per channel: " + ", ".join(f"{k}: {v['accepted']} accepted / {v['rejected']} rejected of {v['items']}"
+                                        for k, v in ch["per_channel"].items()),
+        ]
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"Wrote {out}")
@@ -261,9 +387,10 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--sample", type=int, default=300)
     ap.add_argument("--write-report", action="store_true")
+    ap.add_argument("--channels", action="store_true", help="also evaluate multi-channel ingestion (data/channels)")
     a = ap.parse_args()
     os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
-    res = run(a.sample, a.write_report)
+    res = run(a.sample, a.write_report, a.channels)
     printable = {k: v for k, v in res.items() if k not in ("pipeline_summary",)}
     printable["severity"] = {k: v for k, v in res["severity"].items() if k != "report"}
     print(json.dumps(printable, indent=1, default=str))

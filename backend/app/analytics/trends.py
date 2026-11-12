@@ -52,6 +52,20 @@ def issue_daily_series(df: pd.DataFrame, issue_id: str) -> list[dict[str, Any]]:
     return volume_over_time(sub, "D")
 
 
+def analysis_as_of(df: pd.DataFrame) -> pd.Timestamp:
+    """Reference "now" for windowed analytics: the latest *real* event time.
+
+    Complaints that arrived without a timestamp carry the upload time (``timestamp_inferred``).
+    That is not when the problem happened, so it must not move the analysis window: one
+    undated item uploaded today would otherwise push the recent window past every real spike.
+    """
+    if "timestamp_inferred" in df.columns:
+        real = df.loc[df["timestamp_inferred"].fillna(0).astype(int) == 0, "timestamp"]
+        if not real.empty:
+            return real.max()
+    return df["timestamp"].max()
+
+
 def detect_emerging_issues(
     df: pd.DataFrame,
     baseline_days: int = 14,
@@ -72,8 +86,14 @@ def detect_emerging_issues(
     if df.empty or data.empty:
         result["note"] = "No clustered complaints available."
         return result
-    as_of = df["timestamp"].max()
+    as_of = analysis_as_of(df)
     start = df["timestamp"].min()
+    if "timestamp_inferred" in data.columns:
+        inferred = data["timestamp_inferred"].fillna(0).astype(int) == 1
+        if inferred.any():
+            # Upload time is not an event time: such complaints cannot be placed in a daily series.
+            result["excluded_inferred_timestamps"] = int(inferred.sum())
+            data = data[~inferred]
     history_days = (as_of - start).total_seconds() / 86400.0
     result["as_of"] = as_of.isoformat()
     result["history_days"] = round(history_days, 1)

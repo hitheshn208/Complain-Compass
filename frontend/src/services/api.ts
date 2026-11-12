@@ -1,6 +1,8 @@
 import type {
   Batch,
+  ChannelInfo,
   Complaint,
+  DirectoryResult,
   Envelope,
   FilterOptions,
   Filters,
@@ -83,15 +85,21 @@ export const api = {
   similar: (id: string, topK = 5) => request<SimilarComplaint[]>(`/complaints/${encodeURIComponent(id)}/similar?top_k=${topK}`),
   batch: (id: string) => request<Batch>(`/batches/${encodeURIComponent(id)}`),
   batches: () => request<Batch[]>(`/batches`),
+  channels: () => request<ChannelInfo[]>(`/ingest/channels`),
   recluster: () => request<{ queued: boolean }>(`/pipeline/recluster`, { method: "POST" }),
   process: (batchId: string) => request<{ queued: boolean }>(`/pipeline/process/${encodeURIComponent(batchId)}`, { method: "POST" }),
 };
 
-/** Upload with progress reporting (fetch has no upload progress events, so XHR is used). */
-export function uploadCsv(file: File, onProgress: (fraction: number) => void): Promise<Envelope<UploadResult>> {
+/** Multipart upload with progress reporting (fetch has no upload progress events, so XHR is used). */
+export function uploadFiles<T>(
+  path: string,
+  files: File[],
+  field: "file" | "files",
+  onProgress: (fraction: number) => void,
+): Promise<Envelope<T>> {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", `${BASE}/complaints/upload`);
+    xhr.open("POST", `${BASE}${path}`);
     xhr.upload.onprogress = (e) => {
       if (e.lengthComputable) onProgress(e.loaded / e.total);
     };
@@ -102,7 +110,7 @@ export function uploadCsv(file: File, onProgress: (fraction: number) => void): P
       } catch {
         /* non-JSON error body */
       }
-      if (xhr.status >= 200 && xhr.status < 300) resolve(body as Envelope<UploadResult>);
+      if (xhr.status >= 200 && xhr.status < 300) resolve(body as Envelope<T>);
       else {
         const details = (body as { error?: { details?: unknown } } | null)?.error?.details;
         reject(new ApiError(xhr.status, errorMessage(body, `Upload failed (${xhr.status})`), details));
@@ -110,7 +118,16 @@ export function uploadCsv(file: File, onProgress: (fraction: number) => void): P
     };
     xhr.onerror = () => reject(new ApiError(0, "Network error - is the backend running on port 8000?"));
     const form = new FormData();
-    form.append("file", file);
+    for (const f of files) form.append(field, f);
     xhr.send(form);
   });
 }
+
+export const uploadCsv = (file: File, onProgress: (fraction: number) => void) =>
+  uploadFiles<UploadResult>("/complaints/upload", [file], "file", onProgress);
+
+export const uploadChannel = (channel: string, files: File[], onProgress: (fraction: number) => void) =>
+  uploadFiles<UploadResult>(`/ingest/${encodeURIComponent(channel)}`, files, "files", onProgress);
+
+export const uploadDirectory = (file: File, onProgress: (fraction: number) => void) =>
+  uploadFiles<DirectoryResult>("/customers/directory", [file], "file", onProgress);

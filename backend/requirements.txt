@@ -14,3 +14,6 @@ openai>=1.40
 python-dotenv>=1.0
 httpx>=0.27
 pytest>=8.0
+# Voice-call transcription (offline Whisper). PyAV 16+ is incompatible with faster-whisper 1.2.
+faster-whisper>=1.1,<2
+av>=12,<16

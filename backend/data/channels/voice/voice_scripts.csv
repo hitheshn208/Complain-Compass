@@ -1,0 +1,9 @@
+filename,text
+call_dup_01.wav,"Hello, I'm calling again about a problem. Delivery is delayed again. order number 8 6 0 5 4 1 still shows 'in transit'. Nobody has fixed it yet, please help."
+call_dup_02.wav,"Hello, I'm calling again about a problem. Tracking says delivered but I never received my parcel order number 9 6 3 6 9 9. Nobody has fixed it yet, please help."
+call_dup_03.wav,"Hello, I'm calling again about a problem. Following up on my earlier message: Billed for items I never ordered on invoice order number 2 3 9 0 9 3. Nobody has fixed it yet, please help."
+call_dup_04.wav,"Hello, I'm calling again about a problem. Tracking says delivered but I never received my parcel order number 1 4 6 3 0 7. Nobody has fixed it yet, please help."
+call_new_01.wav,"Hi, thanks for picking up. There is no option to turn off auto-renew for my plan. I'd like this resolved."
+call_new_02.wav,"Hi, thanks for picking up. Login page just spins forever after I enter my credentials. I'd like this resolved."
+call_new_03.wav,"Hi, thanks for picking up. Customer service agent was rude and hung up on me. I'd like this resolved."
+call_new_04.wav,"Hi, thanks for picking up. The courier keeps rescheduling my delivery, it is very late now. I'd like this resolved."

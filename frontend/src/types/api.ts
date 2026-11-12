@@ -210,11 +210,50 @@ export interface UploadResult {
   row_errors: RowError[];
   timestamps_inferred: number;
   processing_started: boolean;
+  channel?: string;
+  /** accepted items per identity link method: explicit | directory | pseudonymous | anonymous */
+  customer_links?: Record<string, number>;
+  items?: ItemReport[];
+}
+
+export interface ItemReport {
+  item: number;
+  label: string;
+  accepted: boolean;
+  customer_link: string;
+  detail: string | null;
+}
+
+export interface ChannelInfo {
+  channel: string;
+  source: string;
+  extensions: string[];
+  multiple_files: boolean;
+  available: boolean;
+  endpoint: string;
+  description: string;
+  transcriber?: { backend: string; available: boolean; reason: string | null; model?: string; device?: string; loaded?: boolean };
+}
+
+export interface DirectoryStats {
+  customers_with_contacts: number;
+  by_type: Record<string, { contacts: number; customers: number }>;
+}
+
+export interface DirectoryResult {
+  rows: number;
+  customers: number;
+  contacts_stored: number;
+  complaints_relinked: number;
+  recluster_started: boolean;
+  row_errors: RowError[];
+  stats: DirectoryStats;
 }
 
 export interface Batch {
   batch_id: string;
   filename: string;
+  channel?: string;
   total_rows: number;
   accepted_rows: number;
   rejected_rows: number;

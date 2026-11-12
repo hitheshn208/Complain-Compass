@@ -33,7 +33,20 @@ class Settings(BaseSettings):
     llm_max_complaint_classifications: int = 2000
 
     # Upload limits
-    max_upload_mb: float = 20.0
+    max_upload_mb: float = 20.0           # per file
+    max_batch_upload_mb: float = 200.0    # all files of one multi-file channel upload
+    max_files_per_upload: int = 500
+
+    # Voice transcription: "local" (faster-whisper, offline), "openai" (needs OPENAI_API_KEY) or "none"
+    transcriber: str = "local"
+    whisper_model: str = "base"           # tiny | base | small | medium | large-v3 (bigger = slower, better)
+    whisper_device: str = "cpu"           # "cuda" needs CUDA 12 cuBLAS/cuDNN libraries for CTranslate2
+    whisper_compute_type: str = "int8"    # int8 on CPU, float16 on CUDA
+    openai_transcription_model: str = "gpt-4o-mini-transcribe"
+
+    # Cross-channel identity: contact details (email / phone / social handle) are stored only as
+    # salted SHA-256 hashes. Changing the salt invalidates the stored directory.
+    identity_salt: str = "complaint-compass-local-salt"
 
     # Clustering (HDBSCAN)
     hdbscan_min_cluster_size: int = 8
