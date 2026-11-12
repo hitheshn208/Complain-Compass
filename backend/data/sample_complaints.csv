@@ -1,0 +1,706 @@
+complaint_text,customer_id,source,timestamp,country,state,age_group,student_status,income_bracket
+Checkout just says 'payment could not be processed' every time I try to pay.,,social_media,2026-09-12T03:29:29Z,,,,,
+The blender I received smells like burning and started smoking on first use. Order ORD-636073.,CUST-1078,SOCIAL_MEDIA,2026-09-12 05:31:39,,,,,
+The iOS app shows a blank white screen and then crashes.,CUST-1150,chat,2026-09-12T07:52:16Z,United States,California,45-54,Non-student,50k-100k
+   Mobile app freezes on the home screen and then force closes.   ,CUST-1251,social_media,2026-09-12T14:21:37Z,India,Karnataka,18-24,Student,25k-50k
+"Received a cracked screen on my new phone, order ORD-916953. This is unacceptable, I'm considering legal action.",CUST-1140,chat,2026-09-12T16:22:23Z,United States,,35-44,Non-student,100k+
+I cancelled my order and the refund hasn't been credited yet after 12 days.,,EMAIL,2026-09-12T16:27:14Z,,,,,
+The warranty registration page has a broken link.,,voice,2026-09-12T17:29:59Z,,,,,
+Cancelled my membership but was still charged Rs 19 for renewal.!!!,CUST-1051,live chat,2026-09-12T21:47:51Z,India,Telangana,35-44,Non-student,50k-100k
+The payment page hangs after I enter my OTP and then shows transaction failed.,CUST-1200,SOCIAL_MEDIA,2026-09-12T22:13:34Z,India,Maharashtra,25-34,Non-student,50k-100k
+Product arrived defective and doesn't turn on at all.,CUST-1190,email,2026-09-13T01:47:22Z,United States,Florida,25-34,Non-student,<25k
+App crashed again when paying.,CUST-1003,chat,yesterday-ish,,,,,
+"Can't use the app at all, it crashes whenever I try to checkout. I am furious, this is urgent.",CUST-1243,phone,2026-09-13T02:57:56Z,,,55+,Non-student,50k-100k
+"After updating, the app crashes immediately on launch.",CUST-1050,chat,2026-09-13T08:44:04Z,India,,45-54,Non-student,50k-100k
+"Order ORD-393964 has not been delivered, the expected date passed 10 days ago. I am furious, this is urgent.",CUST-1155,phone,2026-09-13T09:47:40Z,,,,,
+"Subscription cancellation page keeps redirecting me back to the plans page. Please fix this asap.
+
+Sent from my iPhone",CUST-1036,EMAIL,2026-09-13T21:43:56Z,India,Telangana,18-24,Non-student,25k-50k
+"Item delivered with dents and scratches all over, clearly damaged in transit.",CUST-1190,VOICE,2026-09-14T00:05:30.736958Z,United States,Florida,25-34,Non-student,<25k
+<p>I cancelled my order and the refund hasn't been credited yet after 30 days.</p>,CUST-1043,email,2026/09/14 00:41,Canada,,18-24,Student,50k-100k
+"Hi team,
+I've tried to unsubscribe three times and I'm still being billed monthly. I am furious, this is urgent.
+Thanks",CUST-1081,social_media,2026-09-14T01:56:12Z,United States,Texas,25-34,Student,
+My package ORD-695748 was supposed to arrive 8 days ago and tracking hasn't updated.,CUST-1017,voice,2026-09-14T04:51:26Z,India,Tamil Nadu,25-34,Non-student,25k-50k
+"Shipping is taking forever, ordered two weeks ago and nothing has arrived.",CUST-1063,phone,2026-09-14T05:25:36Z,United States,Florida,25-34,Non-student,25k-50k
+Mobile app freezes on the home screen and then force closes.,CUST-1166,VOICE,2026-09-14T07:44:55Z,India,Telangana,45-54,Non-student,50k-100k
+"Second time contacting you about this. Received a cracked screen on my new phone, order ORD-995825.",CUST-1190,live chat,2026-09-14T12:22:17.483469Z,United States,Florida,25-34,Non-student,<25k
+Customer service agent was rude and hung up on me.,CUST-1157,twitter,2026-09-14T15:55:07Z,India,Delhi,25-34,Non-student,50k-100k
+   My shipment is stuck at the warehouse for 15 days with no update.   ,CUST-1139,phone,2026-09-14T18:50:15Z,United States,New York,35-44,Non-student,50k-100k
+"Billed for items I never ordered on invoice ORD-657540. This is unacceptable, I'm considering legal action.",CUST-1220,VOICE,2026-09-14T22:28:03Z,United States,Florida,35-44,Non-student,25k-50k
+My shipment is stuck at the warehouse for 15 days with no update.,CUST-1202,social_media,2026-09-14T22:56:38Z,India,Telangana,,Non-student,<25k
+"The courier keeps rescheduling my delivery, it is very late now.",CUST-1139,twitter,2026-09-14T23:35:24.078740Z,United States,New York,35-44,Non-student,50k-100k
+"Payment gateway error during checkout. Transaction TXN-98336655 shows failed but money is gone from my account. This is unacceptable, I'm considering legal action.",CUST-1186,phone,2026-09-15T01:20:30Z,United States,Texas,35-44,Non-student,25k-50k
+Following up on my earlier message: The iOS app shows a blank white screen and then crashes.,CUST-1150,Email,2026/09/15 05:21,,,,,
+The glass bottles were shattered when the package arrived.,,chat,2026-09-15T05:56:49Z,,,,,
+I've tried to unsubscribe three times and I'm still being billed monthly.,CUST-1150,live chat,2026-09-15T05:59:34Z,United States,California,45-54,Non-student,50k-100k
+"Not receiving the OTP verification code so I cannot sign in. I am furious, this is urgent.",CUST-1121,twitter,2026-09-15T06:20:36Z,India,Maharashtra,,Non-student,25k-50k
+Still not resolved! Billed for items I never ordered on invoice ORD-657540.,CUST-1220,EMAIL,2026-09-15T08:05:51.549504Z,United States,Florida,35-44,Non-student,25k-50k
+"There are unauthorized charges on my card from your company, this looks like fraud.",CUST-1015,EMAIL,2026-09-15T08:26:37Z,,,,,
+Raised a ticket 12 days ago and got no response at all.,CUST-1225,EMAIL,2026-09-15T08:28:10Z,India,,25-34,Non-student,25k-50k
+"The item in order ORD-154644 arrived damaged, the box was crushed and the product is broken.!!!",CUST-1206,EMAIL,2026-09-15T10:28:29Z,,,,,
+I've been on hold for over an hour and nobody answered.,CUST-1105,social_media,2026/09/15 11:51,India,,25-34,Non-student,25k-50k
+I've tried to unsubscribe three times and I'm still being billed monthly.,CUST-1174,SOCIAL_MEDIA,2026-09-15T12:04:36Z,United Kingdom,England,55+,Non-student,50k-100k
+Your parking lot at the pickup store has no lighting at night.,,VOICE,2026-09-15 12:45:21,,,,,
+"My payment failed at checkout but £120 was deducted from my bank account. Order ORD-476149. I am furious, this is urgent.",,phone,2026-09-15T13:14:57Z,,,,,
+My payment failed at checkout but £1299 was deducted from my bank account. Order ORD-873876.,CUST-1109,Email,2026-09-16 01:12:20,,,,,
+<p>Why was my account banned? I haven't done anything wrong.</p>,CUST-1076,CHAT,2026-09-16T02:49:10Z,United Kingdom,Scotland,35-44,Non-student,<25k
+Support keeps sending copy-paste replies without reading my issue.,CUST-1040,social_media,2026-09-16T03:35:54Z,Canada,British Columbia,25-34,Non-student,25k-50k
+"Still waiting on refund for cancelled order ORD-420218, support keeps saying it is processing.",CUST-1157,chat,2026-09-16 05:41:41,India,Delhi,25-34,Non-student,50k-100k
+There is no option to turn off auto-renew for my plan.,CUST-1036,phone,2026-09-16T07:36:37.267657Z,India,Telangana,18-24,Non-student,25k-50k
+"Hi team,
+My refund of Rs 1299 is stuck in 'initiated' status for weeks.
+Thanks",CUST-1198,VOICE,2026-09-16T08:34:02Z,,,,,
+"My shipment is stuck at the warehouse for 8 days with no update. I am furious, this is urgent.",CUST-1245,live chat,2026-09-16T08:49:53Z,United States,New York,35-44,,50k-100k
+"Your support team is useless, every agent tells me something different.",CUST-1157,live chat,2026/09/16 08:56,India,Delhi,25-34,Non-student,50k-100k
+My package ORD-638205 was supposed to arrive 15 days ago and tracking hasn't updated.,CUST-1137,CHAT,2026-09-16T12:53:06Z,Canada,Ontario,55+,Non-student,100k+
+Got a survey request five times in one day.,CUST-1007,Email,2026-09-16T13:34:39Z,India,Delhi,18-24,Non-student,100k+
+I've tried to unsubscribe three times and I'm still being billed monthly.,CUST-1052,live chat,2026-09-16T16:31:22Z,United States,Florida,45-54,Non-student,50k-100k
+Delivery is delayed again. Order ORD-999308 still shows 'in transit'.,CUST-1180,chat,2026/09/16 19:16,India,Delhi,55+,Non-student,50k-100k
+"Can't use the app at all, it crashes whenever I try to checkout.",CUST-1166,Email,2026-09-16T21:30:17.140760Z,India,Telangana,45-54,Non-student,50k-100k
+Still not resolved! My payment failed at checkout but £1299 was deducted from my bank account. Order ORD-873876.,CUST-1109,phone,2026-09-16T23:23:18.426071Z,India,Karnataka,18-24,Student,
+"Support keeps sending copy-paste replies without reading my issue.
+
+Sent from my iPhone",CUST-1183,SOCIAL_MEDIA,2026-09-17T03:50:12Z,,,,,
+"Shipping is taking forever, ordered two weeks ago and nothing has arrived. Please fix this asap.",CUST-1035,phone,2026/09/17 06:04,India,Delhi,45-54,Non-student,50k-100k
+<p>Cancelled my membership but was still charged $249 for renewal.</p>,CUST-1056,voice,2026-09-17T08:16:19Z,,,,,
+   My shipment is stuck at the warehouse for 10 days with no update.   ,CUST-1209,SOCIAL_MEDIA,2026-09-17T10:20:18Z,India,Karnataka,,Student,<25k
+My seller account has been disabled and it is affecting my business income.,CUST-1159,phone,2026-09-17T11:33:31Z,,,,,
+Tracking says delivered but I never received my parcel ORD-199524.,CUST-1050,social_media,2026-09-17T15:16:38Z,India,,45-54,Non-student,50k-100k
+<p>The blender I received smells like burning and started smoking on first use. Order ORD-774844.</p>,CUST-1043,chat,2026-09-18T01:42:25Z,Canada,,18-24,Student,50k-100k
+I've tried to unsubscribe three times and I'm still being billed monthly.,CUST-1150,EMAIL,2026-09-18T05:26:58.111198Z,United States,California,45-54,Non-student,50k-100k
+Second time contacting you about this. I've tried to unsubscribe three times and I'm still being billed monthly.!!!,CUST-1052,twitter,2026-09-18T08:19:03.655922Z,United States,Florida,45-54,Non-student,50k-100k
+"Card declined at checkout for no reason, bank says there is no issue on their side.",CUST-1136,live chat,2026-09-18T09:10:57Z,United States,New York,25-34,Non-student,100k+
+"My order came with torn packaging and a broken handle, very disappointed.",CUST-1015,phone,2026-09-18T23:58:14Z,India,Maharashtra,18-24,Student,25k-50k
+Customer service agent was rude and hung up on me.,CUST-1077,EMAIL,2026-09-19 03:58:51,India,Tamil Nadu,55+,Non-student,25k-50k
+"Item delivered with dents and scratches all over, clearly damaged in transit.",,live chat,2026-09-19T05:00:11Z,,,,,
+"The monthly bill has wrong tax calculation, I was overcharged.!!!",CUST-1154,email,2026-09-19T05:48:01Z,India,Delhi,25-34,Non-student,100k+
+"Account deactivated suddenly, all my saved data and wallet balance of Rs 89 is inaccessible.",CUST-1050,chat,2026-09-19T06:14:39Z,India,,45-54,Non-student,50k-100k
+"UPI payment failed, amount debited but order not placed. Please help, this was Rs 2499.
+
+Sent from my iPhone",CUST-1208,Email,2026-09-19T07:13:44Z,,,,,
+Following up on my earlier message: Tracking says delivered but I never received my parcel ORD-213174.,CUST-1035,twitter,2026-09-19T08:54:44.188276Z,India,Delhi,45-54,Non-student,50k-100k
+<p>Cancelled my membership but was still charged Rs 89 for renewal.</p>,CUST-1052,social_media,2026-09-19T09:55:52.725544Z,United States,Florida,45-54,Non-student,50k-100k
+Following up on my earlier message: The chat agent closed my conversation without solving anything.!!!,CUST-1077,social_media,2026-09-19T11:00:32.057917Z,India,Tamil Nadu,55+,Non-student,25k-50k
+"Cancelled my membership but was still charged Rs 2499 for renewal. I am furious, this is urgent.",CUST-1007,email,2026-09-19T15:28:39Z,India,Delhi,18-24,Non-student,100k+
+   Refund was approved but the money never reached my account. Order ORD-250755. Please fix this asap.   ,CUST-1159,live chat,2026-09-19T23:10:43Z,India,Tamil Nadu,,Non-student,25k-50k
+Product arrived defective and doesn't turn on at all. You can reach me at user529@example.com or +1 555-320-7701.,CUST-1058,chat,2026-09-20T00:01:24Z,India,Telangana,45-54,Non-student,
+"The courier keeps rescheduling my delivery, it is very late now.",CUST-1035,CHAT,2026-09-20T00:54:55.762606Z,India,Delhi,45-54,Non-student,50k-100k
+"Second time contacting you about this. My order came with torn packaging and a broken handle, very disappointed.",CUST-1043,social_media,2026/09/20 01:38,Canada,,18-24,Student,50k-100k
+"I got an email saying my account is blocked for suspicious activity, but it was me.",CUST-1050,EMAIL,2026-09-20T04:21:17.607782Z,India,,45-54,Non-student,50k-100k
+"I've been on hold for over an hour and nobody answered.
+
+Sent from my iPhone",CUST-1077,CHAT,2026-09-20T10:47:15.929216Z,India,Tamil Nadu,55+,Non-student,25k-50k
+"Tried to pay three times, card keeps getting declined even though it works everywhere else.",CUST-1247,chat,2026-09-20T10:59:58Z,Canada,,25-34,Non-student,100k+
+"Account deactivated suddenly, all my saved data and wallet balance of £2499 is inaccessible. Please fix this asap.",CUST-1202,live chat,2026-09-20T15:33:35Z,,,,,
+Where is my refund? It has been 21 days since the return was picked up.,,phone,2026-09-20T17:24:33Z,,,,,
+"Received a cracked screen on my new phone, order ORD-736956.",CUST-1065,CHAT,2026-09-20T18:55:36Z,United States,Texas,25-34,,25k-50k
+Following up on my earlier message: The blender I received smells like burning and started smoking on first use. Order ORD-895216.,CUST-1015,EMAIL,2026-09-20T20:51:57.291287Z,,,,,
+"   I got an email saying my account is blocked for suspicious activity, but it was me.   ",CUST-1202,email,2026-09-20T21:05:20.337336Z,,,,,
+"Tried to pay three times, card keeps getting declined even though it works everywhere else.",CUST-1040,Email,2026-09-20T23:52:47Z,Canada,British Columbia,25-34,Non-student,25k-50k
+Login page just spins forever after I enter my credentials.,CUST-1129,VOICE,2026-09-21T06:57:39Z,India,Telangana,55+,Non-student,50k-100k
+"Hi team,
+My payment failed at checkout but $2499 was deducted from my bank account. Order ORD-379449. Please fix this asap.
+Thanks",CUST-1074,email,2026-09-21T07:43:54Z,,,,,
+Tracking says delivered but I never received my parcel ORD-857213.,CUST-1086,Email,2026-09-21T13:40:44Z,India,Tamil Nadu,25-34,Non-student,100k+
+"UPI payment failed, amount debited but order not placed. Please help, this was $49.
+
+Sent from my iPhone",CUST-1060,voice,2026/09/21 15:45,United States,New York,25-34,Non-student,100k+
+I cancelled my order and the refund hasn't been credited yet after 15 days.,CUST-1213,phone,2026-09-21 19:17:43,India,Tamil Nadu,45-54,Non-student,<25k
+"<p>Tried to pay three times, card keeps getting declined even though it works everywhere else.</p>",CUST-1199,EMAIL,2026-09-21T19:19:53Z,United States,Texas,55+,Non-student,25k-50k
+Customer service agent was rude and hung up on me.,CUST-1145,EMAIL,2026-09-21T21:32:32Z,India,Maharashtra,,Student,25k-50k
+"Checkout just says 'payment could not be processed' every time I try to pay. This is unacceptable, I'm considering legal action.!!!",CUST-1067,live chat,2026-09-22 00:37:23,India,Karnataka,35-44,Non-student,<25k
+Tracking says delivered but I never received my parcel ORD-891127.,,SOCIAL_MEDIA,2026-09-22 02:35:34,,,,,
+My payment failed at checkout but $2499 was deducted from my bank account. Order ORD-384685. You can reach me at user813@example.com or +1 555-138-4311.,CUST-1161,voice,2026-09-22T02:40:24Z,,,,,
+"   You promised a refund in 5-7 business days, it's been 10 days. Still nothing.   ",CUST-1128,SOCIAL_MEDIA,2026-09-22T03:37:22Z,India,Karnataka,35-44,Non-student,50k-100k
+Raised a ticket 12 days ago and got no response at all.,CUST-1089,twitter,2026-09-22T09:48:31.015201Z,India,,,Non-student,50k-100k
+My refund of £19 is stuck in 'initiated' status for weeks.,CUST-1064,EMAIL,2026-09-22T10:39:53Z,United Kingdom,Scotland,18-24,Student,25k-50k
+   Subscription cancellation page keeps redirecting me back to the plans page.   ,CUST-1035,email,2026-09-22T12:01:21Z,India,Delhi,45-54,Non-student,50k-100k
+"My order came with torn packaging and a broken handle, very disappointed.",CUST-1055,EMAIL,2026-09-22T16:47:59Z,India,Karnataka,18-24,,<25k
+"Card declined at checkout for no reason, bank says there is no issue on their side.",CUST-1110,phone,2026-09-22T23:33:42Z,Canada,British Columbia,18-24,,100k+
+"I've been on hold for over an hour and nobody answered. I am furious, this is urgent. You can reach me at user710@example.com or +1 555-759-8625.",CUST-1170,twitter,2026-09-23T00:44:07Z,United States,California,35-44,Non-student,25k-50k
+"Card declined at checkout for no reason, bank says there is no issue on their side.",CUST-1232,twitter,2026-09-23 01:53:14,Canada,British Columbia,25-34,Non-student,50k-100k
+"Your support team is useless, every agent tells me something different.",CUST-1031,voice,2026-09-23T07:19:01Z,Canada,Ontario,35-44,Non-student,<25k
+"Order ORD-146777 has not been delivered, the expected date passed 8 days ago.",,phone,2026-09-23 08:53:54,,,,,
+Still not resolved! Tracking says delivered but I never received my parcel ORD-857213.,CUST-1086,voice,2026-09-23T09:53:04.018868Z,India,Tamil Nadu,25-34,Non-student,100k+
+"Tried to pay three times, card keeps getting declined even though it works everywhere else.",CUST-1007,live chat,2026-09-23 09:55:32,India,Delhi,18-24,Non-student,100k+
+"UPI payment failed, amount debited but order not placed. Please help, this was $89. I am furious, this is urgent.",CUST-1148,SOCIAL_MEDIA,2026-09-23T15:23:15Z,India,Karnataka,45-54,Non-student,50k-100k
+"There are unauthorized charges on my card from your company, this looks like fraud. Please fix this asap.",CUST-1074,voice,2026-09-23T16:34:47Z,India,Telangana,18-24,Student,25k-50k
+Cancelled my membership but was still charged $89 for renewal.,CUST-1063,live chat,2026-09-23T20:53:31Z,United States,Florida,25-34,Non-student,25k-50k
+"Money got debited twice for a failed payment, Rs 2499 each, and no order was created. Transaction TXN-46484819.",CUST-1035,email,2026-09-24T02:06:39Z,India,Delhi,45-54,Non-student,50k-100k
+My seller account has been disabled and it is affecting my business income.,CUST-1048,phone,2026-09-24T02:18:24Z,India,Delhi,25-34,Non-student,25k-50k
+My shipment is stuck at the warehouse for 15 days with no update.,CUST-1119,Email,2026-09-24 02:19:22,India,,18-24,Student,<25k
+Login page just spins forever after I enter my credentials.,CUST-1220,CHAT,2026-09-24T14:11:19Z,United States,Florida,35-44,Non-student,25k-50k
+   My shipment is stuck at the warehouse for 10 days with no update.   ,,EMAIL,2026-09-24T17:42:32Z,,,,,
+My shipment is stuck at the warehouse for 10 days with no update. Please fix this asap.,CUST-1141,Email,2026-09-24T18:59:14Z,,,,,
+<p>The blender I received smells like burning and started smoking on first use. Order ORD-653071.</p>,CUST-1071,VOICE,2026-09-24 22:42:09,United States,Texas,35-44,,50k-100k
+"I was charged twice for the same order ORD-113368, please reverse the extra $2499.",CUST-1120,Email,2026-09-25T03:15:25Z,India,Karnataka,25-34,,
+Refund was approved but the money never reached my account. Order ORD-765320.,CUST-1090,chat,2026-09-25T10:22:13Z,United States,California,25-34,Student,
+Why was my account banned? I haven't done anything wrong. You can reach me at user127@example.com or +1 555-115-9422.,CUST-1159,voice,2026-09-25T11:10:23Z,India,Tamil Nadu,,Non-student,25k-50k
+My account was suspended without any explanation and I have an active order ORD-503519.,CUST-1019,phone,2026-09-25T13:06:57Z,United States,New York,,Non-student,<25k
+Raised a ticket 30 days ago and got no response at all.,CUST-1087,live chat,2026-09-25T14:46:33Z,India,,25-34,,100k+
+"Mobile app freezes on the home screen and then force closes. I am furious, this is urgent.",CUST-1016,SOCIAL_MEDIA,2026/09/25 20:37,United States,Texas,,Student,
+My account was suspended without any explanation and I have an active order ORD-790266.,CUST-1164,VOICE,2026-09-25T22:52:49Z,,,,,
+Second time contacting you about this. My seller account has been disabled and it is affecting my business income.,CUST-1048,live chat,2026-09-25 23:40:44,India,Delhi,25-34,Non-student,25k-50k
+I returned order ORD-593649 30 days ago and still have not received my refund of £249.,CUST-1150,voice,2026-09-26T02:50:54Z,United States,California,45-54,Non-student,50k-100k
+<p>Checkout just says 'payment could not be processed' every time I try to pay.</p>,CUST-1074,phone,2026-09-26T04:33:24Z,India,Telangana,18-24,Student,25k-50k
+"Card declined at checkout for no reason, bank says there is no issue on their side.",CUST-1007,twitter,2026-09-26T05:14:07.538061Z,India,Delhi,18-24,Non-student,100k+
+I cancelled my order and the refund hasn't been credited yet after 15 days.,CUST-1221,chat,2026-09-26T06:28:45Z,India,Telangana,35-44,Non-student,50k-100k
+My shipment is stuck at the warehouse for 12 days with no update.,CUST-1245,twitter,2026-09-26T06:52:01Z,United States,New York,35-44,,50k-100k
+"Tracking says delivered but I never received my parcel ORD-771709. This is unacceptable, I'm considering legal action.",CUST-1195,chat,2026-09-26T08:45:09Z,,,,,
+"Card declined at checkout for no reason, bank says there is no issue on their side.
+
+Sent from my iPhone",CUST-1161,voice,2026-09-26T14:13:52Z,India,Tamil Nadu,25-34,Non-student,25k-50k
+"Support keeps sending copy-paste replies without reading my issue. I am furious, this is urgent.",CUST-1201,social_media,2026-09-26T15:29:13Z,United States,Texas,25-34,Non-student,<25k
+"The item in order ORD-466586 arrived damaged, the box was crushed and the product is broken.",CUST-1075,chat,2026-09-26T19:37:24Z,India,Tamil Nadu,25-34,,50k-100k
+"Tried to pay three times, card keeps getting declined even though it works everywhere else.",CUST-1145,Email,2026-09-26T21:47:16Z,India,Maharashtra,,Student,25k-50k
+"The item in order ORD-546380 arrived damaged, the box was crushed and the product is broken. Please fix this asap.",CUST-1041,social_media,2026-09-27T00:10:01Z,India,Delhi,25-34,Non-student,100k+
+Tracking says delivered but I never received my parcel ORD-549793.,,EMAIL,2026-09-27T08:06:28Z,,,,,
+"Your support team is useless, every agent tells me something different.",,twitter,2026-09-27T09:04:42Z,,,,,
+"Second time contacting you about this. My order came with torn packaging and a broken handle, very disappointed.",CUST-1041,CHAT,2026/09/27 11:05,India,Delhi,25-34,Non-student,100k+
+Why was my account banned? I haven't done anything wrong.,CUST-1207,VOICE,2026-09-27T11:56:48Z,United Kingdom,Scotland,35-44,Non-student,100k+
+"Item delivered with dents and scratches all over, clearly damaged in transit.",CUST-1089,CHAT,2026-09-27T16:23:43Z,India,,,Non-student,50k-100k
+"Following up on my earlier message: I got an email saying my account is blocked for suspicious activity, but it was me.",CUST-1019,live chat,2026-09-27T18:20:52.770952Z,United States,New York,,Non-student,<25k
+"My order came with torn packaging and a broken handle, very disappointed.",CUST-1071,SOCIAL_MEDIA,2026-09-27T19:01:39.645758Z,United States,Texas,35-44,,50k-100k
+There is an extra charge of Rs 49 on my bill that I never authorized.!!!,CUST-1124,VOICE,2026-09-27T20:07:47Z,United Kingdom,England,,Non-student,<25k
+"My order came with torn packaging and a broken handle, very disappointed.",CUST-1041,voice,2026-09-27T20:24:56.110952Z,India,Delhi,25-34,Non-student,100k+
+"There are unauthorized charges on my card from your company, this looks like fraud.",CUST-1253,phone,2026/09/27 20:34,,,,,
+"I keep getting logged out and then can't log back in. I am furious, this is urgent.",CUST-1161,chat,2026-09-27T21:18:51Z,India,Tamil Nadu,25-34,Non-student,25k-50k
+"My payment failed at checkout but Rs 19 was deducted from my bank account. Order ORD-568472. I am furious, this is urgent.",CUST-1213,social_media,2026-09-27T22:27:50Z,,,,,
+Tracking says delivered but I never received my parcel ORD-442622.,CUST-1079,EMAIL,2026-09-28T00:19:13Z,Canada,British Columbia,25-34,Non-student,100k+
+"You promised a refund in 5-7 business days, it's been 8 days. Still nothing. I am furious, this is urgent.",CUST-1054,email,2026-09-28T04:00:11Z,,,,,
+The blender I received smells like burning and started smoking on first use. Order ORD-801199.,CUST-1142,VOICE,2026-09-28T05:37:04Z,Canada,British Columbia,55+,Non-student,50k-100k
+Second time contacting you about this. The blender I received smells like burning and started smoking on first use. Order ORD-801199.,CUST-1142,social_media,2026-09-28T09:08:52.609198Z,Canada,British Columbia,55+,Non-student,50k-100k
+"You promised a refund in 5-7 business days, it's been 8 days. Still nothing.",CUST-1054,phone,2026-09-28T15:46:01.870339Z,India,Delhi,35-44,Non-student,
+"Item delivered with dents and scratches all over, clearly damaged in transit.",CUST-1181,chat,2026/09/28 16:38,,,18-24,Student,<25k
+Why was my account banned? I haven't done anything wrong. You can reach me at user859@example.com or +1 555-748-5783.,CUST-1027,live chat,2026-09-28T22:44:32Z,United Kingdom,Scotland,25-34,Non-student,
+Tracking says delivered but I never received my parcel ORD-855781.,CUST-1103,phone,2026-09-29T02:37:00Z,,,,,
+Your website accessibility for screen readers is very poor.,,chat,2026-09-29T03:54:35Z,,,,,
+"Still not resolved! I got an email saying my account is blocked for suspicious activity, but it was me.",CUST-1027,voice,2026/09/29 09:42,United Kingdom,Scotland,25-34,Non-student,
+"Hi team,
+Following up on my earlier message: The monthly bill has wrong tax calculation, I was overcharged.
+Thanks",CUST-1253,Email,2026-09-29T15:09:32.420710Z,United States,New York,45-54,Non-student,50k-100k
+I've tried to unsubscribe three times and I'm still being billed monthly.,,VOICE,2026-09-29T20:36:49Z,,,,,
+   There is no option to turn off auto-renew for my plan.   ,CUST-1107,email,2026-09-29 22:41:46,United Kingdom,Scotland,18-24,Student,50k-100k
+My refund of Rs 19 is stuck in 'initiated' status for weeks.,,CHAT,2026-09-29T22:42:07Z,,,,,
+Login page just spins forever after I enter my credentials.,CUST-1236,Email,2026-09-29 23:36:52,United States,Texas,55+,Non-student,25k-50k
+Second time contacting you about this. My package ORD-442622 was supposed to arrive 12 days ago and tracking hasn't updated.,CUST-1079,social_media,2026-09-30T00:02:31.183362Z,Canada,British Columbia,25-34,Non-student,100k+
+"Money got debited twice for a failed payment, $49 each, and no order was created. Transaction TXN-48704726.",CUST-1041,live chat,2026-09-30T00:42:45Z,India,Delhi,25-34,Non-student,100k+
+"I keep getting logged out and then can't log back in. I am furious, this is urgent.",CUST-1027,chat,2026-09-30T03:23:22Z,,,,,
+Cancelled my membership but was still charged $249 for renewal.,CUST-1173,twitter,2026-09-30T05:40:26Z,United States,New York,25-34,Non-student,<25k
+"<p>I've been on hold for over an hour and nobody answered. I am furious, this is urgent.</p>",CUST-1227,email,2026-09-30T07:34:41Z,India,Telangana,25-34,Non-student,50k-100k
+"Second time contacting you about this. Order ORD-442622 has not been delivered, the expected date passed 12 days ago.",CUST-1079,twitter,2026-09-30T08:54:44.503155Z,,,,,
+My shipment is stuck at the warehouse for 15 days with no update.,,twitter,2026-09-30 14:08:07,,,,,
+"Card declined at checkout for no reason, bank says there is no issue on their side.",CUST-1213,live chat,2026-09-30 14:50:48,India,Tamil Nadu,45-54,Non-student,<25k
+"Money got debited twice for a failed payment, £89 each, and no order was created. Transaction TXN-78274190.",CUST-1005,Email,2026-09-30T17:23:39Z,India,Karnataka,25-34,Non-student,50k-100k
+Sign in fails with 'something went wrong' on both app and website.,CUST-1161,EMAIL,2026-09-30T17:29:26.208830Z,India,Tamil Nadu,25-34,Non-student,25k-50k
+"Why was my account banned? I haven't done anything wrong. I am furious, this is urgent.",,voice,2026-09-30 19:16:30,,,,,
+Still not resolved! The glass bottles were shattered when the package arrived.,CUST-1142,CHAT,2026-09-30T21:58:08.853319Z,Canada,British Columbia,55+,Non-student,50k-100k
+"Mobile app freezes on the home screen and then force closes. I am furious, this is urgent. You can reach me at user631@example.com or +1 555-907-6902.",CUST-1180,phone,2026/10/01 00:03,India,Delhi,55+,Non-student,50k-100k
+Your recycling instructions for packaging are confusing.,,SOCIAL_MEDIA,2026-10-01T00:05:58Z,,,,,
+Following up on my earlier message: I've been on hold for over an hour and nobody answered.,CUST-1227,live chat,2026-10-01T00:40:19.166055Z,India,Telangana,25-34,Non-student,50k-100k
+I keep getting logged out and then can't log back in.,CUST-1242,live chat,2026-10-01T01:58:02Z,United Kingdom,England,45-54,Non-student,50k-100k
+Support keeps sending copy-paste replies without reading my issue.,CUST-1157,phone,2026-10-01 03:38:14,India,Delhi,25-34,Non-student,50k-100k
+"Received a cracked screen on my new phone, order ORD-866151. Please fix this asap.",CUST-1206,CHAT,2026-10-01T05:36:09Z,,,,,
+"There are unauthorized charges on my card from your company, this looks like fraud.",CUST-1027,VOICE,2026/10/01 06:27,,,,,
+"Your support team is useless, every agent tells me something different.",CUST-1106,EMAIL,2026-10-01T07:50:08Z,India,Karnataka,18-24,Student,100k+
+"UPI payment failed, amount debited but order not placed. Please help, this was £89.",CUST-1123,Email,2026-10-01T10:40:12Z,United Kingdom,Scotland,25-34,Student,<25k
+Following up on my earlier message: I've been on hold for over an hour and nobody answered.,CUST-1106,social_media,2026-10-01T13:35:34.711659Z,India,Karnataka,18-24,Student,100k+
+I returned order ORD-935309 15 days ago and still have not received my refund of £2499. Please fix this asap.,,phone,2026-10-01T16:51:54Z,,,,,
+Delivery is delayed again. Order ORD-865492 still shows 'in transit'.,CUST-1128,voice,2026-10-01T18:00:25Z,India,Karnataka,35-44,Non-student,50k-100k
+Subscription cancellation page keeps redirecting me back to the plans page.,CUST-1235,Email,2026-10-02T00:17:34Z,United States,New York,,Student,25k-50k
+"Still not resolved! Tried to pay three times, card keeps getting declined even though it works everywhere else.",CUST-1123,voice,2026/10/02 01:22,United Kingdom,Scotland,25-34,Student,<25k
+Your newsletter emails come in Spanish even though I chose English.,CUST-1050,Email,2026-10-02T01:34:48Z,India,,45-54,Non-student,50k-100k
+My package ORD-865492 was supposed to arrive 30 days ago and tracking hasn't updated.,CUST-1128,EMAIL,2026-10-02T06:30:02.858369Z,India,Karnataka,35-44,Non-student,50k-100k
+"UPI payment failed, amount debited but order not placed. Please help, this was £89.",CUST-1005,SOCIAL_MEDIA,2026-10-02T08:19:52.424745Z,,,,,
+"Password reset link is expired every time I click it, locked out of my account.",CUST-1063,CHAT,2026-10-02T09:01:29Z,,,,,
+There is no option to turn off auto-renew for my plan.,CUST-1191,CHAT,2026-10-02T11:38:21Z,Canada,British Columbia,18-24,Student,50k-100k
+"The blender I received smells like burning and started smoking on first use. Order ORD-707488. I am furious, this is urgent.",CUST-1076,Email,2026-10-02T15:04:08Z,,,,,
+The payment page hangs after I enter my OTP and then shows transaction failed.,CUST-1012,email,2026/10/02 18:50,United Kingdom,England,25-34,Non-student,
+"Item delivered with dents and scratches all over, clearly damaged in transit. This is unacceptable, I'm considering legal action.",CUST-1184,social_media,2026-10-02T23:53:15Z,United States,California,35-44,Non-student,50k-100k
+I've been on hold for over an hour and nobody answered.,CUST-1154,chat,2026-10-03T01:09:50Z,India,Delhi,25-34,Non-student,100k+
+Payment gateway error during checkout. Transaction TXN-54360949 shows failed but money is gone from my account.,CUST-1014,SOCIAL_MEDIA,2026-10-03 02:48:58,United Kingdom,England,55+,Non-student,50k-100k
+Delivery is delayed again. Order ORD-860541 still shows 'in transit'.,CUST-1019,twitter,2026-10-03 04:55:53,United States,New York,,Non-student,<25k
+The blender I received smells like burning and started smoking on first use. Order ORD-126008.,CUST-1220,Email,2026-10-03T06:30:29Z,United States,Florida,35-44,Non-student,25k-50k
+The coupon code from your ad did not work at all.,,live chat,2026-10-03T08:50:22Z,,,,,
+The glass bottles were shattered when the package arrived.,CUST-1167,CHAT,2026-10-03T10:48:30Z,,,,,
+The blender I received smells like burning and started smoking on first use. Order ORD-431023.,CUST-1195,SOCIAL_MEDIA,2026-10-03 13:14:26,India,,35-44,Non-student,50k-100k
+"Account deactivated suddenly, all my saved data and wallet balance of £89 is inaccessible.",CUST-1148,VOICE,2026-10-03T14:45:55Z,India,Karnataka,45-54,Non-student,50k-100k
+"<p>The courier keeps rescheduling my delivery, it is very late now.</p>",CUST-1121,chat,2026/10/03 20:19,India,Maharashtra,,Non-student,25k-50k
+I've been on hold for over an hour and nobody answered.,CUST-1106,twitter,2026-10-03T22:41:09.181387Z,India,Karnataka,18-24,Student,100k+
+"The courier keeps rescheduling my delivery, it is very late now.",CUST-1128,email,2026-10-04T00:06:37.426930Z,India,Karnataka,35-44,Non-student,50k-100k
+"Item delivered with dents and scratches all over, clearly damaged in transit.",CUST-1076,chat,2026-10-04T00:27:28.781952Z,United Kingdom,Scotland,35-44,Non-student,<25k
+"Shipping is taking forever, ordered two weeks ago and nothing has arrived.",CUST-1135,phone,2026-10-04T08:35:35Z,United States,Texas,25-34,Non-student,100k+
+"Shipping is taking forever, ordered two weeks ago and nothing has arrived.",CUST-1152,SOCIAL_MEDIA,2026-10-04T09:19:33.300607Z,United Kingdom,Scotland,18-24,,50k-100k
+Would be nice to have a dark mode option in the app.,CUST-1227,email,2026-10-04 11:23:42,India,Telangana,25-34,Non-student,50k-100k
+I've been on hold for over an hour and nobody answered.,CUST-1254,CHAT,2026-10-04T17:42:51Z,India,Telangana,25-34,Student,<25k
+"Order ORD-749609 has not been delivered, the expected date passed 15 days ago.",CUST-1051,CHAT,2026-10-04 21:32:59,India,Telangana,35-44,Non-student,50k-100k
+"Account deactivated suddenly, all my saved data and wallet balance of $49 is inaccessible.",CUST-1015,Email,2026-10-04T22:22:15.723231Z,India,Maharashtra,18-24,Student,25k-50k
+"Hi team,
+There are unauthorized charges on my card from your company, this looks like fraud.
+Thanks",CUST-1228,email,2026-10-04T23:44:59Z,Canada,,,Non-student,50k-100k
+"The item in order ORD-363537 arrived damaged, the box was crushed and the product is broken.",CUST-1000,email,2026-10-05T00:13:59Z,,,18-24,,<25k
+I've tried to unsubscribe three times and I'm still being billed monthly.,CUST-1232,chat,2026-10-05T01:15:16Z,Canada,British Columbia,25-34,Non-student,50k-100k
+"Account deactivated suddenly, all my saved data and wallet balance of Rs 89 is inaccessible.",CUST-1246,CHAT,2026-10-05 03:22:08,United States,Florida,35-44,Non-student,50k-100k
+"Card declined at checkout for no reason, bank says there is no issue on their side.",CUST-1052,voice,2026-10-05T07:05:15Z,United States,Florida,45-54,Non-student,50k-100k
+"Still waiting on refund for cancelled order ORD-207282, support keeps saying it is processing.",CUST-1203,EMAIL,2026/10/05 08:04,United States,California,35-44,Non-student,25k-50k
+Login page just spins forever after I enter my credentials.,,voice,2026-10-05T08:46:33Z,,,,,
+Raised a ticket 30 days ago and got no response at all.,CUST-1074,Email,2026-10-05T11:06:08Z,India,Telangana,18-24,Student,25k-50k
+Tracking says delivered but I never received my parcel ORD-161010.,CUST-1107,phone,2026-10-05T12:45:18Z,United Kingdom,Scotland,18-24,Student,50k-100k
+Delivery is delayed again. Order ORD-750706 still shows 'in transit'.,CUST-1161,chat,2026/10/05 14:47,,,,,
+   I returned order ORD-232871 8 days ago and still have not received my refund of $249.   ,,VOICE,2026-10-05T15:50:58Z,,,,,
+Not receiving the OTP verification code so I cannot sign in.,CUST-1141,CHAT,2026/10/05 16:27,,,,,
+Mobile app freezes on the home screen and then force closes.,,VOICE,2026-10-05 17:36:05,,,,,
+"My invoice shows a higher amount than the price at checkout.
+
+Sent from my iPhone",CUST-1208,voice,2026-10-05T20:23:52Z,India,,25-34,Non-student,50k-100k
+Support keeps sending copy-paste replies without reading my issue.,CUST-1154,phone,2026-10-05T20:28:21.077068Z,,,,,
+"Can't use the app at all, it crashes whenever I try to checkout.",CUST-1175,email,2026/10/05 20:37,India,Maharashtra,55+,,50k-100k
+"I cannot cancel my subscription, the cancel button gives an error.",CUST-1212,twitter,2026-10-05T21:04:22Z,United States,Florida,45-54,Non-student,25k-50k
+My account was suspended without any explanation and I have an active order ORD-795951.,CUST-1246,phone,2026-10-05T21:28:19.948348Z,United States,Florida,35-44,Non-student,50k-100k
+Delivery is delayed again. Order ORD-499194 still shows 'in transit'.,CUST-1197,CHAT,2026-10-06T01:54:09Z,India,Delhi,18-24,Student,
+"I was charged twice for the same order ORD-269654, please reverse the extra $1299.",CUST-1228,CHAT,2026-10-06T03:04:44.458217Z,Canada,,,Non-student,50k-100k
+"Your support team is useless, every agent tells me something different.",CUST-1068,twitter,2026-10-06T06:10:25Z,United States,Florida,45-54,Non-student,50k-100k
+The product description said cotton but the label says polyester.,CUST-1178,chat,2026-10-06T11:44:41Z,India,Delhi,55+,Non-student,25k-50k
+"Hi team,
+Item delivered with dents and scratches all over, clearly damaged in transit.
+Thanks",CUST-1055,SOCIAL_MEDIA,2026-10-06T11:52:19Z,India,Karnataka,18-24,,<25k
+My package ORD-681636 was supposed to arrive 15 days ago and tracking hasn't updated. Please fix this asap.,,email,2026-10-06T16:18:53Z,,,,,
+The blender I received smells like burning and started smoking on first use. Order ORD-618827.,CUST-1247,CHAT,2026-10-06 20:57:18,Canada,,25-34,Non-student,100k+
+"Following up on my earlier message: Shipping is taking forever, ordered two weeks ago and nothing has arrived.",CUST-1197,social_media,2026/10/06 22:29,India,Delhi,18-24,Student,
+"UPI payment failed, amount debited but order not placed. Please help, this was £49.",CUST-1071,voice,2026-10-06T23:52:12Z,,,,,
+"Card declined at checkout for no reason, bank says there is no issue on their side.",CUST-1052,chat,2026-10-07T01:37:15.523586Z,United States,Florida,45-54,Non-student,50k-100k
+Second time contacting you about this. Customer service agent was rude and hung up on me.!!!,CUST-1254,EMAIL,2026/10/07 02:15,India,Telangana,25-34,Student,<25k
+I keep getting logged out and then can't log back in. You can reach me at user278@example.com or +1 555-284-2520.,CUST-1193,email,2026-10-07T02:21:07Z,Canada,British Columbia,,Non-student,
+"Following up on my earlier message: Shipping is taking forever, ordered two weeks ago and nothing has arrived.",CUST-1197,phone,2026-10-07T02:35:09.398612Z,India,Delhi,18-24,Student,
+"I was charged twice for the same order ORD-913432, please reverse the extra £2499.",CUST-1121,EMAIL,2026-10-07T04:04:39Z,India,Maharashtra,,Non-student,25k-50k
+"I cannot cancel my subscription, the cancel button gives an error.",CUST-1232,social_media,2026-10-07T04:42:23.026283Z,Canada,British Columbia,25-34,Non-student,50k-100k
+"Shipping is taking forever, ordered two weeks ago and nothing has arrived.",CUST-1051,EMAIL,2026-10-07T06:19:53.724644Z,India,Telangana,35-44,Non-student,50k-100k
+"Your support team is useless, every agent tells me something different.",CUST-1082,EMAIL,2026-10-07T07:54:57Z,United States,New York,35-44,Non-student,50k-100k
+The font on your website is a bit too small to read comfortably.,CUST-1079,VOICE,2026-10-07 08:47:14,Canada,British Columbia,25-34,Non-student,100k+
+"After updating, the app crashes immediately on launch.",CUST-1108,phone,2026-10-07T14:11:55Z,,,25-34,Non-student,<25k
+Mobile app freezes on the home screen and then force closes.,CUST-1137,SOCIAL_MEDIA,2026/10/07 16:26,,,,,
+My payment failed at checkout but Rs 249 was deducted from my bank account. Order ORD-104887.,CUST-1245,email,2026-10-07T18:50:32Z,United States,New York,35-44,,50k-100k
+"Received a cracked screen on my new phone, order ORD-728258. This is unacceptable, I'm considering legal action.",CUST-1011,CHAT,2026-10-07T20:19:30Z,India,Delhi,25-34,Non-student,
+The glass bottles were shattered when the package arrived. You can reach me at user591@example.com or +1 555-744-7404.,CUST-1115,CHAT,2026-10-07T20:35:30Z,United Kingdom,Scotland,25-34,Non-student,50k-100k
+"Hi team,
+The courier keeps rescheduling my delivery, it is very late now.
+Thanks",CUST-1054,voice,2026/10/08 01:30,India,Delhi,35-44,Non-student,
+My refund of $249 is stuck in 'initiated' status for weeks.,CUST-1092,Email,2026-10-08T10:19:16Z,United States,New York,25-34,Non-student,25k-50k
+"Received a cracked screen on my new phone, order ORD-156157.",CUST-1222,phone,2026-10-08T13:18:04Z,,,,,
+"Raised a ticket 10 days ago and got no response at all.
+
+Sent from my iPhone",CUST-1036,twitter,2026-10-08T22:01:54Z,India,Telangana,18-24,Non-student,25k-50k
+"Order ORD-537147 has not been delivered, the expected date passed 12 days ago.",CUST-1054,chat,2026-10-08T22:09:57.672407Z,India,Delhi,35-44,Non-student,
+There is no option to turn off auto-renew for my plan.,CUST-1208,live chat,2026-10-09 02:44:10,India,,25-34,Non-student,50k-100k
+"Hi team,
+I was charged twice for the same order ORD-126885, please reverse the extra $89.
+Thanks",CUST-1047,social_media,2026-10-09T04:11:39Z,United Kingdom,Scotland,35-44,Non-student,50k-100k
+"UPI payment failed, amount debited but order not placed. Please help, this was $49.",CUST-1039,VOICE,2026-10-09T04:26:12Z,,,,,
+My shipment is stuck at the warehouse for 15 days with no update.,CUST-1252,email,2026/10/09 06:27,India,Delhi,35-44,Non-student,50k-100k
+"Still not resolved! Shipping is taking forever, ordered two weeks ago and nothing has arrived.",CUST-1054,CHAT,2026-10-09T14:55:55.341613Z,India,Delhi,35-44,Non-student,
+"My order came with torn packaging and a broken handle, very disappointed.",CUST-1090,social_media,2026-10-09T18:37:26Z,United States,California,25-34,Student,
+"I've tried to unsubscribe three times and I'm still being billed monthly. I am furious, this is urgent.",CUST-1069,chat,2026-10-09T20:22:37Z,India,Karnataka,18-24,Student,
+"Hi team,
+Delivery is delayed again. Order ORD-294078 still shows 'in transit'. I am furious, this is urgent.
+Thanks",CUST-1095,Email,2026/10/09 20:28,India,Karnataka,45-54,Non-student,50k-100k
+I keep getting logged out and then can't log back in. Please fix this asap.,CUST-1179,Email,2026-10-09T20:38:32Z,India,Telangana,18-24,Non-student,100k+
+"Still not resolved! I was charged twice for the same order ORD-913432, please reverse the extra £2499.",CUST-1121,chat,2026-10-09T22:20:04.995352Z,India,Maharashtra,,Non-student,25k-50k
+"Refund was approved but the money never reached my account. Order ORD-255190. I am furious, this is urgent.",CUST-1064,twitter,2026-10-10 04:32:17,United Kingdom,Scotland,18-24,Student,25k-50k
+Your delivery driver blocked my driveway for twenty minutes.,CUST-1147,email,2026-10-10T06:12:10Z,India,Telangana,,Non-student,50k-100k
+Delivery is delayed again. Order ORD-679811 still shows 'in transit'. You can reach me at user318@example.com or +1 555-124-4768.,CUST-1211,SOCIAL_MEDIA,2026-10-10 06:15:20,Canada,Ontario,25-34,Non-student,25k-50k
+Support keeps sending copy-paste replies without reading my issue.,CUST-1097,phone,2026/10/10 08:32,United States,New York,,Non-student,50k-100k
+I cancelled my order and the refund hasn't been credited yet after 30 days.,CUST-1064,VOICE,2026-10-10 11:24:59,United Kingdom,Scotland,18-24,Student,25k-50k
+Login page just spins forever after I enter my credentials.,CUST-1159,chat,2026-10-10 13:57:02,India,Tamil Nadu,,Non-student,25k-50k
+The app crashes every time I open the cart after the latest update.,CUST-1199,live chat,2026/10/10 14:51,,,,,
+,CUST-1001,email,2026-10-20T10:00:00Z,,,,,
+Refund was approved but the money never reached my account. Order ORD-298202.,CUST-1209,CHAT,2026-10-10T16:25:04Z,,,,,
+"Your support team is useless, every agent tells me something different.",CUST-1089,live chat,2026-10-10T19:16:30Z,India,,,Non-student,50k-100k
+   There is an extra charge of £19 on my bill that I never authorized.   ,CUST-1243,chat,2026-10-10T20:04:06Z,,,55+,Non-student,50k-100k
+My shipment is stuck at the warehouse for 12 days with no update.,CUST-1109,email,2026-10-11T00:16:52Z,India,Karnataka,18-24,Student,
+   My package ORD-893365 was supposed to arrive 12 days ago and tracking hasn't updated.   ,CUST-1225,CHAT,2026-10-11T06:45:49Z,India,,25-34,Non-student,25k-50k
+The assembly instructions are missing step 4.,CUST-1222,chat,2026/10/11 07:21,,,,,
+"Item delivered with dents and scratches all over, clearly damaged in transit. Please fix this asap.",,VOICE,2026-10-11T09:57:19Z,,,,,
+"Sign in fails with 'something went wrong' on both app and website. I am furious, this is urgent.",,email,2026-10-11T12:59:12Z,,,,,
+Second time contacting you about this. I keep getting logged out and then can't log back in.,CUST-1159,voice,2026-10-11T13:59:27.647438Z,,,,,
+"Shipping is taking forever, ordered two weeks ago and nothing has arrived.",CUST-1066,EMAIL,2026-10-11T16:32:23Z,India,Telangana,18-24,Student,25k-50k
+"Shipping is taking forever, ordered two weeks ago and nothing has arrived. This is unacceptable, I'm considering legal action.",CUST-1179,twitter,2026/10/11 18:48,India,Telangana,18-24,Non-student,100k+
+"Second time contacting you about this. The courier keeps rescheduling my delivery, it is very late now.",CUST-1252,phone,2026-10-11 20:00:52,,,,,
+I've been on hold for over an hour and nobody answered.,,email,2026-10-11T20:44:04Z,,,,,
+Second time contacting you about this. Not receiving the OTP verification code so I cannot sign in.,CUST-1159,twitter,2026-10-12T00:41:41.185491Z,India,Tamil Nadu,,Non-student,25k-50k
+The glass bottles were shattered when the package arrived.,CUST-1165,email,2026-10-12T02:49:14Z,United States,California,35-44,,100k+
+   My payment failed at checkout but £1299 was deducted from my bank account. Order ORD-504684.   ,CUST-1224,social_media,2026-10-12T06:49:32Z,United States,Florida,25-34,,
+Still not resolved! Support keeps sending copy-paste replies without reading my issue.,CUST-1097,EMAIL,2026-10-12T07:29:29.950878Z,United States,New York,,Non-student,50k-100k
+"<p>Card declined at checkout for no reason, bank says there is no issue on their side.</p>",CUST-1146,EMAIL,2026-10-12T09:32:41Z,,,25-34,Student,<25k
+"Hi team,
+Where is my refund? It has been 8 days since the return was picked up.
+Thanks",CUST-1144,live chat,2026-10-12T09:34:15Z,India,Telangana,35-44,Non-student,25k-50k
+The loyalty points from my last purchase never showed up.,CUST-1193,EMAIL,2026-10-12T10:15:22Z,Canada,British Columbia,,Non-student,
+"Money got debited twice for a failed payment, £249 each, and no order was created. Transaction TXN-76532158.",,social_media,2026-10-12T16:14:29Z,,,,,
+App keeps closing by itself on my Android phone since yesterday.,CUST-1199,voice,2026/10/12 17:17,United States,Texas,55+,Non-student,25k-50k
+My refund of Rs 120 is stuck in 'initiated' status for weeks.,CUST-1121,live chat,2026-10-12T17:46:53Z,India,Maharashtra,,Non-student,25k-50k
+My payment failed at checkout but $19 was deducted from my bank account. Order ORD-352009.,CUST-1181,email,2026/10/12 21:10,,,18-24,Student,<25k
+"Two-factor authentication code never arrives, cannot access my account.",CUST-1187,VOICE,2026-10-12T21:34:54Z,United States,Florida,35-44,Non-student,50k-100k
+"Account deactivated suddenly, all my saved data and wallet balance of Rs 1299 is inaccessible.",CUST-1118,EMAIL,2026-10-13T01:07:45Z,India,,55+,Non-student,100k+
+"Account deactivated suddenly, all my saved data and wallet balance of $49 is inaccessible. I am furious, this is urgent.",CUST-1169,VOICE,2026-10-13T02:12:13Z,United States,California,,,100k+
+"<p>Following up on my earlier message: Tried to pay three times, card keeps getting declined even though it works everywhere else.</p>",CUST-1224,live chat,2026/10/13 02:21,United States,Florida,25-34,,
+Mobile app freezes on the home screen and then force closes.,CUST-1089,VOICE,2026-10-13T04:09:07.913963Z,India,,,Non-student,50k-100k
+My account was suspended without any explanation and I have an active order ORD-773459.,CUST-1176,live chat,2026-10-13T06:47:49Z,United States,Florida,25-34,Non-student,100k+
+"Password reset link is expired every time I click it, locked out of my account. This is unacceptable, I'm considering legal action.",CUST-1231,live chat,2026/10/13 08:44,United States,Florida,,Non-student,<25k
+"Shipping is taking forever, ordered two weeks ago and nothing has arrived.",CUST-1109,twitter,2026-10-13 10:26:31,India,Karnataka,18-24,Student,
+"Item delivered with dents and scratches all over, clearly damaged in transit.",CUST-1206,live chat,2026-10-13T13:59:11Z,United States,,35-44,Non-student,50k-100k
+"Still not resolved! Shipping is taking forever, ordered two weeks ago and nothing has arrived.",CUST-1066,chat,2026-10-13 17:59:17,India,Telangana,18-24,Student,25k-50k
+<p>Subscription cancellation page keeps redirecting me back to the plans page.</p>,CUST-1147,chat,2026/10/13 18:03,India,Telangana,,Non-student,50k-100k
+Following up on my earlier message: Support keeps sending copy-paste replies without reading my issue.,CUST-1089,email,2026-10-13T19:02:56.461962Z,India,,,Non-student,50k-100k
+"I can't log in to my account, it keeps saying invalid password even after resetting it.",CUST-1082,voice,2026-10-13T23:06:18Z,,,,,
+Raised a ticket 8 days ago and got no response at all.,CUST-1094,voice,2026-10-13 23:38:16,India,Telangana,25-34,,50k-100k
+My payment failed at checkout but £249 was deducted from my bank account. Order ORD-962767. You can reach me at user988@example.com or +1 555-755-8742.,CUST-1251,email,2026-10-14T02:32:55Z,India,Karnataka,18-24,Student,25k-50k
+Following up on my earlier message: I cancelled my order and the refund hasn't been credited yet after 8 days.,CUST-1121,VOICE,2026/10/14 03:20,India,Maharashtra,,Non-student,25k-50k
+<p>I cancelled my order and the refund hasn't been credited yet after 10 days.</p>,CUST-1158,EMAIL,2026-10-14T06:22:06Z,,,,,
+There is an extra charge of $19 on my bill that I never authorized.,CUST-1102,social_media,2026/10/14 06:42,Canada,British Columbia,,,
+"I've tried to unsubscribe three times and I'm still being billed monthly. I am furious, this is urgent.",CUST-1160,CHAT,2026/10/14 09:25,,,,,
+"After updating, the app crashes immediately on launch. I am furious, this is urgent.",CUST-1083,social_media,2026-10-14T09:34:34Z,India,Maharashtra,35-44,Non-student,50k-100k
+Second time contacting you about this. Where is my refund? It has been 8 days since the return was picked up.,CUST-1121,email,2026-10-14T15:39:17.597480Z,,,,,
+The blender I received smells like burning and started smoking on first use. Order ORD-591147.,CUST-1165,VOICE,2026-10-14T20:25:42Z,United States,California,35-44,,100k+
+My shipment is stuck at the warehouse for 12 days with no update.,,chat,2026-10-15T01:20:09Z,,,,,
+"Password reset link is expired every time I click it, locked out of my account.",CUST-1199,chat,2026-10-15T03:51:38Z,United States,Texas,55+,Non-student,25k-50k
+"<p>I returned order ORD-720928 21 days ago and still have not received my refund of Rs 499. I am furious, this is urgent.</p>",CUST-1249,twitter,2026-10-15T03:57:52Z,United States,Texas,35-44,Non-student,25k-50k
+Second time contacting you about this. The chat agent closed my conversation without solving anything.,CUST-1094,SOCIAL_MEDIA,2026-10-15T06:01:50.988474Z,India,Telangana,25-34,,50k-100k
+"Can't use the app at all, it crashes whenever I try to checkout.",CUST-1206,social_media,2026-10-15T06:31:42.916475Z,United States,,35-44,Non-student,50k-100k
+"Shipping is taking forever, ordered two weeks ago and nothing has arrived.
+
+Sent from my iPhone",CUST-1231,social_media,2026-10-15T08:58:55Z,,,,,
+"Hi team,
+Item delivered with dents and scratches all over, clearly damaged in transit.
+Thanks",CUST-1014,VOICE,2026-10-15 11:13:09,United Kingdom,England,55+,Non-student,50k-100k
+"Password reset link is expired every time I click it, locked out of my account.",CUST-1120,SOCIAL_MEDIA,2026/10/15 11:23,India,Karnataka,25-34,,
+"Received a cracked screen on my new phone, order ORD-778526.",CUST-1050,EMAIL,2026-10-15T12:26:11Z,India,,45-54,Non-student,50k-100k
+"   Still not resolved! Two-factor authentication code never arrives, cannot access my account.   ",CUST-1082,Email,2026-10-15T14:36:47.473879Z,United States,New York,35-44,Non-student,50k-100k
+<p>My package ORD-559226 was supposed to arrive 12 days ago and tracking hasn't updated. Please fix this asap.</p>,CUST-1070,live chat,2026-10-15T17:13:49Z,United States,Florida,25-34,Non-student,50k-100k
+"Item delivered with dents and scratches all over, clearly damaged in transit.",CUST-1061,social_media,2026-10-15T17:17:15Z,United States,New York,25-34,Non-student,100k+
+"Order ORD-146307 has not been delivered, the expected date passed 30 days ago.",CUST-1107,phone,2026-10-15T23:58:03Z,United Kingdom,Scotland,18-24,Student,50k-100k
+"Delivery is delayed again. Order ORD-396765 still shows 'in transit'.
+
+Sent from my iPhone",CUST-1060,Email,2026-10-16T00:21:15Z,United States,New York,25-34,Non-student,100k+
+Login page just spins forever after I enter my credentials.,CUST-1243,SOCIAL_MEDIA,2026-10-16T07:30:36Z,,,,,
+   Subscription cancellation page keeps redirecting me back to the plans page.   ,CUST-1042,SOCIAL_MEDIA,2026/10/16 09:03,,,,,
+"<p>Card declined at checkout for no reason, bank says there is no issue on their side. I am furious, this is urgent.</p>",CUST-1197,email,2026-10-16 10:41:09,,,,,
+"Following up on my earlier message: Order ORD-146307 has not been delivered, the expected date passed 30 days ago.",CUST-1107,EMAIL,2026-10-16T13:58:13.921702Z,United Kingdom,Scotland,18-24,Student,50k-100k
+I returned order ORD-506224 21 days ago and still have not received my refund of £499.,CUST-1065,CHAT,2026/10/16 17:17,United States,Texas,25-34,,25k-50k
+I cancelled my order and the refund hasn't been credited yet after 15 days.,CUST-1171,live chat,2026-10-16T18:40:52Z,United Kingdom,England,35-44,Non-student,25k-50k
+I've been on hold for over an hour and nobody answered.,,voice,2026-10-16T19:03:37Z,,,,,
+Second time contacting you about this. Delivery is delayed again. Order ORD-396765 still shows 'in transit'.,CUST-1060,social_media,2026-10-16T20:34:17.969591Z,United States,New York,25-34,Non-student,100k+
+Following up on my earlier message: Billed for items I never ordered on invoice ORD-239093.,CUST-1102,live chat,2026-10-16T21:16:21.229723Z,Canada,British Columbia,,,
+Still not resolved! My invoice shows a higher amount than the price at checkout.,CUST-1102,chat,2026-10-16T21:37:45.043304Z,Canada,British Columbia,,,
+Still not resolved! Login page just spins forever after I enter my credentials.,CUST-1199,EMAIL,2026-10-17T01:41:19.766608Z,United States,Texas,55+,Non-student,25k-50k
+"   I was charged twice for the same order ORD-743937, please reverse the extra £120.   ",CUST-1076,Email,2026-10-17 03:04:44,United Kingdom,Scotland,35-44,Non-student,<25k
+Not receiving the OTP verification code so I cannot sign in. You can reach me at user588@example.com or +1 555-541-7805.,CUST-1199,voice,2026-10-17 04:45:00,United States,Texas,55+,Non-student,25k-50k
+My payment failed at checkout but $1299 was deducted from my bank account. Order ORD-750618.,CUST-1197,phone,2026-10-17T07:02:22.714335Z,,,,,
+"Can't use the app at all, it crashes whenever I try to checkout. You can reach me at user846@example.com or +1 555-223-7919.",CUST-1137,CHAT,2026-10-17T09:06:28.327695Z,Canada,Ontario,55+,Non-student,100k+
+"Still not resolved! Product arrived defective and doesn't turn on at all.
+
+Sent from my iPhone",CUST-1061,EMAIL,2026-10-17T11:35:05.889415Z,United States,New York,25-34,Non-student,100k+
+"<p>The item in order ORD-564077 arrived damaged, the box was crushed and the product is broken.</p>",CUST-1185,SOCIAL_MEDIA,2026-10-17T17:18:20Z,India,Telangana,55+,Non-student,50k-100k
+"After updating, the app crashes immediately on launch.",CUST-1259,SOCIAL_MEDIA,2026-10-17T18:46:59Z,India,Maharashtra,35-44,Non-student,50k-100k
+The blender I received smells like burning and started smoking on first use. Order ORD-778526.!!!,CUST-1050,social_media,2026-10-17 19:01:49,India,,45-54,Non-student,50k-100k
+Customer service agent was rude and hung up on me.,CUST-1156,EMAIL,2026-10-17T19:13:04Z,United States,,45-54,Non-student,50k-100k
+"   Tried to pay three times, card keeps getting declined even though it works everywhere else.   ",CUST-1197,SOCIAL_MEDIA,2026-10-17T19:49:24.018142Z,India,Delhi,18-24,Student,
+Second time contacting you about this. I cancelled my order and the refund hasn't been credited yet after 21 days.,CUST-1249,phone,2026-10-17T21:05:44.234805Z,United States,Texas,35-44,Non-student,25k-50k
+"The item in order ORD-114463 arrived damaged, the box was crushed and the product is broken.",CUST-1015,twitter,2026-10-18T00:03:23Z,India,Maharashtra,18-24,Student,25k-50k
+Tracking says delivered but I never received my parcel ORD-883968.,CUST-1130,email,2026/10/18 01:51,United States,New York,45-54,Non-student,
+"The monthly bill has wrong tax calculation, I was overcharged.",CUST-1005,Email,2026-10-18T04:52:47Z,India,Karnataka,25-34,Non-student,50k-100k
+Mobile app freezes on the home screen and then force closes.,CUST-1259,CHAT,2026-10-18T06:06:52.327302Z,India,Maharashtra,35-44,Non-student,50k-100k
+My refund of £499 is stuck in 'initiated' status for weeks.,CUST-1185,twitter,2026-10-18 06:41:35,India,Telangana,55+,Non-student,50k-100k
+Tracking says delivered but I never received my parcel ORD-146307.,CUST-1107,CHAT,2026-10-18T07:11:18.435730Z,,,,,
+"The courier keeps rescheduling my delivery, it is very late now.",CUST-1082,voice,2026/10/18 12:28,United States,New York,35-44,Non-student,50k-100k
+My invoice shows a higher amount than the price at checkout.,CUST-1005,social_media,2026-10-18T15:59:38.527934Z,India,Karnataka,25-34,Non-student,50k-100k
+"My order came with torn packaging and a broken handle, very disappointed.",CUST-1217,SOCIAL_MEDIA,2026-10-18T19:20:00Z,India,Delhi,25-34,Non-student,
+Login page just spins forever after I enter my credentials.,CUST-1030,live chat,2026-10-18T19:28:03Z,India,Delhi,18-24,Non-student,50k-100k
+"Still not resolved! Still waiting on refund for cancelled order ORD-506224, support keeps saying it is processing.",CUST-1065,twitter,2026-10-18T19:59:47.651220Z,United States,Texas,25-34,,25k-50k
+"Received a cracked screen on my new phone, order ORD-178771.",CUST-1115,Email,2026-10-19T02:59:01Z,United Kingdom,Scotland,25-34,Non-student,50k-100k
+Product arrived defective and doesn't turn on at all.,CUST-1109,CHAT,2026-10-19T05:33:12Z,India,Karnataka,18-24,Student,
+My invoice shows a higher amount than the price at checkout.,CUST-1206,social_media,2026-10-19T06:34:24.635650Z,United States,,35-44,Non-student,50k-100k
+Product arrived defective and doesn't turn on at all.,CUST-1161,SOCIAL_MEDIA,2026-10-19 09:40:51,India,Tamil Nadu,25-34,Non-student,25k-50k
+"The payment page hangs after I enter my OTP and then shows transaction failed. I am furious, this is urgent.",CUST-1011,social_media,2026-10-19 14:32:41,,,,,
+"Item delivered with dents and scratches all over, clearly damaged in transit.",CUST-1018,VOICE,2026-10-19T14:53:10Z,United Kingdom,England,45-54,Non-student,25k-50k
+My payment failed at checkout but $1299 was deducted from my bank account. Order ORD-576935.,CUST-1052,email,2026-10-19T15:12:05Z,United States,Florida,45-54,Non-student,50k-100k
+"I got an email saying my account is blocked for suspicious activity, but it was me.",CUST-1224,social_media,2026-10-20T00:35:33Z,United States,Florida,25-34,,
+"Order ORD-778058 has not been delivered, the expected date passed 8 days ago. I am furious, this is urgent. You can reach me at user176@example.com or +1 555-654-2744.",,voice,2026-10-20T01:22:23Z,,,,,
+Cancelled my membership but was still charged Rs 49 for renewal.,CUST-1107,Email,2026-10-20T04:06:54Z,United Kingdom,Scotland,18-24,Student,50k-100k
+There is an extra charge of £49 on my bill that I never authorized.,CUST-1032,CHAT,2026-10-20 05:55:21,United Kingdom,Scotland,45-54,,100k+
+"You promised a refund in 5-7 business days, it's been 8 days. Still nothing.",,social_media,2026-10-20T08:24:33Z,,,,,
+"UPI payment failed, amount debited but order not placed. Please help, this was Rs 49.",CUST-1097,social_media,2026-10-20T12:00:33Z,United States,New York,,Non-student,50k-100k
+"Still waiting on refund for cancelled order ORD-927763, support keeps saying it is processing.",CUST-1034,social_media,2026-10-20 12:47:32,,,,,
+There is an extra charge of $49 on my bill that I never authorized.,CUST-1191,twitter,2026-10-20T17:58:48Z,Canada,British Columbia,18-24,Student,50k-100k
+"Hi team,
+Still not resolved! The monthly bill has wrong tax calculation, I was overcharged.
+Thanks",CUST-1005,chat,2026-10-20T18:19:41.701852Z,India,Karnataka,25-34,Non-student,50k-100k
+Refund was approved but the money never reached my account. Order ORD-623954.,CUST-1200,email,2026-10-20T18:19:45Z,,,,,
+"Refund was approved but the money never reached my account. Order ORD-397252. I am furious, this is urgent.",CUST-1074,twitter,2026-10-20T21:20:03Z,India,Telangana,18-24,Student,25k-50k
+Still not resolved! My shipment is stuck at the warehouse for 30 days with no update.,CUST-1130,live chat,2026-10-20T23:00:07.879039Z,,,,,
+Customer service agent was rude and hung up on me.,CUST-1081,EMAIL,2026-10-20T23:15:48Z,United States,Texas,25-34,Student,
+"Hi team,
+The blender I received smells like burning and started smoking on first use. Order ORD-537400.
+Thanks",CUST-1074,EMAIL,2026-10-21T00:34:01Z,India,Telangana,18-24,Student,25k-50k
+"The courier keeps rescheduling my delivery, it is very late now.",CUST-1133,social_media,2026-10-21T01:08:56Z,,,,,
+The iOS app shows a blank white screen and then crashes.,,twitter,2026-10-21T01:41:20Z,,,,,
+My seller account has been disabled and it is affecting my business income.,CUST-1109,Email,2026-10-21 13:19:22,India,Karnataka,18-24,Student,
+The gift wrapping option was missing from my order.,CUST-1059,email,2026/10/21 13:41,United States,Florida,,Student,<25k
+Sign in fails with 'something went wrong' on both app and website.,CUST-1221,EMAIL,2026-10-22T03:03:28Z,India,Telangana,35-44,Non-student,50k-100k
+"Your support team is useless, every agent tells me something different.",CUST-1258,twitter,2026-10-22T07:17:20Z,,,,,
+I've tried to unsubscribe three times and I'm still being billed monthly.,CUST-1245,phone,2026-10-22T07:32:00Z,United States,New York,35-44,,50k-100k
+Product arrived defective and doesn't turn on at all.,CUST-1132,social_media,2026-10-22 07:32:55,India,Maharashtra,55+,Non-student,
+"Tried to pay three times, card keeps getting declined even though it works everywhere else.",CUST-1097,VOICE,2026-10-22T09:18:24.241161Z,United States,New York,,Non-student,50k-100k
+The store opening hours on Google are wrong.,CUST-1102,voice,2026-10-22T15:24:02Z,Canada,British Columbia,,,
+"There are unauthorized charges on my card from your company, this looks like fraud.",CUST-1005,voice,2026-10-22T16:29:21Z,India,Karnataka,25-34,Non-student,50k-100k
+Delivery is delayed again. Order ORD-257212 still shows 'in transit'.,CUST-1152,EMAIL,2026-10-22T17:22:36Z,United Kingdom,Scotland,18-24,,50k-100k
+"Hi team,
+Subscription cancellation page keeps redirecting me back to the plans page.
+Thanks",CUST-1024,CHAT,2026-10-22T18:42:43Z,United Kingdom,England,25-34,Non-student,50k-100k
+"Card declined at checkout for no reason, bank says there is no issue on their side. I am furious, this is urgent.",CUST-1044,email,2026-10-22T18:55:05Z,India,Tamil Nadu,35-44,Non-student,
+Support keeps sending copy-paste replies without reading my issue.,CUST-1194,CHAT,2026-10-23T00:02:19Z,India,Tamil Nadu,55+,Non-student,50k-100k
+I've been on hold for over an hour and nobody answered.,CUST-1107,voice,2026-10-23T00:41:42Z,United Kingdom,Scotland,18-24,Student,50k-100k
+Billed for items I never ordered on invoice ORD-582860.,CUST-1058,SOCIAL_MEDIA,2026-10-23T04:14:47Z,India,Telangana,45-54,Non-student,
+"   Shipping is taking forever, ordered two weeks ago and nothing has arrived. Please fix this asap.   ",CUST-1012,EMAIL,2026-10-23T04:33:41Z,United Kingdom,England,25-34,Non-student,
+Support keeps sending copy-paste replies without reading my issue.,CUST-1194,phone,2026-10-23T09:15:17.698340Z,India,Tamil Nadu,55+,Non-student,50k-100k
+My invoice shows a higher amount than the price at checkout. You can reach me at user727@example.com or +1 555-685-5620.,CUST-1035,SOCIAL_MEDIA,2026-10-23T10:06:16Z,,,,,
+Second time contacting you about this. The payment page hangs after I enter my OTP and then shows transaction failed.,CUST-1044,chat,2026-10-23T15:43:28.043892Z,India,Tamil Nadu,35-44,Non-student,
+Refund was approved but the money never reached my account. Order ORD-272132.,CUST-1239,CHAT,2026-10-23T15:48:20Z,United States,Texas,35-44,Non-student,25k-50k
+"UPI payment failed, amount debited but order not placed. Please help, this was $89.",CUST-1044,CHAT,2026-10-23T17:46:14.161236Z,India,Tamil Nadu,35-44,Non-student,
+"There are unauthorized charges on my card from your company, this looks like fraud. Please fix this asap.",CUST-1107,chat,2026-10-23T19:55:14Z,United Kingdom,Scotland,18-24,Student,50k-100k
+My account was suspended without any explanation and I have an active order ORD-940480.,CUST-1223,social_media,2026-10-23T20:39:56Z,United States,,55+,Non-student,
+My order never arrived and nobody replies.,CUST-1002,fax,2026-10-21T10:00:00Z,,,,,
+"There are unauthorized charges on my card from your company, this looks like fraud.",CUST-1035,live chat,2026-10-23T23:55:55.886969Z,India,Delhi,45-54,Non-student,50k-100k
+"Money got debited twice for a failed payment, Rs 499 each, and no order was created. Transaction TXN-82248455. You can reach me at user159@example.com or +1 555-864-1562.",CUST-1054,SOCIAL_MEDIA,2026-10-24T01:55:02Z,India,Delhi,35-44,Non-student,
+I've tried to unsubscribe three times and I'm still being billed monthly.,CUST-1091,email,2026-10-24T04:23:20Z,,,,,
+"Hi team,
+Refund was approved but the money never reached my account. Order ORD-982442. I am furious, this is urgent.
+Thanks",CUST-1082,social_media,2026-10-24T04:49:39Z,,,,,
+"My seller account has been disabled and it is affecting my business income.
+
+Sent from my iPhone",,twitter,2026-10-24 05:02:13,,,,,
+I cancelled my order and the refund hasn't been credited yet after 12 days.,CUST-1182,VOICE,2026-10-24T06:34:29Z,,,,,
+"My order came with torn packaging and a broken handle, very disappointed.!!!",CUST-1159,CHAT,2026-10-24T07:57:25Z,India,Tamil Nadu,,Non-student,25k-50k
+"Your support team is useless, every agent tells me something different.!!!",CUST-1152,Email,2026-10-24T13:30:06Z,United Kingdom,Scotland,18-24,,50k-100k
+I cancelled my order and the refund hasn't been credited yet after 21 days.,CUST-1125,Email,2026/10/24 15:56,United States,Texas,25-34,Non-student,100k+
+The glass bottles were shattered when the package arrived.,CUST-1090,SOCIAL_MEDIA,2026-10-24T17:34:51Z,United States,California,25-34,Student,
+Still not resolved! There is no option to turn off auto-renew for my plan.,CUST-1091,voice,2026-10-24T19:21:02.800125Z,India,Telangana,25-34,Student,25k-50k
+"Login page just spins forever after I enter my credentials.
+
+Sent from my iPhone",CUST-1067,CHAT,2026/10/24 21:15,India,Karnataka,35-44,Non-student,<25k
+Product arrived defective and doesn't turn on at all.,,VOICE,2026-10-24T22:05:13Z,,,,,
+The iOS app shows a blank white screen and then crashes.,,CHAT,2026-10-24T23:11:12Z,,,,,
+"Your support team is useless, every agent tells me something different. This is unacceptable, I'm considering legal action.",CUST-1205,CHAT,2026-10-25T01:31:56Z,United States,New York,35-44,Non-student,100k+
+"Still not resolved! My invoice shows a higher amount than the price at checkout.
+
+Sent from my iPhone",CUST-1058,email,2026/10/25 10:06,India,Telangana,45-54,Non-student,
+The chat agent closed my conversation without solving anything.,CUST-1060,chat,2026-10-25T14:12:06Z,,,,,
+"Not receiving the OTP verification code so I cannot sign in. I am furious, this is urgent.",CUST-1048,Email,2026-10-25T17:41:28Z,India,Delhi,25-34,Non-student,25k-50k
+"I cannot cancel my subscription, the cancel button gives an error.",CUST-1141,social_media,2026-10-25T23:33:39Z,,,,,
+My payment failed at checkout but Rs 499 was deducted from my bank account. Order ORD-798384. Please fix this asap.,CUST-1072,EMAIL,2026-10-26T01:51:02Z,India,Karnataka,25-34,Non-student,50k-100k
+I cancelled my order and the refund hasn't been credited yet after 8 days. Please fix this asap.,CUST-1173,chat,2026-10-26T04:43:15Z,United States,New York,25-34,Non-student,<25k
+"My invoice shows a higher amount than the price at checkout. I am furious, this is urgent.",CUST-1078,EMAIL,2026-10-26T06:27:36Z,India,Tamil Nadu,25-34,Non-student,50k-100k
+Refund was approved but the money never reached my account. Order ORD-263690.,,social_media,2026-10-26T12:06:28Z,,,,,
+"Hi team,
+App keeps closing by itself on my Android phone since yesterday.
+Thanks",CUST-1046,phone,2026-10-26T13:32:26Z,United States,Florida,55+,Non-student,50k-100k
+Support keeps sending copy-paste replies without reading my issue.,CUST-1066,EMAIL,2026-10-26 15:47:44,India,Telangana,18-24,Student,25k-50k
+Checkout just says 'payment could not be processed' every time I try to pay.,CUST-1085,social_media,2026-10-26T20:51:47Z,United States,New York,25-34,Non-student,25k-50k
+"I keep getting logged out and then can't log back in. This is unacceptable, I'm considering legal action.",CUST-1250,chat,2026-10-27T00:27:19Z,,,,,
+I keep getting logged out and then can't log back in. Please fix this asap.,CUST-1179,social_media,2026-10-27 06:45:05,,,,,
+Tracking says delivered but I never received my parcel ORD-963699.,CUST-1243,live chat,2026-10-27 09:58:20,,,55+,Non-student,50k-100k
+"UPI payment failed, amount debited but order not placed. Please help, this was $120.",CUST-1253,phone,2026-10-27T11:36:31Z,,,,,
+"Shipping is taking forever, ordered two weeks ago and nothing has arrived.",,CHAT,2026-10-27T15:46:57Z,,,,,
+"Password reset link is expired every time I click it, locked out of my account. I am furious, this is urgent.",CUST-1043,Email,2026-10-27T21:26:34Z,,,,,
+I've tried to unsubscribe three times and I'm still being billed monthly. Please fix this asap.,CUST-1089,live chat,2026-10-27T23:16:25Z,India,,,Non-student,50k-100k
+I've tried to unsubscribe three times and I'm still being billed monthly.,CUST-1125,SOCIAL_MEDIA,2026-10-28 02:23:03,United States,Texas,25-34,Non-student,100k+
+"The courier keeps rescheduling my delivery, it is very late now.",,CHAT,2026-10-28T06:37:51Z,,,,,
+"Received a cracked screen on my new phone, order ORD-993522. Please fix this asap.",CUST-1191,EMAIL,2026-10-28T06:56:27Z,Canada,British Columbia,18-24,Student,50k-100k
+Login page just spins forever after I enter my credentials.,CUST-1193,phone,2026-10-28 10:34:24,,,,,
+Raised a ticket 12 days ago and got no response at all.,CUST-1051,VOICE,2026-10-28T12:44:12Z,India,Telangana,35-44,Non-student,50k-100k
+"Password reset link is expired every time I click it, locked out of my account.",CUST-1096,VOICE,2026-10-28T14:28:15Z,India,Maharashtra,45-54,Non-student,25k-50k
+"Following up on my earlier message: I cannot cancel my subscription, the cancel button gives an error.",CUST-1125,email,2026-10-28T17:49:01.282772Z,United States,Texas,25-34,Non-student,100k+
+"Money got debited twice for a failed payment, $89 each, and no order was created. Transaction TXN-46439333. Please fix this asap.",CUST-1199,SOCIAL_MEDIA,2026-10-28T18:16:00Z,United States,Texas,55+,Non-student,25k-50k
+"Item delivered with dents and scratches all over, clearly damaged in transit.",CUST-1191,CHAT,2026-10-28 20:30:48,Canada,British Columbia,18-24,Student,50k-100k
+My account was suspended without any explanation and I have an active order ORD-288643.,CUST-1015,chat,2026-10-28T23:01:11Z,India,Maharashtra,18-24,Student,25k-50k
+Following up on my earlier message: Sign in fails with 'something went wrong' on both app and website.,CUST-1096,Email,2026-10-29T01:10:16.102816Z,India,Maharashtra,45-54,Non-student,25k-50k
+"The courier keeps rescheduling my delivery, it is very late now.",CUST-1110,chat,2026/10/29 04:31,Canada,British Columbia,18-24,,100k+
+Following up on my earlier message: Login page just spins forever after I enter my credentials.,CUST-1179,voice,2026-10-29T06:01:33.780398Z,India,Telangana,18-24,Non-student,100k+
+Cancelled my membership but was still charged £1299 for renewal.,CUST-1172,twitter,2026/10/29 07:01,India,Delhi,45-54,Non-student,25k-50k
+"I was charged twice for the same order ORD-408857, please reverse the extra £2499. I am furious, this is urgent.",CUST-1218,email,2026-10-29T10:04:23Z,,,,Non-student,100k+
+I keep getting logged out and then can't log back in.,CUST-1102,Email,2026-10-29T13:04:25Z,,,,,
+"Password reset link is expired every time I click it, locked out of my account. I am furious, this is urgent.",CUST-1083,live chat,2026-10-29T15:46:23Z,India,Maharashtra,35-44,Non-student,50k-100k
+The chat agent closed my conversation without solving anything.,CUST-1051,SOCIAL_MEDIA,2026/10/29 17:41,India,Telangana,35-44,Non-student,50k-100k
+My package ORD-685661 was supposed to arrive 8 days ago and tracking hasn't updated.!!!,CUST-1010,chat,2026-10-29T22:23:34Z,Canada,Ontario,,Non-student,100k+
+"I got an email saying my account is blocked for suspicious activity, but it was me.",CUST-1254,social_media,2026-10-30T06:55:31Z,India,Telangana,25-34,Student,<25k
+"Why was my account banned? I haven't done anything wrong. I am furious, this is urgent.",CUST-1146,VOICE,2026/10/30 08:54,,,25-34,Student,<25k
+Payment gateway error during checkout. Transaction TXN-78920851 shows failed but money is gone from my account.,CUST-1057,twitter,2026-10-30T10:54:10Z,Canada,British Columbia,18-24,,<25k
+"Product size chart is inaccurate, the medium fits like a small.",,social_media,2026-10-30 12:02:35,,,,,
+Payment gateway error during checkout. Transaction TXN-73819982 shows failed but money is gone from my account.,CUST-1004,chat,2026-10-30 15:29:07,United States,California,18-24,Student,<25k
+Support keeps sending copy-paste replies without reading my issue.,CUST-1028,live chat,2026-10-30T20:07:30Z,,,,,
+"I returned order ORD-572552 10 days ago and still have not received my refund of $89. I am furious, this is urgent.",CUST-1257,phone,2026-10-30T20:35:31Z,United States,California,45-54,Non-student,25k-50k
+"Hi team,
+I've tried to unsubscribe three times and I'm still being billed monthly.
+Thanks",CUST-1241,voice,2026-10-30T22:06:28Z,,,,,
+I cancelled my order and the refund hasn't been credited yet after 10 days.,CUST-1257,email,2026-10-30T22:16:00.880881Z,United States,California,45-54,Non-student,25k-50k
+I returned order ORD-980096 15 days ago and still have not received my refund of Rs 1299. You can reach me at user612@example.com or +1 555-694-6703.,CUST-1201,VOICE,2026-10-31T00:08:06Z,United States,Texas,25-34,Non-student,<25k
+"Password reset link is expired every time I click it, locked out of my account.",CUST-1075,voice,2026-10-31T00:23:16Z,India,Tamil Nadu,25-34,,50k-100k
+My payment failed at checkout but Rs 499 was deducted from my bank account. Order ORD-356430.,CUST-1180,Email,2026-10-31T01:24:54Z,India,Delhi,55+,Non-student,50k-100k
+"Password reset link is expired every time I click it, locked out of my account.",CUST-1251,social_media,2026-10-31T02:06:40Z,,,,,
+"I can't log in to my account, it keeps saying invalid password even after resetting it.",CUST-1194,phone,2026-10-31T03:10:23Z,,,,,
+"Second time contacting you about this. You promised a refund in 5-7 business days, it's been 10 days. Still nothing.",CUST-1257,Email,2026-10-31T03:15:30.385385Z,United States,California,45-54,Non-student,25k-50k
+Subscription cancellation page keeps redirecting me back to the plans page.,CUST-1241,SOCIAL_MEDIA,2026-10-31T08:21:40.051703Z,United States,Florida,25-34,Non-student,50k-100k
+Raised a ticket 30 days ago and got no response at all.!!!,CUST-1186,twitter,2026-10-31T13:40:03Z,United States,Texas,35-44,Non-student,25k-50k
+Still not resolved! I returned order ORD-980096 15 days ago and still have not received my refund of Rs 1299.,CUST-1201,email,2026/10/31 17:35,United States,Texas,25-34,Non-student,<25k
+<p>Sign in fails with 'something went wrong' on both app and website.</p>,CUST-1176,social_media,2026-10-31T17:56:23Z,United States,Florida,25-34,Non-student,100k+
+"My seller account has been disabled and it is affecting my business income. I am furious, this is urgent.",CUST-1065,SOCIAL_MEDIA,2026-10-31T19:42:03Z,United States,Texas,25-34,,25k-50k
+Subscription cancellation page keeps redirecting me back to the plans page.,,live chat,2026-11-01T02:35:03Z,,,,,
+"I keep getting logged out and then can't log back in. I am furious, this is urgent.",CUST-1122,CHAT,2026/11/01 07:01,,,,,
+"Login page just spins forever after I enter my credentials. This is unacceptable, I'm considering legal action.",CUST-1044,voice,2026-11-01T10:39:14Z,India,Tamil Nadu,35-44,Non-student,
+"Price dropped right after I bought it, can I get the difference?",,Email,2026-11-01T11:39:57Z,,,,,
+"Two-factor authentication code never arrives, cannot access my account.",CUST-1075,CHAT,2026-11-01 12:04:48,India,Tamil Nadu,25-34,,50k-100k
+"My order came with torn packaging and a broken handle, very disappointed.",CUST-1056,phone,2026-11-01T12:44:42Z,United States,New York,25-34,Non-student,
+I returned order ORD-865344 15 days ago and still have not received my refund of £120.,CUST-1070,voice,2026-11-01T15:07:46Z,,,,,
+Billed for items I never ordered on invoice ORD-255362. Please fix this asap.,CUST-1137,twitter,2026-11-01T16:24:15Z,Canada,Ontario,55+,Non-student,100k+
+"Not receiving the OTP verification code so I cannot sign in.
+
+Sent from my iPhone",CUST-1062,CHAT,2026-11-01T18:16:38Z,,,,,
+Cancelled my membership but was still charged Rs 89 for renewal.!!!,CUST-1241,SOCIAL_MEDIA,2026-11-01 23:41:52,,,,,
+"I cannot cancel my subscription, the cancel button gives an error. Please fix this asap.",CUST-1108,Email,2026-11-02T09:04:32Z,,,25-34,Non-student,<25k
+Where is my refund? It has been 15 days since the return was picked up.,CUST-1201,twitter,2026/11/02 09:37,,,,,
+Billed for items I never ordered on invoice ORD-678469.,CUST-1156,VOICE,2026-11-02T10:46:54Z,,,,,
+My refund of £249 is stuck in 'initiated' status for weeks.,CUST-1200,Email,2026-11-02T13:59:33Z,,,,,
+"Still not resolved! The monthly bill has wrong tax calculation, I was overcharged.",CUST-1156,social_media,2026-11-02T13:59:47.245446Z,United States,,45-54,Non-student,50k-100k
+"I was charged twice for the same order ORD-640299, please reverse the extra $249.
+
+Sent from my iPhone",CUST-1191,email,2026-11-02T16:06:37Z,Canada,British Columbia,18-24,Student,50k-100k
+The chat agent closed my conversation without solving anything.,CUST-1066,voice,2026-11-02T21:13:31Z,India,Telangana,18-24,Student,25k-50k
+<p>Where is my refund? It has been 21 days since the return was picked up.</p>,CUST-1125,email,2026-11-03T01:16:52Z,United States,Texas,25-34,Non-student,100k+
+"The courier keeps rescheduling my delivery, it is very late now.",CUST-1140,SOCIAL_MEDIA,2026-11-03T03:44:55Z,United States,,35-44,Non-student,100k+
+I cancelled my order and the refund hasn't been credited yet after 21 days.,CUST-1200,SOCIAL_MEDIA,2026-11-03T05:10:28.943099Z,,,,,
+"I cannot cancel my subscription, the cancel button gives an error.",,email,2026-11-03T06:56:28Z,,,,,
+I keep getting logged out and then can't log back in.,,twitter,2026-11-03 07:22:10,,,,,
+"There are unauthorized charges on my card from your company, this looks like fraud.",CUST-1041,twitter,2026-11-03T09:21:55Z,India,Delhi,25-34,Non-student,100k+
+"There are unauthorized charges on my card from your company, this looks like fraud.",CUST-1156,Email,2026-11-03T10:30:48Z,United States,,45-54,Non-student,50k-100k
+"I've been on hold for over an hour and nobody answered.
+
+Sent from my iPhone",CUST-1104,chat,2026-11-03T11:04:05Z,India,Tamil Nadu,25-34,Student,<25k
+"Refund was approved but the money never reached my account. Order ORD-372387. This is unacceptable, I'm considering legal action.",CUST-1152,live chat,2026-11-03T12:48:57Z,,,,,
+Sign in fails with 'something went wrong' on both app and website.,CUST-1062,twitter,2026/11/03 17:33,India,Maharashtra,45-54,Non-student,25k-50k
+"Received a cracked screen on my new phone, order ORD-257538.",CUST-1143,phone,2026-11-03T18:54:48Z,United States,Florida,45-54,,<25k
+"Second time contacting you about this. I was charged twice for the same order ORD-237579, please reverse the extra £19.",CUST-1156,twitter,2026-11-03T19:11:21.797874Z,United States,,45-54,Non-student,50k-100k
+Following up on my earlier message: Sign in fails with 'something went wrong' on both app and website.!!!,CUST-1062,Email,2026-11-03T20:03:29.885937Z,India,Maharashtra,45-54,Non-student,25k-50k
+Second time contacting you about this. My invoice shows a higher amount than the price at checkout.,CUST-1156,SOCIAL_MEDIA,2026-11-03T21:18:03.769820Z,United States,,45-54,Non-student,50k-100k
+"The payment page hangs after I enter my OTP and then shows transaction failed. This is unacceptable, I'm considering legal action.",CUST-1195,phone,2026-11-03T22:06:19Z,,,,,
+Login page just spins forever after I enter my credentials.,CUST-1133,twitter,2026-11-04 00:11:53,United Kingdom,,25-34,Non-student,50k-100k
+My package ORD-770699 was supposed to arrive 15 days ago and tracking hasn't updated.,CUST-1051,Email,2026-11-04T05:42:46Z,,,,,
+Support keeps sending copy-paste replies without reading my issue.,CUST-1067,live chat,2026/11/04 05:49,India,Karnataka,35-44,Non-student,<25k
+"The glass bottles were shattered when the package arrived. I am furious, this is urgent.",CUST-1222,email,2026-11-04T05:58:08Z,United Kingdom,,18-24,Student,<25k
+<p>My invoice shows a higher amount than the price at checkout.</p>,CUST-1245,email,2026/11/04 07:30,,,,,
+"There are unauthorized charges on my card from your company, this looks like fraud.",CUST-1123,EMAIL,2026/11/04 08:38,United Kingdom,Scotland,25-34,Student,<25k
+"Hi team,
+My payment failed at checkout but Rs 499 was deducted from my bank account. Order ORD-398090.
+Thanks",CUST-1168,Email,2026/11/04 12:17,United States,California,25-34,Student,<25k
+Tracking says delivered but I never received my parcel ORD-667297.,CUST-1130,chat,2026-11-04T17:03:53Z,United States,New York,45-54,Non-student,
+Sign in fails with 'something went wrong' on both app and website.,CUST-1053,chat,2026/11/04 17:47,,,,,
+"Still not resolved! The courier keeps rescheduling my delivery, it is very late now.",CUST-1051,SOCIAL_MEDIA,2026-11-04T20:54:44.544990Z,India,Telangana,35-44,Non-student,50k-100k
+Following up on my earlier message: I've tried to unsubscribe three times and I'm still being billed monthly. You can reach me at user974@example.com or +1 555-529-8890.,CUST-1108,CHAT,2026-11-04T21:02:40.347788Z,,,25-34,Non-student,<25k
+I keep getting logged out and then can't log back in. Please fix this asap.,,SOCIAL_MEDIA,2026-11-04T22:22:47Z,,,,,
+My package ORD-234425 was supposed to arrive 30 days ago and tracking hasn't updated.,,voice,2026-11-05T00:46:49Z,,,,,
+Payment gateway error during checkout. Transaction TXN-98097063 shows failed but money is gone from my account.!!!,CUST-1131,chat,2026-11-05T01:42:29Z,India,Telangana,45-54,Non-student,100k+
+"Item delivered with dents and scratches all over, clearly damaged in transit.
+
+Sent from my iPhone",CUST-1060,EMAIL,2026-11-05T02:55:39Z,United States,New York,25-34,Non-student,100k+
+Tracking says delivered but I never received my parcel ORD-947954.,CUST-1082,CHAT,2026-11-05 03:21:48,United States,New York,35-44,Non-student,50k-100k
+"Refund was approved but the money never reached my account. Order ORD-359433. I am furious, this is urgent.",CUST-1075,SOCIAL_MEDIA,2026/11/05 06:56,,,,,
+I've tried to unsubscribe three times and I'm still being billed monthly.,CUST-1052,CHAT,2026-11-05T08:46:19Z,United States,Florida,45-54,Non-student,50k-100k
+"Refund was approved but the money never reached my account. Order ORD-382271. This is unacceptable, I'm considering legal action.",CUST-1107,CHAT,2026-11-05 12:04:19,United Kingdom,Scotland,18-24,Student,50k-100k
+"Raised a ticket 8 days ago and got no response at all. I am furious, this is urgent.!!!",CUST-1195,live chat,2026-11-05T21:32:06Z,India,,35-44,Non-student,50k-100k
+"I've been on hold for over an hour and nobody answered. I am furious, this is urgent.",CUST-1103,SOCIAL_MEDIA,2026/11/06 02:06,India,Delhi,18-24,Student,<25k
+The payment page hangs after I enter my OTP and then shows transaction failed.,CUST-1168,SOCIAL_MEDIA,2026-11-06T09:28:35.457177Z,United States,California,25-34,Student,<25k
+"I got an email saying my account is blocked for suspicious activity, but it was me.",CUST-1109,EMAIL,2026-11-06T12:05:18Z,,,,,
+My shipment is stuck at the warehouse for 21 days with no update.,CUST-1204,Email,2026-11-06T13:20:57Z,India,Karnataka,18-24,Non-student,100k+
+My account was suspended without any explanation and I have an active order ORD-663463.,CUST-1053,twitter,2026-11-06T15:15:23Z,United States,,18-24,Student,50k-100k
+Why was my account banned? I haven't done anything wrong.,CUST-1109,twitter,2026-11-06T18:05:22.998775Z,India,Karnataka,18-24,Student,
+Not receiving the OTP verification code so I cannot sign in.,CUST-1086,SOCIAL_MEDIA,2026-11-06T21:05:51Z,India,Tamil Nadu,25-34,Non-student,100k+
+"Password reset link is expired every time I click it, locked out of my account.",CUST-1258,Email,2026-11-06T21:50:22Z,United Kingdom,Scotland,25-34,Student,<25k
+   The iOS app shows a blank white screen and then crashes.   ,CUST-1232,live chat,2026-11-07T01:11:00Z,,,,,
+Login page just spins forever after I enter my credentials.,CUST-1162,EMAIL,2026-11-07T01:13:30Z,India,Karnataka,18-24,Student,25k-50k
+I received someone else's invoice with their name and address in my package.,CUST-1021,phone,2026-11-07 06:38:02,United Kingdom,Scotland,18-24,,<25k
+"Refund was approved but the money never reached my account. Order ORD-768914.
+
+Sent from my iPhone",CUST-1239,twitter,2026-11-07T07:10:06Z,United States,Texas,35-44,Non-student,25k-50k
+I've tried to unsubscribe three times and I'm still being billed monthly. You can reach me at user693@example.com or +1 555-110-2581.,CUST-1208,voice,2026/11/07 08:18,India,,25-34,Non-student,50k-100k
+"Customer service agent was rude and hung up on me. I am furious, this is urgent.",CUST-1216,live chat,2026-11-07T11:41:17Z,Canada,British Columbia,55+,Non-student,<25k
+"I was charged twice for the same order ORD-521139, please reverse the extra $2499. I am furious, this is urgent.",CUST-1157,CHAT,2026-11-07T12:49:39Z,,,,,
+Billed for items I never ordered on invoice ORD-251141.,CUST-1150,chat,2026-11-07T13:08:24Z,United States,California,45-54,Non-student,50k-100k
+Not receiving the OTP verification code so I cannot sign in.,CUST-1201,email,2026-11-07 13:15:06,United States,Texas,25-34,Non-student,<25k
+Payment gateway error during checkout. Transaction TXN-26960874 shows failed but money is gone from my account.,,voice,2026-11-07T15:41:55Z,,,,,
+I returned order ORD-814248 8 days ago and still have not received my refund of £120.,CUST-1221,VOICE,2026-11-07T17:22:28Z,India,Telangana,35-44,Non-student,50k-100k
+"   Mobile app freezes on the home screen and then force closes. I am furious, this is urgent.   ",CUST-1167,chat,2026-11-07T21:03:03Z,India,Maharashtra,18-24,Student,<25k
+I returned order ORD-252436 12 days ago and still have not received my refund of £249. You can reach me at user635@example.com or +1 555-776-3906.,CUST-1157,CHAT,2026-11-07T22:08:38Z,India,Delhi,25-34,Non-student,50k-100k
+I keep getting logged out and then can't log back in.,CUST-1089,chat,2026-11-07T23:19:03Z,,,,,
+Following up on my earlier message: The chat agent closed my conversation without solving anything.!!!,CUST-1195,twitter,2026-11-08T00:25:45.573224Z,India,,35-44,Non-student,50k-100k
+Mobile app freezes on the home screen and then force closes.,CUST-1010,chat,2026-11-08T00:29:34Z,Canada,Ontario,,Non-student,100k+
+"Can't use the app at all, it crashes whenever I try to checkout.
+
+Sent from my iPhone",CUST-1137,EMAIL,2026-11-08T01:19:55Z,Canada,Ontario,55+,Non-student,100k+
+"The item in order ORD-381351 arrived damaged, the box was crushed and the product is broken.",CUST-1133,chat,2026-11-08T02:57:07Z,United Kingdom,,25-34,Non-student,50k-100k
+"Two-factor authentication code never arrives, cannot access my account.",,twitter,2026-11-08T06:00:16Z,,,,,
+Product arrived defective and doesn't turn on at all.,CUST-1133,SOCIAL_MEDIA,2026-11-08T07:26:46.407389Z,United Kingdom,,25-34,Non-student,50k-100k
+"Still waiting on refund for cancelled order ORD-929906, support keeps saying it is processing.",CUST-1105,Email,2026-11-08T10:35:29Z,India,,25-34,Non-student,25k-50k
+"Money got debited twice for a failed payment, £19 each, and no order was created. Transaction TXN-59535555.
+
+Sent from my iPhone",CUST-1206,voice,2026-11-08T11:14:53Z,United States,,35-44,Non-student,50k-100k
+"Cancelled my membership but was still charged $19 for renewal. I am furious, this is urgent.",CUST-1065,social_media,2026-11-08T12:30:14Z,United States,Texas,25-34,,25k-50k
+Following up on my earlier message: Mobile app freezes on the home screen and then force closes.,CUST-1137,phone,2026-11-08T13:37:09.639519Z,Canada,Ontario,55+,Non-student,100k+
+I cancelled my order and the refund hasn't been credited yet after 8 days.,CUST-1033,twitter,2026-11-08T14:12:10Z,,,35-44,Non-student,25k-50k
+"Hi team,
+After updating, the app crashes immediately on launch.
+Thanks",CUST-1098,live chat,2026-11-08T14:54:05Z,,,,,
+The glass bottles were shattered when the package arrived.,CUST-1255,Email,2026-11-08T16:45:16Z,United States,Florida,55+,Non-student,50k-100k
+"Can't use the app at all, it crashes whenever I try to checkout.",CUST-1098,SOCIAL_MEDIA,2026-11-08 17:32:33,,,,,
+Login page just spins forever after I enter my credentials.,CUST-1162,twitter,2026-11-08T20:07:35.886344Z,India,Karnataka,18-24,Student,25k-50k
+"Can't use the app at all, it crashes whenever I try to checkout.",CUST-1206,chat,2026/11/08 20:36,,,,,
+The app crashes every time I open the cart after the latest update.,CUST-1089,live chat,2026-11-08T21:44:34Z,,,,,
+"My refund of $49 is stuck in 'initiated' status for weeks.
+
+Sent from my iPhone",CUST-1231,social_media,2026-11-08T21:46:03Z,United States,Florida,,Non-student,<25k
+Following up on my earlier message: I cancelled my order and the refund hasn't been credited yet after 12 days.,CUST-1157,voice,2026-11-09T01:18:44.345151Z,,,,,
+"Account deactivated suddenly, all my saved data and wallet balance of $89 is inaccessible.",CUST-1126,phone,2026/11/09 02:52,United Kingdom,Scotland,18-24,Student,25k-50k
+"   Still not resolved! My order came with torn packaging and a broken handle, very disappointed.   ",CUST-1133,twitter,2026-11-09 03:21:34,United Kingdom,,25-34,Non-student,50k-100k
+Payment gateway error during checkout. Transaction TXN-59535555 shows failed but money is gone from my account.,CUST-1206,SOCIAL_MEDIA,2026-11-09T05:54:36.830226Z,United States,,35-44,Non-student,50k-100k
+"Can't use the app at all, it crashes whenever I try to checkout.",CUST-1137,live chat,2026-11-09T06:28:19.904508Z,,,,,
+I've tried to unsubscribe three times and I'm still being billed monthly.,CUST-1183,EMAIL,2026-11-09T06:40:40Z,United Kingdom,England,18-24,Student,<25k
+"The monthly bill has wrong tax calculation, I was overcharged. You can reach me at user154@example.com or +1 555-180-5014.",CUST-1150,social_media,2026-11-09T07:26:02.768139Z,United States,California,45-54,Non-student,50k-100k
+"The monthly bill has wrong tax calculation, I was overcharged.!!!",CUST-1206,social_media,2026-11-09T11:11:23Z,,,,,
+The iOS app shows a blank white screen and then crashes.,CUST-1053,VOICE,2026-11-09T12:12:11Z,United States,,18-24,Student,50k-100k
+Mobile app freezes on the home screen and then force closes.,CUST-1030,phone,2026-11-09T13:04:43Z,India,Delhi,18-24,Non-student,50k-100k
+"Can't use the app at all, it crashes whenever I try to checkout.",CUST-1054,social_media,2026-11-09T15:09:31Z,,,,,
+"I can't log in to my account, it keeps saying invalid password even after resetting it.",CUST-1035,phone,2026-11-09T17:19:24Z,India,Delhi,45-54,Non-student,50k-100k
+"Received a cracked screen on my new phone, order ORD-516869.",CUST-1258,voice,2026-11-09T19:43:26Z,United Kingdom,Scotland,25-34,Student,<25k
+"Account deactivated suddenly, all my saved data and wallet balance of $19 is inaccessible. I am furious, this is urgent.",CUST-1202,Email,2026-11-09T20:12:49Z,India,Telangana,,Non-student,<25k
+"After updating, the app crashes immediately on launch.",CUST-1166,VOICE,2026-11-09T22:07:59Z,India,Telangana,45-54,Non-student,50k-100k
+The app crashes every time I open the cart after the latest update.,CUST-1133,chat,2026-11-10T01:54:34Z,United Kingdom,,25-34,Non-student,50k-100k
+Not receiving the OTP verification code so I cannot sign in.,CUST-1199,VOICE,2026-11-10T02:11:21Z,United States,Texas,55+,Non-student,25k-50k
+Mobile app freezes on the home screen and then force closes.,CUST-1053,CHAT,2026-11-10T04:28:57.178060Z,United States,,18-24,Student,50k-100k
+"Shipping is taking forever, ordered two weeks ago and nothing has arrived.",CUST-1112,CHAT,2026-11-10T05:30:07Z,United States,,25-34,Non-student,25k-50k
+Following up on my earlier message: My invoice shows a higher amount than the price at checkout.,CUST-1206,email,2026-11-10T06:20:02.736671Z,United States,,35-44,Non-student,50k-100k
+I've been on hold for over an hour and nobody answered.,CUST-1153,social_media,2026-11-10T07:50:46Z,,,,,
+Following up on my earlier message: App keeps closing by itself on my Android phone since yesterday.,CUST-1167,Email,2026/11/10 09:00,,,,,
+Second time contacting you about this. Sign in fails with 'something went wrong' on both app and website.,CUST-1089,VOICE,2026-11-10T10:34:29.585966Z,,,,,
+Refund was approved but the money never reached my account. Order ORD-419443.,CUST-1231,chat,2026/11/10 11:34,,,,,
+"Money got debited twice for a failed payment, £19 each, and no order was created. Transaction TXN-59535555.
+
+Sent from my iPhone",CUST-1206,CHAT,2026-11-10T12:08:13.299293Z,United States,,35-44,Non-student,50k-100k
+Checkout just says 'payment could not be processed' every time I try to pay. You can reach me at user621@example.com or +1 555-152-5934.,,CHAT,2026-11-10 12:28:19,,,,,
+Mobile app freezes on the home screen and then force closes. You can reach me at user86@example.com or +1 555-370-6395.,CUST-1062,Email,2026-11-10T14:43:37Z,India,Maharashtra,45-54,Non-student,25k-50k
+<p>Still not resolved! The iOS app shows a blank white screen and then crashes.</p>,CUST-1098,SOCIAL_MEDIA,2026-11-10T15:37:33.069712Z,India,Delhi,25-34,Non-student,50k-100k
+"Can't use the app at all, it crashes whenever I try to checkout. I am furious, this is urgent.",CUST-1051,twitter,2026-11-10 17:58:34,India,Telangana,35-44,Non-student,50k-100k
+"Following up on my earlier message: Can't use the app at all, it crashes whenever I try to checkout. You can reach me at user555@example.com or +1 555-462-7500.",CUST-1166,email,2026/11/10 21:01,,,,,
+"Still not resolved! Can't use the app at all, it crashes whenever I try to checkout.",CUST-1053,live chat,2026-11-10 21:02:00,,,,,
+"Second time contacting you about this. My order came with torn packaging and a broken handle, very disappointed.
+
+Sent from my iPhone",CUST-1258,live chat,2026-11-10T21:15:00Z,United Kingdom,Scotland,25-34,Student,<25k
+Still not resolved! Tracking says delivered but I never received my parcel ORD-835236.,CUST-1112,voice,2026-11-10T21:46:00Z,,,,,
+Following up on my earlier message: Product arrived defective and doesn't turn on at all.,CUST-1258,SOCIAL_MEDIA,2026/11/10 21:47,United Kingdom,Scotland,25-34,Student,<25k

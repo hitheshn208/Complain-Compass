@@ -1,0 +1,16 @@
+dimension,value,population
+country,India,52000
+country,United States,38000
+country,United Kingdom,17000
+country,Canada,11000
+age_group,18-24,26000
+age_group,25-34,39000
+age_group,35-44,27000
+age_group,45-54,16000
+age_group,55+,10000
+student_status,Student,24000
+student_status,Non-student,94000
+income_bracket,<25k,33000
+income_bracket,25k-50k,36000
+income_bracket,50k-100k,32000
+income_bracket,100k+,17000
