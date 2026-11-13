@@ -5,6 +5,7 @@ import hashlib
 import uuid
 from typing import Any
 
+from app.database.models import BatchStatus
 from app.database.repository import Repository
 from app.ingestion.base import IngestionAdapter, IngestionError, MultiFileAdapter, UploadedFile
 from app.ingestion.csv_ingestion import sha256_bytes
@@ -43,9 +44,7 @@ class IngestionService:
         """Validate and persist. Valid rows are stored even if other rows are rejected.
         Raises DuplicateFileError (409) for a previously imported identical file."""
         file_hash = sha256_bytes(content)
-        existing = self.repo.find_batch_by_hash(file_hash)
-        if existing is not None:
-            raise DuplicateFileError(existing)
+        self._check_duplicate(file_hash)
         result = self.adapter.parse(content, filename)
         return self._persist(result, filename, file_hash, "CSV")
 
@@ -57,14 +56,23 @@ class IngestionService:
         if not files:
             raise IngestionError("No files uploaded")
         fingerprint = files_fingerprint(channel, files)
-        existing = self.repo.find_batch_by_hash(fingerprint)
-        if existing is not None:
-            raise DuplicateFileError(existing)
+        self._check_duplicate(fingerprint)
         result = adapter.parse_files(files)
         if result.total_rows == 0:
             raise IngestionError("No complaints found in the uploaded file(s)", 422)
         label = files[0].filename if len(files) == 1 else f"{files[0].filename} + {len(files) - 1} more"
         return self._persist(result, label, fingerprint, adapter.source.value)
+
+    def _check_duplicate(self, file_hash: str) -> None:
+        """409 for a file that was already imported. A previous attempt where every row was rejected
+        imported nothing, so it is replaced instead of blocking the re-upload."""
+        existing = self.repo.find_batch_by_hash(file_hash)
+        if existing is None:
+            return
+        if not existing["accepted_rows"]:
+            self.repo.delete_empty_batch(existing["batch_id"])
+            return
+        raise DuplicateFileError(existing)
 
     def _persist(self, result: IngestionResult, filename: str, file_hash: str, channel: str) -> dict[str, Any]:
         batch_id = str(uuid.uuid4())
@@ -78,6 +86,10 @@ class IngestionService:
             errors=result.errors,
             channel=channel,
         )
+        if not result.complaints:
+            # Nothing to process: close the batch now, otherwise it would stay UPLOADED forever.
+            self.repo.update_batch(batch_id, status=BatchStatus.FAILED, progress=0,
+                                   error_message=no_valid_rows_message(result))
         links: dict[str, int] = {}
         for it in result.items:
             if it.accepted:
@@ -110,3 +122,14 @@ class IngestionService:
             "row_errors": [e.model_dump() for e in parsed.errors[:500]],
             "stats": self.repo.directory_stats(),
         }
+
+
+def no_valid_rows_message(result: IngestionResult) -> str:
+    n = result.total_rows
+    reasons: dict[str, int] = {}
+    for e in result.errors:
+        msg = e.message.split("] ", 1)[1] if e.message.startswith("[") and "] " in e.message else e.message
+        reasons[msg] = reasons.get(msg, 0) + 1
+    top = max(reasons, key=reasons.get) if reasons else "unknown"
+    return (f"No valid complaints: all {n} item(s) were rejected. Most common problem: {top}. "
+            "Check that the file was uploaded on the right tab.")

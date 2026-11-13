@@ -169,3 +169,41 @@ def test_end_to_end_sample_dataset_real_embeddings(settings):
         tr = client.get("/api/v1/analytics/trends").json()["data"]
         assert tr["emerging"]["limited_data"] is False
         assert any(i["is_emerging"] for i in tr["emerging"]["issues"])
+
+
+def test_small_upload_groups_issues_by_category(client):
+    rows = ["complaint_text,customer_id,timestamp"]
+    texts = [
+        "My package has not been delivered, tracking stuck for 10 days",
+        "The courier keeps rescheduling my delivery, it is very late",
+        "Order never arrived, shipping is delayed again",
+        "I was charged twice on my invoice for the same order",
+        "My bill shows an extra charge I did not agree to",
+        "The app crashes every time I open it",
+    ]
+    for i, t in enumerate(texts):
+        rows.append(f'"{t}",CUST-{i},2026-09-0{i + 1}T10:00:00Z')
+    assert upload(client, "\n".join(rows) + "\n", name="small.csv").status_code == 201
+    o = client.get("/api/v1/analytics/overview").json()["data"]
+    assert o["grouping_mode"] == "category" and o["processed_complaints"] == 6
+    issues = client.get("/api/v1/issues").json()["data"]
+    cats = sorted(i["category"] for i in issues)
+    assert cats == ["Billing", "Delivery"]  # the single App Stability complaint stays unassigned
+    assert client.get("/api/v1/issues/top10").json()["data"]
+
+
+def test_all_rejected_upload_is_closed_and_can_be_reuploaded(client):
+    posts = b'{"post_id": "p1", "text": "App keeps crashing", "created_at": "2026-09-01T10:00:00Z"}\n' \
+            b'{"post_id": "p2", "text": "Refund still missing", "created_at": "2026-09-02T10:00:00Z"}\n'
+    files = {"files": ("social_posts.jsonl", posts, "application/json")}
+    r = client.post("/api/v1/ingest/chat", files=files)  # wrong tab: posts are not conversations
+    assert r.status_code == 201, r.text
+    body = r.json()["data"]
+    assert body["accepted_rows"] == 0 and body["processing_started"] is False
+    batch = client.get(f"/api/v1/batches/{body['batch_id']}").json()["data"]
+    assert batch["status"] == "FAILED"  # not left UPLOADED, so the UI stops polling
+    assert "right tab" in batch["error_message"] and "message list" in batch["error_message"]
+    # Same file, same tab again: nothing was imported the first time, so no 409.
+    again = client.post("/api/v1/ingest/chat", files=files)
+    assert again.status_code == 201
+    assert len([b for b in client.get("/api/v1/batches").json()["data"] if b["filename"] == "social_posts.jsonl"]) == 1

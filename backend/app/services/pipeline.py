@@ -29,7 +29,8 @@ from app.preprocessing.cleaner import clean_text
 
 logger = logging.getLogger(__name__)
 
-STAGES = ["preprocessing", "embedding", "clustering", "classification", "labeling", "deduplication", "scoring"]
+# Classification runs before clustering: small datasets are grouped by category (see _cluster).
+STAGES = ["preprocessing", "embedding", "classification", "clustering", "labeling", "deduplication", "scoring"]
 
 
 @dataclass
@@ -137,10 +138,10 @@ class PipelineOrchestrator:
     # ---------------------------------------------------------------- stages
     def _global_stages(self, progress: Callable[[str], None]) -> dict[str, Any]:
         out: dict[str, Any] = {}
-        progress("clustering")
-        out["clustering"] = self._cluster()
         progress("classification")
         out["classification"] = self._classify()
+        progress("clustering")
+        out["clustering"] = self._cluster()
         progress("labeling")
         out["labeling"] = self._label()
         progress("deduplication")
@@ -171,7 +172,14 @@ class PipelineOrchestrator:
     def _cluster(self) -> dict[str, Any]:
         ids = self.repo.embedded_complaint_ids()
         ids, mat = self.embedder.store.get_embeddings(ids)
-        result = self.clusterer.cluster(ids, mat)
+        if len(ids) < self.settings.semantic_clustering_min_complaints:
+            # Too little data for density-based clustering: one issue per complaint category.
+            cats = self.repo.complaint_categories()
+            result = self.clusterer.cluster_by_category(ids, mat, [cats.get(i) for i in ids])
+            mode = "category"
+        else:
+            result = self.clusterer.cluster(ids, mat)
+            mode = "semantic"
 
         previous_members = self.repo.cluster_members()
         previous = []
@@ -211,6 +219,7 @@ class PipelineOrchestrator:
         rows += [(cid, None, 0.0, True) for cid in result.noise_ids]
         self.repo.replace_cluster_assignments(rows)
         return {
+            "mode": mode,
             "points": result.n_points,
             "clusters": len(result.clusters),
             "noise": len(result.noise_ids),
@@ -248,6 +257,7 @@ class PipelineOrchestrator:
         }
         keywords = cluster_keywords(texts_by_cluster)
         counts = {"llm": 0, "fallback": 0, "manual_kept": 0, "cached_unchanged": 0}
+        pending: list[tuple[dict[str, Any], list[str], list[str], list[str], str, list[dict[str, str]]]] = []
         for issue in issues:
             mids = members.get(issue["cluster_id"], [])
             reps = json.loads(issue["representative_ids"] or "[]")
@@ -260,7 +270,11 @@ class PipelineOrchestrator:
                 counts["cached_unchanged"] += 1
                 continue
             samples = [{"complaint_id": c, "text": complaints[c]["normalized_text"]} for c in reps if c in complaints]
-            label = self.classifier.label_cluster(samples, kw, len(mids))
+            pending.append((issue, mids, reps, kw, signature, samples))
+
+        # All LLM label requests go out together (cached ones are answered without a call).
+        labels = self.classifier.label_clusters([(p[5], p[3], len(p[1])) for p in pending])
+        for (issue, mids, reps, kw, signature, samples), label in zip(pending, labels):
             if label is None:
                 label = fallback_cluster_label(
                     kw, [cat_by_id.get(c) for c in mids], [s["text"] for s in samples], reps, len(mids)

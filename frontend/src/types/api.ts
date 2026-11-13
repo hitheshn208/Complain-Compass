@@ -73,6 +73,10 @@ export interface Overview {
   top_issues: IssueSummary[];
   llm_enabled: boolean;
   filtered: boolean;
+  /** "category": small dataset, issues are complaint categories; "semantic": HDBSCAN clustering */
+  grouping_mode: "category" | "semantic";
+  semantic_min_complaints: number;
+  processed_complaints: number;
 }
 
 export interface SeriesPoint {

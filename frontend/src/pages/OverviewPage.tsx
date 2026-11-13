@@ -43,6 +43,14 @@ export function OverviewPage() {
         </div>
       </div>
 
+      {o.grouping_mode === "category" && (
+        <Note>
+          Small dataset ({fmtInt(o.processed_complaints)} complaints): issues are grouped by complaint category.
+          Semantic clustering, which also separates different problems within a category, starts at{" "}
+          {fmtInt(o.semantic_min_complaints)} complaints.
+        </Note>
+      )}
+
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-6">
         <StatTile label="Complaint reports" value={fmtInt(o.total_reports)} icon={<MessageSquareText className="h-4 w-4" />}
           hint={`${fmtInt(o.total_incidents)} distinct incidents`} />

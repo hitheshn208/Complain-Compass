@@ -12,13 +12,15 @@ import hashlib
 import json
 import logging
 import re
+import threading
+import time
 from collections import Counter
-from typing import Any, Literal, Sequence
+from concurrent.futures import ThreadPoolExecutor
+from typing import Any, Callable, Literal, Sequence
 
 from pydantic import BaseModel, Field, ValidationError
 
 from app.database.models import CATEGORIES, Severity
-from app.database.repository import Repository
 
 logger = logging.getLogger(__name__)
 
@@ -150,14 +152,21 @@ class LLMUnavailable(RuntimeError):
 
 
 class LLMClassifier:
-    """gpt-4o-mini wrapper with SQLite-backed response caching and graceful fallback."""
+    """gpt-4o-mini wrapper with persistent response caching, parallel requests and graceful fallback.
 
-    BATCH = 20
+    Requests run on a small thread pool (``concurrency``). The first request of every run is sent
+    alone as a probe, so a missing/broken API key costs one call, not ``concurrency`` calls. After
+    any failure, requests that have not started yet are skipped and fall back to the rules.
+    Cache reads/writes only happen on the calling thread; worker threads only talk to OpenAI.
+    """
 
-    def __init__(self, repo: Repository, api_key: str | None, model: str = "gpt-4o-mini", timeout: float = 30.0,
-                 enabled: bool = True):
-        self.repo = repo
+    def __init__(self, cache: Any, api_key: str | None, model: str = "gpt-4o-mini", timeout: float = 30.0,
+                 enabled: bool = True, batch_size: int = 10, concurrency: int = 6):
+        # ``cache`` is anything with cache_get/cache_put: LLMCache in the app, Repository in tests.
+        self.cache = cache
         self.model = model
+        self.batch_size = max(1, batch_size)
+        self.concurrency = max(1, concurrency)
         self.client = None
         self.last_error: str | None = None
         if enabled and api_key:
@@ -191,34 +200,69 @@ class LLMClassifier:
             raise LLMUnavailable(f"LLM refused or returned no parsed content: {getattr(msg, 'refusal', None)}")
         return msg.parsed
 
+    def _run_parallel(self, jobs: Sequence[Any], fn: Callable[[Any], Any]) -> list[Any]:
+        """Run ``fn(job)`` for every job and return results in job order (None where skipped or failed).
+        The first job runs alone as a probe; the rest run on the thread pool. ``LLMUnavailable`` from
+        any job stops jobs that have not started yet."""
+        results: list[Any] = [None] * len(jobs)
+        if not jobs:
+            return results
+        try:
+            results[0] = fn(jobs[0])
+        except LLMUnavailable:
+            return results
+        stop = threading.Event()
+
+        def run(i: int) -> tuple[int, Any]:
+            if stop.is_set():
+                return i, None
+            try:
+                return i, fn(jobs[i])
+            except LLMUnavailable:
+                stop.set()
+                return i, None
+
+        if len(jobs) > 1:
+            with ThreadPoolExecutor(max_workers=min(self.concurrency, len(jobs) - 1), thread_name_prefix="llm") as ex:
+                for i, res in ex.map(run, range(1, len(jobs))):
+                    results[i] = res
+        return results
+
     # ------------------------------------------------ complaint classification
     def classify_complaints(self, complaints: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
-        """Classify complaints ({complaint_id, normalized_text}). Uses cache, then LLM in batches,
-        then the rule-based fallback for anything the LLM could not handle."""
+        """Classify complaints ({complaint_id, normalized_text}). Uses cache, then the LLM in parallel
+        batches, then the rule-based fallback for anything the LLM could not handle."""
         results: dict[str, dict[str, Any]] = {}
         pending: list[dict[str, Any]] = []
         for c in complaints:
-            cached = self.repo.cache_get(self._key("classify", c["normalized_text"]))
+            # With the LLM disabled, cached LLM answers are not used either: "disabled" must mean
+            # the deterministic rules, so results stay reproducible and honestly labeled.
+            cached = self.cache.cache_get(self._key("classify", c["normalized_text"])) if self.available else None
             if cached:
                 results[c["complaint_id"]] = {**json.loads(cached), "complaint_id": c["complaint_id"]}
             else:
                 pending.append(c)
 
-        if self.available:
-            for start in range(0, len(pending), self.BATCH):
-                chunk = pending[start : start + self.BATCH]
-                try:
-                    for cid, data in self._classify_chunk(chunk).items():
-                        results[cid] = data
-                except LLMUnavailable:
-                    break  # stop hammering a failing API; remaining items use fallback
+        if self.available and pending:
+            chunks = [pending[i : i + self.batch_size] for i in range(0, len(pending), self.batch_size)]
+            t0 = time.monotonic()
+            answered = 0
+            for out in self._run_parallel(chunks, self._classify_chunk):
+                for c, data in out or []:
+                    self.cache.cache_put(self._key("classify", c["normalized_text"]), "classify", self.model,
+                                         json.dumps(data))
+                    results[c["complaint_id"]] = {**data, "complaint_id": c["complaint_id"]}
+                    answered += 1
+            logger.info("LLM classified %d/%d uncached complaints in %d call(s), %.1fs (%d served from cache)",
+                        answered, len(pending), len(chunks), time.monotonic() - t0, len(complaints) - len(pending))
 
         for c in complaints:
             if c["complaint_id"] not in results:
                 results[c["complaint_id"]] = {**fallback_classify(c["normalized_text"]), "complaint_id": c["complaint_id"]}
         return [results[c["complaint_id"]] for c in complaints]
 
-    def _classify_chunk(self, chunk: Sequence[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    def _classify_chunk(self, chunk: Sequence[dict[str, Any]]) -> list[tuple[dict[str, Any], dict[str, Any]]]:
+        """One API call for a chunk. Runs on a worker thread: no database access here."""
         system = (
             "You classify customer complaints for a support analytics team. For each complaint return category, "
             "severity, a one-sentence summary, explicit entities (order/transaction IDs, products, amounts, payment "
@@ -230,12 +274,11 @@ class LLMClassifier:
         )
         lines = [f"[{i}] {c['normalized_text'][:1500]}" for i, c in enumerate(chunk)]
         parsed = self._parse(system, "Complaints:\n" + "\n".join(lines), ComplaintClassificationBatch)
-        out: dict[str, dict[str, Any]] = {}
+        out: list[tuple[dict[str, Any], dict[str, Any]]] = []
         for item in parsed.results:  # type: ignore[attr-defined]
             if not 0 <= item.index < len(chunk):
                 continue
-            c = chunk[item.index]
-            data = {
+            out.append((chunk[item.index], {
                 "category": item.category,
                 "severity": item.severity,
                 "summary": item.summary,
@@ -243,22 +286,55 @@ class LLMClassifier:
                 "confidence": max(0.0, min(1.0, item.confidence)),
                 "evidence": item.evidence,
                 "source": "llm",
-            }
-            self.repo.cache_put(self._key("classify", c["normalized_text"]), "classify", self.model, json.dumps(data))
-            out[c["complaint_id"]] = {**data, "complaint_id": c["complaint_id"]}
+            }))
         return out
 
     # ---------------------------------------------------- cluster labeling
+    def _label_key(self, samples: Sequence[dict[str, Any]], keywords: list[str], size: int) -> str:
+        # Content only (texts, keywords, size), never complaint IDs: IDs are new UUIDs on every
+        # upload, so an ID-based key would never hit after the application is reset.
+        payload = json.dumps({"texts": [s["text"][:800] for s in samples], "kw": keywords, "size": size})
+        return self._key("label_v2", payload)
+
+    @staticmethod
+    def _bind_label(data: dict[str, Any], samples: Sequence[dict[str, Any]]) -> dict[str, Any]:
+        """Turn a cached label (supporting samples stored by position) into one citing current IDs."""
+        out = {k: v for k, v in data.items() if k != "supporting_sample_indices"}
+        out["supporting_complaint_ids"] = [samples[i]["complaint_id"] for i in data.get("supporting_sample_indices", [])
+                                           if 0 <= i < len(samples)]
+        return out
+
     def label_cluster(self, samples: Sequence[dict[str, Any]], keywords: list[str], size: int) -> dict[str, Any] | None:
-        """Label a cluster from representative samples ({complaint_id, text}). Returns None if the LLM
+        """Label one cluster from representative samples ({complaint_id, text}). Returns None if the LLM
         is unavailable (caller then uses ``fallback_cluster_label``)."""
+        return self.label_clusters([(samples, keywords, size)])[0]
+
+    def label_clusters(
+        self, requests: Sequence[tuple[Sequence[dict[str, Any]], list[str], int]]
+    ) -> list[dict[str, Any] | None]:
+        """Label many clusters ((samples, keywords, size) each), uncached ones in parallel.
+        Returns one label (or None = use the fallback) per request, in order."""
+        out: list[dict[str, Any] | None] = [None] * len(requests)
         if not self.available:
-            return None
-        payload = json.dumps({"samples": [[s["complaint_id"], s["text"][:800]] for s in samples], "kw": keywords})
-        key = self._key("label", payload)
-        cached = self.repo.cache_get(key)
-        if cached:
-            return json.loads(cached)
+            return out
+        todo: list[tuple[int, str, Sequence[dict[str, Any]], list[str], int]] = []
+        for i, (samples, keywords, size) in enumerate(requests):
+            key = self._label_key(samples, keywords, size)
+            cached = self.cache.cache_get(key)
+            if cached:
+                out[i] = self._bind_label(json.loads(cached), samples)
+            else:
+                todo.append((i, key, samples, keywords, size))
+        results = self._run_parallel(todo, lambda job: self._label_call(job[2], job[3], job[4]))
+        for (i, key, samples, _, _), data in zip(todo, results):
+            if data is None:
+                continue
+            self.cache.cache_put(key, "label", self.model, json.dumps(data))
+            out[i] = self._bind_label(data, samples)
+        return out
+
+    def _label_call(self, samples: Sequence[dict[str, Any]], keywords: list[str], size: int) -> dict[str, Any] | None:
+        """One API call for one cluster. Runs on a worker thread: no database access here."""
         system = (
             "You name recurring customer issues discovered by clustering. Given representative complaints from one "
             "cluster, produce a concise title, a factual description, a category, the common symptoms customers "
@@ -272,20 +348,17 @@ class LLMClassifier:
         )
         try:
             label: ClusterLabel = self._parse(system, user, ClusterLabel)  # type: ignore[assignment]
-        except LLMUnavailable:
-            return None
         except ValidationError as exc:
             logger.warning("Cluster label failed validation: %s", exc)
             return None
-        valid_ids = {s["complaint_id"] for s in samples}
-        data = {
+        cited = set(label.supporting_complaint_ids)
+        return {
             "title": label.title[:120],
             "description": label.description,
             "category": label.category if label.category in CATEGORIES else "Other",
             "symptoms": label.common_symptoms[:8],
             "root_cause_hypotheses": label.root_cause_hypotheses[:6],
-            "supporting_complaint_ids": [i for i in label.supporting_complaint_ids if i in valid_ids],
+            # Unknown IDs the model invented are dropped here.
+            "supporting_sample_indices": [i for i, s in enumerate(samples) if s["complaint_id"] in cited],
             "label_source": "llm",
         }
-        self.repo.cache_put(key, "label", self.model, json.dumps(data))
-        return data

@@ -116,3 +116,20 @@ def test_representatives_skip_near_duplicates():
     sims = np.array([0.99, 0.98, 0.9])
     assert select_representatives(members, sims, 2) == [0, 2]
     assert select_representatives(members, sims, 3) == [0, 2, 1]  # filled when diversity runs out
+
+
+def test_small_data_groups_by_category():
+    from app.inference.clustering import ClusteringEngine
+
+    rng = np.random.default_rng(0)
+    emb = rng.normal(size=(7, 16)).astype(np.float32)
+    emb /= np.linalg.norm(emb, axis=1, keepdims=True)
+    ids = [f"c{i}" for i in range(7)]
+    cats = ["Delivery", "Delivery", "Delivery", "Billing", "Billing", "Refunds", None]
+    res = ClusteringEngine(min_cluster_size=8).cluster_by_category(ids, emb, cats)
+    groups = sorted(sorted(c.member_ids) for c in res.clusters)
+    assert groups == [["c0", "c1", "c2"], ["c3", "c4"]]
+    assert sorted(res.noise_ids) == ["c5", "c6"]  # single-member category and unclassified stay unassigned
+    for c in res.clusters:
+        assert c.representative_ids and set(c.representative_ids) <= set(c.member_ids)
+        assert abs(float(np.linalg.norm(c.centroid)) - 1.0) < 1e-5

@@ -92,6 +92,13 @@ storage paths, upload limits, voice transcription (`TRANSCRIBER=local|openai|non
 priority weights (validated to sum to 1), trend-detection parameters and the segment
 privacy threshold. `OPENAI_API_KEY` is read only by the backend and never sent to the browser.
 
+## Resetting the application
+
+Stop the backend, run `rm -rf backend/storage` (SQLite + ChromaDB), and start it again. OpenAI responses are
+cached separately in `backend/cache/llm_cache.db` and keyed by complaint text, so re-uploading the same files
+after a reset makes almost no API calls. Delete that file only to force fresh GPT results.
+LLM requests run in parallel (`LLM_CONCURRENCY`, default 6, `LLM_BATCH_SIZE` complaints per request).
+
 ## Using without an OpenAI key
 
 Everything works without a key. Classification falls back to keyword rules, and cluster

@@ -171,7 +171,7 @@ def evaluate_channels(c) -> dict:
 
 def run(sample: int, write_report: bool, channels: bool = False) -> dict:
     tmp = Path(tempfile.mkdtemp(prefix="cc_eval_"))
-    settings = Settings(db_path=tmp / "eval.db", chroma_dir=tmp / "chroma")
+    settings = Settings(db_path=tmp / "eval.db", chroma_dir=tmp / "chroma", llm_cache_path=tmp / "llm_cache.db")
     t0 = time.time()
     c = build_container(settings)
     content = (BACKEND / "data" / "sample_complaints.csv").read_bytes()

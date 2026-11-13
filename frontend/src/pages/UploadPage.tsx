@@ -9,7 +9,7 @@ import { fmtDate, fmtInt, humanize } from "../lib/format";
 import { ApiError, api, uploadChannel, uploadCsv, uploadDirectory } from "../services/api";
 import type { Batch, ChannelInfo, DirectoryResult, RowError, UploadResult } from "../types/api";
 
-const STAGES = ["preprocessing", "embedding", "clustering", "classification", "labeling", "deduplication", "scoring"];
+const STAGES = ["preprocessing", "embedding", "classification", "clustering", "labeling", "deduplication", "scoring"];
 
 type TabId = "csv" | "email" | "chat" | "social" | "voice" | "directory";
 
@@ -184,6 +184,27 @@ export function UploadPage() {
   const inputRef = useRef<HTMLInputElement>(null);
   const history = useApi(() => api.batches().then((r) => r.data), [batch?.status, directory]);
   const channels = useApi(() => api.channels().then((r) => r.data), [tab === "voice" ? result : null]);
+  const [retrying, setRetrying] = useState<string>();
+
+  // Keep the history table live while any batch (e.g. a retried one) is still running
+  const historyActive = history.data?.some((b) => b.status === "PROCESSING" || b.status === "UPLOADED");
+  useEffect(() => {
+    if (!historyActive) return;
+    const t = setTimeout(history.reload, 1500);
+    return () => clearTimeout(t);
+  }, [history.data, historyActive, history.reload]);
+
+  const retry = async (batchId: string) => {
+    setRetrying(batchId);
+    try {
+      await api.process(batchId);
+    } catch (e) {
+      setError({ message: (e as Error).message });
+    } finally {
+      setRetrying(undefined);
+      history.reload();
+    }
+  };
 
   const reset = () => {
     setFiles([]); setResult(undefined); setDirectory(undefined); setBatch(undefined); setError(undefined); setProgress(0);
@@ -203,7 +224,9 @@ export function UploadPage() {
         const b = (await api.batch(result.batch_id)).data;
         if (stop) return;
         setBatch(b);
-        if (b.status === "PROCESSING" || b.status === "UPLOADED") setTimeout(poll, 800);
+        // Keep polling only while a pipeline run can actually finish it
+        const running = b.status === "PROCESSING" || (b.status === "UPLOADED" && result.processing_started !== false);
+        if (running) setTimeout(poll, 800);
       } catch (e) {
         if (!stop) setError({ message: (e as Error).message });
       }
@@ -378,7 +401,20 @@ export function UploadPage() {
                     <td className="py-2 pr-3 text-ink-2">{fmtDate(b.created_at, true)}</td>
                     <td className="tabular py-2 pr-3 text-right">{fmtInt(b.accepted_rows)}</td>
                     <td className="tabular py-2 pr-3 text-right">{fmtInt(b.rejected_rows)}</td>
-                    <td className="py-2 text-xs">{humanize(b.status)}{b.status === "FAILED" && b.error_message ? `: ${b.error_message}` : ""}</td>
+                    <td className="py-2 text-xs">
+                      {humanize(b.status)}
+                      {b.status === "PROCESSING" && b.stage ? `: ${humanize(b.stage)}` : ""}
+                      {b.status === "FAILED" && b.accepted_rows === 0 && b.error_message ? `: ${b.error_message}` : ""}
+                      {b.status === "FAILED" && b.accepted_rows > 0 && (
+                        <>
+                          {b.error_message ? `: ${b.error_message.split(". Re-run")[0]}` : ""}{" "}
+                          <button onClick={() => retry(b.batch_id)} disabled={!!retrying || historyActive}
+                            className="ml-1 rounded border border-line px-2 py-0.5 font-medium text-accent-ink hover:bg-accent-wash disabled:opacity-50">
+                            {retrying === b.batch_id ? "Starting…" : "Retry"}
+                          </button>
+                        </>
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>

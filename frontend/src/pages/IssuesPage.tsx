@@ -41,13 +41,17 @@ export function IssuesPage() {
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="text-xl font-semibold tracking-tight">Discovered issues</h1>
-          <p className="text-sm text-muted">Recurring problems found by semantic clustering (HDBSCAN). Unclustered complaints are not shown.</p>
+          <p className="text-sm text-muted">Recurring problems: differently worded complaints about the same problem are grouped together (semantic clustering; small datasets are grouped by complaint category). Complaints that fit no group are not shown.</p>
         </div>
         <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search issues…"
           className="h-8 w-64 rounded-md border border-line bg-surface px-2.5 text-sm outline-none focus:border-accent" />
       </div>
       <Card>
-        {rows.length === 0 ? <EmptyState title="No issues match" /> : (
+        {rows.length === 0 ? (
+          <EmptyState title={q ? "No issues match" : "No recurring issues yet"}>
+            {!q && "An issue needs at least 2 complaints about the same kind of problem. Upload more complaints to see issues here."}
+          </EmptyState>
+        ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead className="text-xs text-muted">

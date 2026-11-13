@@ -22,14 +22,14 @@ def pytest_configure(config):
 @pytest.fixture
 def settings(tmp_path) -> Settings:
     """Isolated settings: temp storage, LLM disabled, real embeddings."""
-    return Settings(db_path=tmp_path / "test.db", chroma_dir=tmp_path / "chroma", openai_api_key=None,
+    return Settings(db_path=tmp_path / "test.db", chroma_dir=tmp_path / "chroma", llm_cache_path=tmp_path / "llm_cache.db", openai_api_key=None,
                     llm_enabled=False, _env_file=None)
 
 
 @pytest.fixture
 def fake_settings(tmp_path) -> Settings:
     """Same as ``settings`` but with the fast hashing embedder (API plumbing tests only)."""
-    return Settings(db_path=tmp_path / "test.db", chroma_dir=tmp_path / "chroma", openai_api_key=None,
+    return Settings(db_path=tmp_path / "test.db", chroma_dir=tmp_path / "chroma", llm_cache_path=tmp_path / "llm_cache.db", openai_api_key=None,
                     llm_enabled=False, embedder="fake", hdbscan_min_cluster_size=3, hdbscan_min_samples=2,
                     _env_file=None)
 

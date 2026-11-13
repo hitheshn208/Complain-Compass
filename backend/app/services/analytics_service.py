@@ -88,7 +88,15 @@ class AnalyticsService:
             "top_issues": [self._issue_summary(s) for s in scores[:10]],
             "llm_enabled": self.settings.llm_available,
             "filtered": not filters.is_empty(),
+            **self.grouping_info(),
         }
+
+    def grouping_info(self) -> dict[str, Any]:
+        """How issues are currently formed (mirrors PipelineOrchestrator._cluster)."""
+        n = self.repo.embedded_complaint_count()
+        threshold = self.settings.semantic_clustering_min_complaints
+        return {"grouping_mode": "category" if n < threshold else "semantic",
+                "semantic_min_complaints": threshold, "processed_complaints": n}
 
     @staticmethod
     def _count_by(df: pd.DataFrame, col: str, unknown: str | None = None) -> list[dict[str, Any]]:

@@ -101,6 +101,14 @@ class Repository:
     def find_batch_by_hash(self, file_hash: str) -> dict[str, Any] | None:
         return _row(self.conn.execute("SELECT * FROM ingestion_batches WHERE file_hash = ?", (file_hash,)).fetchone())
 
+    def delete_empty_batch(self, batch_id: str) -> None:
+        """Remove a batch that has no complaints (every row was rejected), so the same file can be re-uploaded."""
+        with self.db.transaction() as conn:
+            if conn.execute("SELECT 1 FROM complaints WHERE batch_id = ? LIMIT 1", (batch_id,)).fetchone():
+                raise ValueError(f"Batch {batch_id} has complaints; refusing to delete")
+            conn.execute("DELETE FROM batch_row_errors WHERE batch_id = ?", (batch_id,))
+            conn.execute("DELETE FROM ingestion_batches WHERE batch_id = ?", (batch_id,))
+
     def get_batch(self, batch_id: str) -> dict[str, Any] | None:
         return _row(self.conn.execute("SELECT * FROM ingestion_batches WHERE batch_id = ?", (batch_id,)).fetchone())
 
@@ -271,6 +279,27 @@ class Repository:
         with self.db.transaction() as conn:
             conn.execute(f"UPDATE ingestion_batches SET {', '.join(sets)} WHERE batch_id = ?", params)
 
+    def fail_interrupted_batches(self) -> int:
+        """Called at startup: no pipeline is running yet, so any batch still UPLOADED/PROCESSING was cut off
+        by a server stop. Mark it FAILED with a hint instead of leaving it 'processing' forever."""
+        rows = self.conn.execute(
+            "SELECT batch_id, stage, total_rows, accepted_rows FROM ingestion_batches WHERE status IN (?, ?)",
+            (BatchStatus.UPLOADED.value, BatchStatus.PROCESSING.value),
+        ).fetchall()
+        for r in rows:
+            if not r["accepted_rows"]:
+                self.update_batch(r["batch_id"], status=BatchStatus.FAILED, error_message=(
+                    f"No valid complaints: all {r['total_rows']} item(s) were rejected. "
+                    "Check that the file was uploaded on the right tab."))
+                continue
+            where = f" during '{r['stage']}'" if r["stage"] else ""
+            self.update_batch(
+                r["batch_id"], status=BatchStatus.FAILED,
+                error_message=f"Interrupted: the server stopped{where}. Re-run it with "
+                              f"POST /api/v1/pipeline/process/{r['batch_id']} (cached LLM results are reused).",
+            )
+        return len(rows)
+
     # --------------------------------------------------------------- complaints
     def complaints_by_status(self, batch_id: str, status: ComplaintStatus) -> list[dict[str, Any]]:
         return _rows(
@@ -313,6 +342,14 @@ class Repository:
 
     def embedded_complaint_ids(self) -> list[str]:
         return [r[0] for r in self.conn.execute("SELECT complaint_id FROM complaints WHERE embedded = 1").fetchall()]
+
+    def embedded_complaint_count(self) -> int:
+        return int(self.conn.execute("SELECT COUNT(*) FROM complaints WHERE embedded = 1").fetchone()[0])
+
+    def complaint_categories(self) -> dict[str, str]:
+        """complaint_id -> classified category (LLM or fallback)."""
+        return {r[0]: r[1] for r in self.conn.execute(
+            "SELECT complaint_id, category FROM complaint_classifications WHERE category IS NOT NULL").fetchall()}
 
     def get_complaints(self, complaint_ids: Sequence[str]) -> dict[str, dict[str, Any]]:
         out: dict[str, dict[str, Any]] = {}

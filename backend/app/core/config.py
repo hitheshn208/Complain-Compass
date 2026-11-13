@@ -29,8 +29,13 @@ class Settings(BaseSettings):
     openai_api_key: str | None = None
     openai_model: str = "gpt-4o-mini"
     llm_enabled: bool = True
-    llm_timeout_seconds: float = 30.0
+    llm_timeout_seconds: float = 60.0
     llm_max_complaint_classifications: int = 2000
+    llm_batch_size: int = Field(10, ge=1, le=50)   # complaints per classification request
+    llm_concurrency: int = Field(6, ge=1, le=32)   # parallel OpenAI requests
+    # OpenAI responses are cached here, deliberately outside storage/: deleting storage/ resets the
+    # app but keeps the (paid) responses, so re-uploading the same data costs almost nothing.
+    llm_cache_path: Path = BACKEND_DIR / "cache" / "llm_cache.db"
 
     # Upload limits
     max_upload_mb: float = 20.0           # per file
@@ -54,6 +59,9 @@ class Settings(BaseSettings):
     cluster_merge_threshold: float = 0.50  # consolidate HDBSCAN clusters with centroid cosine >= this (0 = off)
     cluster_match_threshold: float = 0.80  # centroid cosine sim to keep a stable issue id
     representatives_per_cluster: int = 5
+    # Below this many complaints, issues are formed by complaint category instead of HDBSCAN,
+    # which needs volume to find dense groups (0 = always use semantic clustering).
+    semantic_clustering_min_complaints: int = Field(80, ge=0)
 
     # Deduplication
     dedup_time_window_days: float = 7.0

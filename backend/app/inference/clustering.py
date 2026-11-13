@@ -98,6 +98,34 @@ class ClusteringEngine:
         probs = getattr(model, "probabilities_", np.ones(n))
         raw_k = len(set(labels.tolist()) - {NOISE})
         labels = self.consolidate(labels, embeddings)
+        result = self._build(ids, embeddings, labels, probs)
+        logger.info("HDBSCAN found %d clusters (%d after consolidation), %d noise of %d points",
+                    raw_k, len(result.clusters), len(result.noise_ids), n)
+        return result
+
+    def cluster_by_category(
+        self, ids: list[str], embeddings: np.ndarray, categories: list[str | None], min_size: int = 2
+    ) -> ClusteringResult:
+        """Small-data mode: one issue per complaint category with >= ``min_size`` complaints.
+
+        Density-based clustering needs volume; on a few dozen complaints it groups by shared
+        wording (greetings, follow-up templates) instead of by problem. The per-complaint
+        category (LLM or keyword fallback) is reliable at any size. Complaints whose category
+        is missing, "Other", or shared by fewer than ``min_size`` complaints stay unassigned.
+        """
+        n = len(ids)
+        names = sorted({c for c in categories if c and c != "Other"})
+        index = {c: i for i, c in enumerate(names)}
+        labels = np.array([index.get(c, NOISE) if c else NOISE for c in categories], dtype=int)
+        for lab in set(labels.tolist()) - {NOISE}:
+            if int((labels == lab).sum()) < min_size:
+                labels[labels == lab] = NOISE
+        result = self._build(ids, embeddings, labels, np.ones(n))
+        logger.info("Category grouping: %d issues, %d unassigned of %d complaints",
+                    len(result.clusters), len(result.noise_ids), n)
+        return result
+
+    def _build(self, ids: list[str], embeddings: np.ndarray, labels: np.ndarray, probs: np.ndarray) -> ClusteringResult:
         clusters: list[DiscoveredCluster] = []
         for label in sorted(set(labels.tolist()) - {NOISE}):
             idx = np.where(labels == label)[0]
@@ -116,9 +144,7 @@ class ClusteringEngine:
                 )
             )
         noise = [ids[i] for i in np.where(labels == NOISE)[0]]
-        logger.info("HDBSCAN found %d clusters (%d after consolidation), %d noise of %d points",
-                    raw_k, len(clusters), len(noise), n)
-        return ClusteringResult(clusters=clusters, noise_ids=noise, n_points=n)
+        return ClusteringResult(clusters=clusters, noise_ids=noise, n_points=len(ids))
 
 
     def consolidate(self, labels: np.ndarray, embeddings: np.ndarray) -> np.ndarray:

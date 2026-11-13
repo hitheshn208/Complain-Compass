@@ -12,6 +12,7 @@ from app.core.config import Settings, get_settings
 from app.database.repository import Repository
 from app.database.sqlite import Database
 from app.inference.classifier import LLMClassifier
+from app.inference.llm_cache import LLMCache
 from app.inference.embeddings import EmbeddingEngine, HashingEncoder, SentenceTransformerEncoder
 from app.inference.similarity import SimilarityService
 from app.inference.vector_store import VectorStore
@@ -38,6 +39,7 @@ class Container:
     embedder: EmbeddingEngine
     similarity: SimilarityService
     classifier: LLMClassifier
+    llm_cache: LLMCache
     pipeline: PipelineOrchestrator
     analytics: AnalyticsService
     ingestion: IngestionService
@@ -56,8 +58,16 @@ def build_container(settings: Settings) -> Container:
         logger.info("Loading embedding model %s", settings.embedding_model)
         encoder = SentenceTransformerEncoder(settings.embedding_model)
     embedder = EmbeddingEngine(encoder, store, settings.embedding_batch_size)
-    classifier = LLMClassifier(repo, settings.openai_api_key, settings.openai_model, settings.llm_timeout_seconds,
-                               settings.llm_enabled)
+    llm_cache = LLMCache(settings.llm_cache_path)
+    moved = llm_cache.import_from(db.connect())
+    if moved:
+        logger.info("Moved %d cached LLM responses into %s", moved, settings.llm_cache_path)
+    logger.info("LLM response cache: %d entries in %s", llm_cache.count(), settings.llm_cache_path)
+    interrupted = repo.fail_interrupted_batches()
+    if interrupted:
+        logger.warning("Marked %d batch(es) left PROCESSING by a previous run as FAILED", interrupted)
+    classifier = LLMClassifier(llm_cache, settings.openai_api_key, settings.openai_model, settings.llm_timeout_seconds,
+                               settings.llm_enabled, settings.llm_batch_size, settings.llm_concurrency)
     if not classifier.available:
         logger.warning("OPENAI_API_KEY not set or LLM disabled: using deterministic fallback classification/labels.")
     pipeline = PipelineOrchestrator(settings, repo, embedder, classifier, PipelineState())
@@ -79,6 +89,7 @@ def build_container(settings: Settings) -> Container:
         embedder=embedder,
         similarity=SimilarityService(store),
         classifier=classifier,
+        llm_cache=llm_cache,
         pipeline=pipeline,
         analytics=AnalyticsService(repo, settings),
         ingestion=IngestionService(repo, CSVIngestionAdapter(int(settings.max_upload_mb * 1024 * 1024)),
@@ -93,5 +104,6 @@ def make_lifespan(settings: Settings | None = None):
         app.state.container = build_container(settings or get_settings())
         yield
         app.state.container.db.close()
+        app.state.container.llm_cache.close()
 
     return lifespan
