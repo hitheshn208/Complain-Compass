@@ -6,7 +6,7 @@ Upload these in the app at http://localhost:5173/upload, in folder order.
 |---|---|---|
 | 1 | CSV | `1_complaints_csv/sample_complaints.csv` (~620 complaints) |
 | 2 | *(no UI tab, use the terminal)* | `curl -F file=@uploads/2_population_optional/sample_population.csv http://localhost:8000/api/v1/analytics/populations`: optional, makes segment views show rates instead of counts |
-| 3 | Customer directory | `3_customer_directory/customer_directory.csv`: links email/phone/social senders to existing customers |
+| 3 | Customer directory | `3_customer_directory/customer_directory.csv`: links email/phone/social senders to existing customers and adds their country, state, age group, student status and income bracket (like a CRM export) |
 | 4 | Email | everything in `4_email/` (`.eml` files + `inbox_export.mbox`) |
 | 5 | Chat | `5_chat/chat_transcripts.json` |
 | 6 | Social media | `6_social_media/social_posts.jsonl` |

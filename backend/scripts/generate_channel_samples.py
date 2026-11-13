@@ -66,21 +66,57 @@ def strip_html(t: str) -> str:
     return re.sub(r"<[^>]+>", "", t).replace("Sent from my iPhone", "").strip()
 
 
+DEMOGRAPHICS = ["country", "state", "age_group", "student_status", "income_bracket"]
+DIRECTORY_COLUMNS = ["customer_id", "email", "phone", "social_handle", *DEMOGRAPHICS]
+
+
+def add_demographics(directory: dict[str, dict], rows: list[dict], rng: random.Random) -> None:
+    """Give every directory customer a full profile, as a CRM export would have.
+
+    Values a customer already has in sample_complaints.csv are copied unchanged, so the CSV and the
+    directory never contradict each other. Missing fields are drawn from the CSV's own distribution
+    (state drawn within the customer's country)."""
+    known: dict[str, dict[str, str]] = {}
+    for r in rows:
+        if r["customer_id"]:
+            for k in DEMOGRAPHICS:
+                if r.get(k):
+                    known.setdefault(r["customer_id"], {})[k] = r[k]
+    pool = {k: [r[k] for r in rows if r.get(k)] for k in DEMOGRAPHICS}
+    states_by_country: dict[str, list[str]] = {}
+    for r in rows:
+        if r.get("country") and r.get("state"):
+            states_by_country.setdefault(r["country"], []).append(r["state"])
+    for cid in sorted(directory):
+        profile = dict(known.get(cid, {}))
+        profile.setdefault("country", rng.choice(pool["country"]))
+        if "state" not in profile and states_by_country.get(profile["country"]):
+            profile["state"] = rng.choice(states_by_country[profile["country"]])
+        for k in ("age_group", "student_status", "income_bracket"):
+            profile.setdefault(k, rng.choice(pool[k]))
+        directory[cid].update(profile)
+
+
+def write_directory(directory: dict[str, dict]) -> None:
+    with open(OUT / "customer_directory.csv", "w", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=DIRECTORY_COLUMNS)
+        w.writeheader()
+        for d in directory.values():
+            w.writerow({k: d.get(k, "") for k in DIRECTORY_COLUMNS})
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--seed", type=int, default=7)
     ap.add_argument("--piper-python", help="python executable with piper-tts installed (to synthesize voice wavs)")
     ap.add_argument("--piper-model", help="path to a piper .onnx voice")
+    ap.add_argument("--directory-only", action="store_true",
+                    help="only rewrite customer_directory.csv (keeps the email/chat/social/voice samples)")
     args = ap.parse_args()
     rng = random.Random(args.seed)
 
     rows = list(csv.DictReader(open(DATA / "sample_complaints.csv", encoding="utf-8")))
     customers = sorted({r["customer_id"] for r in rows if r["customer_id"]})
-    for sub in ("email", "voice"):
-        (OUT / sub).mkdir(parents=True, exist_ok=True)
-    for old in list((OUT / "email").glob("*")) + list((OUT / "voice").glob("*.wav")):
-        old.unlink()
-
     # ---------------------------------------------------------------- directory
     directory: dict[str, dict] = {}
     for i, cid in enumerate(rng.sample(customers, 90)):
@@ -90,6 +126,17 @@ def main() -> None:
                           "phone": f"+1 555 {100 + i:03d} {rng.randint(1000, 9999)}",
                           "social_handle": f"@{name.lower()}_{cid[-4:]}"}
     in_dir = list(directory)
+    # Separate RNG so adding demographics does not change any other generated sample.
+    add_demographics(directory, rows, random.Random(args.seed + 1))
+    if args.directory_only:
+        write_directory(directory)
+        print("wrote", OUT / "customer_directory.csv", f"({len(directory)} customers)")
+        return
+
+    for sub in ("email", "voice"):
+        (OUT / sub).mkdir(parents=True, exist_ok=True)
+    for old in list((OUT / "email").glob("*")) + list((OUT / "voice").glob("*.wav")):
+        old.unlink()
 
     # CSV complaints (with customer + reference id) whose owner is in the directory -> re-reports
     dup_sources = [r for r in rows if r["customer_id"] in directory and REF.search(r["complaint_text"])
@@ -281,11 +328,7 @@ def main() -> None:
         print("voice: scripts + manifest written; pass --piper-python/--piper-model to synthesize .wav files")
 
     # ---------------------------------------------------------------- directory + truth
-    with open(OUT / "customer_directory.csv", "w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=["customer_id", "email", "phone", "social_handle"])
-        w.writeheader()
-        for d in directory.values():
-            w.writerow({k: d[k] for k in ("customer_id", "email", "phone", "social_handle")})
+    write_directory(directory)
     with open(OUT / "channel_ground_truth.csv", "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=["channel", "item", "kind", "reference", "customer_id", "family"])
         w.writeheader()
