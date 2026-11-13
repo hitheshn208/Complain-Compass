@@ -123,6 +123,11 @@ def evaluate_channels(c) -> dict:
     out: dict = {"directory": {k: directory[k] for k in ("customers", "contacts_stored", "complaints_relinked")},
                  "seconds_per_channel": timings, "per_channel": {}}
     dup_ok = dup_total = dup_review = new_false_merge = new_total = id_ok = id_total = 0
+    rep_ok = rep_total = 0
+    # "repeat" rows: a second report by the same customer of a "new" item in the same channel. The
+    # original's incident is expected to contain it, so it does not count as a false merge there.
+    repeats_of = {(r.channel, r.reference): label_to_complaint.get((r.channel, r.item))
+                  for r in truth.itertuples() if r.kind == "repeat"}
     rej_ok = rej_total = voice_ref_ok = voice_ref_total = 0
     for ch in inputs:
         t = truth[truth.channel == ch]
@@ -152,9 +157,14 @@ def evaluate_channels(c) -> dict:
                 if ch == "voice":
                     voice_ref_total += 1
                     voice_ref_ok += row["reference"] in json.loads(stored[1])
+            elif row["kind"] == "repeat":
+                rep_total += 1
+                orig = label_to_complaint.get((ch, row["reference"]))
+                rep_ok += bool(orig) and incident_of.get(orig) == incident_of.get(cid)
             else:
                 new_total += 1
-                new_false_merge += len(members_df) > 1
+                expected = {cid, repeats_of.get((ch, row["item"]))}
+                new_false_merge += bool(set(members_df.cid) - expected)
         out["per_channel"][ch] = stats
     after = c.analytics.overview(ComplaintFilters())
     out.update({
@@ -163,6 +173,7 @@ def evaluate_channels(c) -> dict:
         "cross_channel_duplicates_merged": f"{dup_ok}/{dup_total}",
         "cross_channel_duplicates_flagged_for_review": dup_review,
         "new_complaints_wrongly_merged": f"{new_false_merge}/{new_total}",
+        "same_channel_repeats_merged": f"{rep_ok}/{rep_total}",
         "voice_reference_ids_recovered": f"{voice_ref_ok}/{voice_ref_total}",
     })
     out["overview_delta"] = {k: after[k] - before[k] for k in ("total_reports", "total_incidents", "duplicate_reports")}
@@ -368,6 +379,7 @@ def write_markdown(r: dict) -> None:
             "|---|---|",
             f"| Cross-channel re-reports merged into the original CSV incident | {ch['cross_channel_duplicates_merged']} |",
             f"| ... of the unmerged, flagged for review | {ch['cross_channel_duplicates_flagged_for_review']} |",
+            f"| Repeat conversations (same customer, same problem, same channel) merged | {ch['same_channel_repeats_merged']} |",
             f"| New complaints wrongly merged into another incident | {ch['new_complaints_wrongly_merged']} |",
             f"| Customer identity resolved as expected (explicit / directory / pseudonymous / anonymous) | {ch['identity_link_accuracy']} |",
             f"| Items that should be rejected (auto-reply, bot-only chat, retweet) and were | {ch['rejects_correct']} |",

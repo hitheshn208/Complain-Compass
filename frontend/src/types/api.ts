@@ -286,6 +286,38 @@ export interface Complaint {
   issue_title: string | null;
   incident_id: string | null;
   link_type: string | null;
+  /** number of reports (all channels) linked to this complaint's incident */
+  incident_report_count?: number;
+}
+
+/** Why a report was linked to an incident (see backend deduplication/incident_matching.py) */
+export interface DedupEvidence {
+  rule?: string;
+  shared_reference_ids?: string[];
+  days_since_last_report?: number;
+  max_semantic_similarity?: number;
+  same_issue_cluster?: boolean;
+  same_category?: boolean;
+  [key: string]: unknown;
+}
+
+export interface IncidentReport {
+  complaint_id: string;
+  source: string;
+  timestamp: string;
+  customer_id: string | null;
+  normalized_text: string | null;
+  original_text: string;
+  upload_channel: string | null;
+  upload_filename: string | null;
+  link_type: "CANONICAL" | "DUPLICATE";
+  match_confidence: number;
+  evidence: DedupEvidence;
+}
+
+export interface ComplaintDetail extends Complaint {
+  /** every report (any channel) in this complaint's incident, oldest first */
+  incident_reports: IncidentReport[];
 }
 
 export interface SimilarComplaint {

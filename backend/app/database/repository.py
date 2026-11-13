@@ -374,7 +374,9 @@ class Repository:
         total = self.conn.execute(f"SELECT COUNT(*) {_COMPLAINT_JOINS} WHERE {where}", params).fetchone()[0]
         q = f"""SELECT c.complaint_id, c.customer_id, c.source, c.original_text, c.normalized_text, c.timestamp,
                        c.batch_id, c.processing_status, c.created_at, cl.category, cl.severity, cl.summary,
-                       i.issue_id, i.title AS issue_title, l.incident_id, l.link_type
+                       i.issue_id, i.title AS issue_title, l.incident_id, l.link_type,
+                       (SELECT COUNT(*) FROM complaint_incident_links l2 WHERE l2.incident_id = l.incident_id)
+                           AS incident_report_count
                 {_COMPLAINT_JOINS} WHERE {where}
                 ORDER BY c.timestamp DESC, c.complaint_id LIMIT ? OFFSET ?"""
         rows = _rows(self.conn.execute(q, [*params, page_size, (page - 1) * page_size]).fetchall())
@@ -628,8 +630,11 @@ class Repository:
     def incident_complaints(self, incident_id: str) -> list[dict[str, Any]]:
         return _rows(
             self.conn.execute(
-                """SELECT c.complaint_id, c.source, c.timestamp, l.link_type, l.match_confidence, l.evidence
+                """SELECT c.complaint_id, c.source, c.timestamp, c.customer_id, c.normalized_text, c.original_text,
+                          b.channel AS upload_channel, b.filename AS upload_filename,
+                          l.link_type, l.match_confidence, l.evidence
                    FROM complaint_incident_links l JOIN complaints c ON c.complaint_id = l.complaint_id
+                   LEFT JOIN ingestion_batches b ON b.batch_id = c.batch_id
                    WHERE l.incident_id = ? ORDER BY c.timestamp""",
                 (incident_id,),
             ).fetchall()

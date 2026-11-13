@@ -1,4 +1,4 @@
-import { Search, X } from "lucide-react";
+import { Link2, Search, X } from "lucide-react";
 import { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Card, EmptyState, ErrorState, Loading, Pagination, SeverityBadge } from "../components/ui";
@@ -6,7 +6,78 @@ import { useApi } from "../hooks/useApi";
 import { useFilters } from "../hooks/useFilters";
 import { fmtDate, fmtInt, humanize, sourceColor } from "../lib/format";
 import { api } from "../services/api";
-import type { Complaint } from "../types/api";
+import type { Complaint, IncidentReport } from "../types/api";
+
+/** Plain-language reason a report was attached to its incident. */
+function matchReason(r: IncidentReport): string {
+  if (r.link_type === "CANONICAL") return "First report: opened this incident";
+  const e = r.evidence ?? {};
+  if (e.rule === "T1_shared_reference") {
+    return `Same customer, same order ${(e.shared_reference_ids ?? []).join(", ")}`;
+  }
+  if (e.rule === "T2_identity_time_semantic_topic") {
+    const parts = ["Same customer"];
+    if (e.days_since_last_report != null) parts.push(`${e.days_since_last_report.toFixed(1)} days after the previous report`);
+    if (e.max_semantic_similarity != null) parts.push(`${Math.round(e.max_semantic_similarity * 100)}% similar meaning`);
+    if (e.same_issue_cluster) parts.push("same issue");
+    else if (e.same_category) parts.push("same category");
+    return parts.join(" · ");
+  }
+  return humanize(e.rule ?? "linked");
+}
+
+function channelLabel(r: IncidentReport): string {
+  return r.upload_channel === "CSV" ? `${humanize(r.source)} (CSV import)` : humanize(r.source);
+}
+
+function IncidentPanel({ complaint, onClose }: { complaint: Complaint; onClose: () => void }) {
+  const detail = useApi(() => api.complaint(complaint.complaint_id).then((r) => r.data), [complaint.complaint_id]);
+  const reports = detail.data?.incident_reports ?? [];
+  const channels = new Set(reports.map((r) => humanize(r.source).toLowerCase()));
+  const title = reports.length > 1
+    ? `Same incident: ${reports.length} reports across ${channels.size} channel${channels.size === 1 ? "" : "s"}`
+    : "Same incident";
+  return (
+    <Card title={title}
+      subtitle={reports.length > 1 ? "One customer, one problem: counted once (1 incident, 1 affected customer)" : undefined}
+      action={<button onClick={onClose} className="rounded p-1 text-muted hover:bg-surface-2"><X className="h-4 w-4" /></button>}>
+      {detail.error && <ErrorState error={detail.error} onRetry={detail.reload} />}
+      {!detail.data ? !detail.error && <Loading /> : reports.length <= 1 ? (
+        <p className="text-sm text-muted">
+          {complaint.incident_id
+            ? "No other reports of this incident: the customer has not reported this problem anywhere else."
+            : complaint.customer_id
+              ? "Not linked to an incident yet."
+              : "Anonymous complaint: without a customer identity it is never merged with other reports."}
+        </p>
+      ) : (
+        <ol className="space-y-3">
+          {reports.map((r) => {
+            const self = r.complaint_id === complaint.complaint_id;
+            return (
+              <li key={r.complaint_id} className={`rounded-lg border p-2.5 ${self ? "border-accent bg-accent-wash" : "border-line"}`}>
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
+                  <span className="flex items-center gap-1 font-medium text-ink">
+                    <span className="h-2 w-2 rounded-sm" style={{ background: sourceColor(r.source) }} />{channelLabel(r)}
+                  </span>
+                  <span className="text-muted">{fmtDate(r.timestamp, true)}</span>
+                  {self && <span className="rounded bg-surface px-1.5 font-medium text-accent-ink">this complaint</span>}
+                </div>
+                <p className="mt-1 line-clamp-3 text-sm text-ink">{r.normalized_text ?? r.original_text}</p>
+                <div className="mt-1 flex items-start justify-between gap-2 text-xs text-ink-2">
+                  <span className="flex items-start gap-1"><Link2 className="mt-0.5 h-3 w-3 shrink-0" />{matchReason(r)}</span>
+                  {r.link_type === "DUPLICATE" && (
+                    <span className="tabular shrink-0 rounded bg-surface-2 px-1.5 py-0.5">{Math.round(r.match_confidence * 100)}%</span>
+                  )}
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+      )}
+    </Card>
+  );
+}
 
 function SimilarPanel({ complaint, onClose }: { complaint: Complaint; onClose: () => void }) {
   const sim = useApi(() => api.similar(complaint.complaint_id, 5).then((r) => r.data), [complaint.complaint_id]);
@@ -91,7 +162,11 @@ export function ComplaintsPage() {
                         <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-sm" style={{ background: sourceColor(c.source) }} />{humanize(c.source)}</span>
                         <span>{fmtDate(c.timestamp, true)}</span>
                         <span>{c.customer_id ?? "anonymous"}</span>
-                        {c.link_type === "DUPLICATE" && <span className="rounded bg-surface-2 px-1.5 font-medium text-ink-2">duplicate report</span>}
+                        {(c.incident_report_count ?? 0) > 1 && (
+                          <span className="flex items-center gap-1 rounded bg-surface-2 px-1.5 font-medium text-ink-2">
+                            <Link2 className="h-3 w-3" />{c.incident_report_count} reports · 1 incident
+                          </span>
+                        )}
                         {c.issue_id ? (
                           <Link onClick={(e) => e.stopPropagation()} to={`/issues/${c.issue_id}`} className="text-accent hover:underline">{c.issue_title}</Link>
                         ) : <span>unclustered</span>}
@@ -104,7 +179,12 @@ export function ComplaintsPage() {
             </>
           )}
         </Card>
-        {selected && <SimilarPanel complaint={selected} onClose={() => setSelected(undefined)} />}
+        {selected && (
+          <div className="space-y-4">
+            <IncidentPanel complaint={selected} onClose={() => setSelected(undefined)} />
+            <SimilarPanel complaint={selected} onClose={() => setSelected(undefined)} />
+          </div>
+        )}
       </div>
     </div>
   );

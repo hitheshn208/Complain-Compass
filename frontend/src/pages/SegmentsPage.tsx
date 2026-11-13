@@ -30,7 +30,8 @@ export function SegmentsPage() {
         </div>
       </div>
       {seg.error && <ErrorState error={seg.error} onRetry={seg.reload} />}
-      {!seg.data ? (!seg.error && <Loading />) : (() => {
+      {/* The previous dimension's data stays in `seg.data` while the new one loads: wait for this one */}
+      {!seg.data?.segments[dim] ? (!seg.error && <Loading />) : (() => {
         const b = seg.data.segments[dim];
         const m = seg.data.issue_matrix;
         const maxCust = Math.max(...b.segments.map((s) => s.unique_customers), 1);

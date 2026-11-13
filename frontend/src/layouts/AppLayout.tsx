@@ -1,6 +1,7 @@
 import { Compass, FileUp, LayoutDashboard, ListOrdered, MessageSquareText, RefreshCw, Users } from "lucide-react";
 import { useState } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { ErrorBoundary } from "../components/ErrorBoundary";
 import { FilterBar } from "../components/FilterBar";
 import { api } from "../services/api";
 
@@ -79,7 +80,9 @@ export function AppLayout() {
           {showFilters ? <FilterBar /> : <div className="text-sm font-medium text-ink-2">Data ingestion</div>}
         </header>
         <main className="mx-auto w-full max-w-[1400px] flex-1 px-4 py-6 sm:px-6">
-          <Outlet />
+          <ErrorBoundary resetKey={pathname}>
+            <Outlet />
+          </ErrorBoundary>
         </main>
       </div>
     </div>

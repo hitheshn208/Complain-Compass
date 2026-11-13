@@ -207,3 +207,20 @@ def test_all_rejected_upload_is_closed_and_can_be_reuploaded(client):
     again = client.post("/api/v1/ingest/chat", files=files)
     assert again.status_code == 201
     assert len([b for b in client.get("/api/v1/batches").json()["data"] if b["filename"] == "social_posts.jsonl"]) == 1
+
+
+def test_complaint_detail_lists_every_report_of_the_incident(client):
+    rows = ["complaint_text,customer_id,timestamp",
+            '"My order ORD-555111 has not arrived, tracking stuck",CUST-9,2026-09-01T10:00:00Z',
+            '"Still waiting for order ORD-555111, nobody replies",CUST-9,2026-09-03T10:00:00Z',
+            '"The app crashes on launch",CUST-8,2026-09-02T10:00:00Z']
+    assert upload(client, "\n".join(rows) + "\n", name="inc.csv").status_code == 201
+    listed = client.get("/api/v1/complaints", params={"search": "ORD-555111"}).json()["data"]
+    assert len(listed) == 2 and all(c["incident_report_count"] == 2 for c in listed)
+    detail = client.get(f"/api/v1/complaints/{listed[0]['complaint_id']}").json()["data"]
+    reports = detail["incident_reports"]
+    assert [r["link_type"] for r in reports] == ["CANONICAL", "DUPLICATE"]
+    assert reports[1]["evidence"]["rule"] == "T1_shared_reference"
+    assert all(r["upload_channel"] == "CSV" and r["normalized_text"] for r in reports)
+    solo = client.get("/api/v1/complaints", params={"search": "crashes"}).json()["data"]
+    assert len(solo) == 1 and solo[0]["incident_report_count"] == 1

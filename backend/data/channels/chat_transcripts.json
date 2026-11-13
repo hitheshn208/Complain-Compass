@@ -475,6 +475,70 @@
       ]
     },
     {
+      "conversation_id": "CHAT-R01",
+      "customer_email": "hiro.1028@example.com",
+      "started_at": "2026-11-04T23:53:53Z",
+      "messages": [
+        {
+          "role": "bot",
+          "text": "Hi! I'm ShopBot. How can I help you today?",
+          "timestamp": "2026-11-04T23:53:53Z"
+        },
+        {
+          "role": "customer",
+          "text": "Hi, it's me again.",
+          "timestamp": "2026-11-04T23:54:33Z"
+        },
+        {
+          "role": "customer",
+          "text": "Account deactivated suddenly, all my saved data and wallet balance of Rs 249 is inaccessible. It's about order ORD-323021 again.",
+          "timestamp": "2026-11-04T23:55:08Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-11-04T23:55:13Z"
+        },
+        {
+          "role": "agent",
+          "text": "Sorry about this, I can see your earlier chat. Escalating it now.",
+          "timestamp": "2026-11-04T23:57:53Z"
+        }
+      ]
+    },
+    {
+      "conversation_id": "CHAT-R02",
+      "customer_id": "CUST-1161",
+      "started_at": "2026-11-07T16:32:51Z",
+      "messages": [
+        {
+          "role": "bot",
+          "text": "Hi! I'm ShopBot. How can I help you today?",
+          "timestamp": "2026-11-07T16:32:51Z"
+        },
+        {
+          "role": "customer",
+          "text": "Hi, it's me again.",
+          "timestamp": "2026-11-07T16:33:31Z"
+        },
+        {
+          "role": "customer",
+          "text": "My shipment is stuck at the warehouse for 21 days with no update.",
+          "timestamp": "2026-11-07T16:34:06Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-11-07T16:34:11Z"
+        },
+        {
+          "role": "agent",
+          "text": "Sorry about this, I can see your earlier chat. Escalating it now.",
+          "timestamp": "2026-11-07T16:36:51Z"
+        }
+      ]
+    },
+    {
       "conversation_id": "CHAT-BOTONLY",
       "started_at": "2026-11-08T22:00:00Z",
       "messages": [
@@ -485,6 +549,38 @@
         {
           "role": "bot",
           "text": "Are you still there?"
+        }
+      ]
+    },
+    {
+      "conversation_id": "CHAT-X01",
+      "customer_phone": "+1 555 146 4800",
+      "started_at": "2026-10-19T07:28:50Z",
+      "messages": [
+        {
+          "role": "bot",
+          "text": "Hi! I'm ShopBot. How can I help you today?",
+          "timestamp": "2026-10-19T07:28:50Z"
+        },
+        {
+          "role": "customer",
+          "text": "I already emailed and tweeted about this.",
+          "timestamp": "2026-10-19T07:29:25Z"
+        },
+        {
+          "role": "customer",
+          "text": "My order number is 396765 and it still hasn't been delivered, tracking just says in transit.",
+          "timestamp": "2026-10-19T07:30:00Z"
+        },
+        {
+          "role": "bot",
+          "text": "I'm sorry to hear that. Let me connect you with an agent.",
+          "timestamp": "2026-10-19T07:30:05Z"
+        },
+        {
+          "role": "agent",
+          "text": "I can see your email and your post, escalating this now.",
+          "timestamp": "2026-10-19T07:31:50Z"
         }
       ]
     }

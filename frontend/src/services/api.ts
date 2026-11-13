@@ -2,6 +2,7 @@ import type {
   Batch,
   ChannelInfo,
   Complaint,
+  ComplaintDetail,
   DirectoryResult,
   Envelope,
   FilterOptions,
@@ -82,6 +83,7 @@ export const api = {
     request<Complaint[]>(
       `/complaints${buildQuery(f, { page: opts.page ?? 1, page_size: opts.pageSize ?? 25, issue_id: opts.issueId, search: opts.search })}`,
     ),
+  complaint: (id: string) => request<ComplaintDetail>(`/complaints/${encodeURIComponent(id)}`),
   similar: (id: string, topK = 5) => request<SimilarComplaint[]>(`/complaints/${encodeURIComponent(id)}/similar?top_k=${topK}`),
   batch: (id: string) => request<Batch>(`/batches/${encodeURIComponent(id)}`),
   batches: () => request<Batch[]>(`/batches`),

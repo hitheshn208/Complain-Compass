@@ -31,7 +31,10 @@ chat,CHAT-N06,new,,anonymous,poor_support
 chat,CHAT-N07,new,,anonymous,poor_support
 chat,CHAT-N08,new,,anonymous,refund_delay
 chat,CHAT-N09,new,,anonymous,damaged_product
+chat,CHAT-R01,repeat,CHAT-N01,CUST-1028,account_suspension
+chat,CHAT-R02,repeat,CHAT-N03,CUST-1161,delivery_delay
 chat,CHAT-BOTONLY,reject,,,
+chat,CHAT-X01,cross_channel_duplicate,ORD-396765,CUST-1060,
 social,SM-D01,cross_channel_duplicate,ORD-873876,CUST-1109,
 social,SM-D02,cross_channel_duplicate,ORD-593649,CUST-1150,
 social,SM-D03,cross_channel_duplicate,ORD-294078,CUST-1095,
@@ -53,6 +56,7 @@ social,SM-N14,new,,pseudonymous,subscription_cancel
 social,SM-N15,new,,CUST-1198,login_problem
 social,SM-N16,new,,pseudonymous,subscription_cancel
 social,SM-RT01,reject,,,
+social,SM-X01,cross_channel_duplicate,ORD-396765,CUST-1060,
 voice,call_dup_01.wav,cross_channel_duplicate,ORD-860541,CUST-1019,
 voice,call_dup_02.wav,cross_channel_duplicate,ORD-963699,CUST-1243,
 voice,call_dup_03.wav,cross_channel_duplicate,ORD-239093,CUST-1102,
