@@ -328,3 +328,21 @@ export interface SimilarComplaint {
   source: string | null;
   timestamp: string | null;
 }
+
+/** The 5 formula weights (0-1 each, summing to 1). */
+export interface PriorityWeights {
+  impact: number;
+  severity: number;
+  recurrence: number;
+  growth: number;
+  business: number;
+}
+
+export interface PrioritySettings {
+  weights: PriorityWeights;
+  /** business value (0-100) of each complaint category */
+  category_weights: Record<string, number>;
+  defaults: { weights: PriorityWeights; category_weights: Record<string, number> };
+  /** true when the company has overridden the defaults */
+  customized: boolean;
+}

@@ -29,7 +29,7 @@ def list_issues(
 
 @router.get("/top10")
 def top10(filters: ComplaintFilters = Depends(get_filters), c: Container = Depends(get_container)):
-    return envelope(c.analytics.top10(filters), weights=c.settings.weights, filtered=not filters.is_empty())
+    return envelope(c.analytics.top10(filters), weights=c.analytics.weights(), filtered=not filters.is_empty())
 
 
 @router.get("/{issue_id}")
@@ -37,7 +37,7 @@ def get_issue(issue_id: str, filters: ComplaintFilters = Depends(get_filters), c
     detail = c.analytics.issue_detail(issue_id, filters)
     if detail is None:
         raise HTTPException(status_code=404, detail="Issue not found")
-    return envelope(detail, weights=c.settings.weights)
+    return envelope(detail, weights=c.analytics.weights())
 
 
 @router.patch("/{issue_id}")

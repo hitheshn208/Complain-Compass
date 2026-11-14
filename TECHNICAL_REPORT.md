@@ -192,7 +192,8 @@ Only two of the seven pipeline stages call the LLM:
 - Every response is **cached** by the complaint's text, in a file that survives an application reset. Re-uploading
   the same data costs nothing and takes seconds.
 - Measured: the full CSV with an empty database but a warm cache finishes in about **23 s**; uncached it takes
-  about 2 minutes. Cost for the full sample is about **US$0.05** (~50k input + ~60k output tokens).
+  about 3–4 minutes (measured rate: ~40 s per 100 uncached complaints with 6 parallel requests). Cost for the full
+  sample is about **US$0.05** (~50k input + ~60k output tokens).
 
 **Without an API key**, everything still works: keyword rules classify complaints, and issue titles are built from
 the dominant category plus distinctive TF-IDF keywords. Root-cause hypotheses are then not generated, and the UI says so.
@@ -304,7 +305,10 @@ wrong merge would hide a real customer, while a missed merge only slightly over-
 Priority = 0.35 × Impact + 0.25 × Severity + 0.20 × Recurrence + 0.10 × Growth + 0.10 × Business impact
 ```
 
-Every component is scaled 0–100. The weights are configurable and validated to sum to 1.
+Every component is scaled 0–100. The percentages above are the defaults: a company can change the five weights
+and the business value of each category on the **Priority settings** page (sidebar). Saving validates that the
+weights add up to 100 % and re-scores every issue instantly (`PUT /api/v1/settings/priority`,
+`backend/app/services/priority_settings.py`). Reset restores the defaults from configuration.
 
 | Component | How it is computed | Why |
 |---|---|---|
@@ -325,9 +329,11 @@ so a company sees *India's* top 10, not the global one.
 
 ## 10. Segments and filters: who is affected?
 
-- **Five dimensions**: country, state, age group, student status, income bracket. They come from customer records
-  (the CSV columns or the customer directory) and are **never inferred**. Missing values show as "Unknown".
-- **Filter bar** on every page: any combination of the five dimensions, channel, date range and severity. Every
+- **Dimensions**: the dashboard shows country, age group and income bracket. The backend also supports state and
+  student status; they are hidden in the UI and can be shown again by adding them to `UI_DIMENSIONS` in
+  `frontend/src/lib/dimensions.ts`. Values come from customer records (the CSV columns or the customer directory)
+  and are **never inferred**. Missing values show as "Unknown".
+- **Filter bar** on every page: any combination of those dimensions, channel, date range and severity. Every
   chart, KPI and the top 10 update, and filters live in the URL, so a filtered view can be shared as a link.
 - **Segments page**: affected customers, complaints and incidents per segment, the top issues per segment, and an
   **issue × segment heatmap** showing which problems hit which groups.
@@ -347,6 +353,7 @@ so a company sees *India's* top 10, not the global one.
 | **Issue detail** | Title, description, symptoms, **root-cause hypotheses** (marked speculative), the score breakdown and explanation, growth trend, representative complaints, segment breakdown; analysts can edit the title and status |
 | **Segments** | Per-dimension breakdown and the issue × segment heatmap |
 | **Complaints** | Every complaint with original text, severity, channel, issue, and a **"N reports · 1 incident"** badge. Click one to see the **Same incident** panel (every linked report, its channel and why it was linked) and semantically similar complaints |
+| **Priority settings** | Sliders for the five formula weights and the business value of each category; Save re-ranks every issue instantly, with the top 10 and rank changes shown alongside |
 | **Upload** | Tabs per channel and for the customer directory, live progress through the 7 pipeline stages, per-row errors, upload history with retry |
 
 **Emerging issues.** Daily incident counts per issue are compared with a 14-day baseline. An issue is flagged when its

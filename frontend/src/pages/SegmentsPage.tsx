@@ -5,8 +5,9 @@ import { useApi } from "../hooks/useApi";
 import { useFilters } from "../hooks/useFilters";
 import { fmtInt, humanize, truncate } from "../lib/format";
 import { api } from "../services/api";
+import { UI_DIMENSIONS } from "../lib/dimensions";
 
-const DIMENSIONS = ["country", "state", "age_group", "student_status", "income_bracket"];
+const DIMENSIONS: string[] = UI_DIMENSIONS.map((d) => d.key);
 
 export function SegmentsPage() {
   const { filters, key } = useFilters();

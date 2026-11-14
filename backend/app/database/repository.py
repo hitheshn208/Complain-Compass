@@ -652,6 +652,23 @@ class Repository:
                 (key, kind, model, response, utcnow_iso()),
             )
 
+    # -------------------------------------------------------------- app settings
+    def get_setting(self, key: str) -> Any | None:
+        row = self.conn.execute("SELECT value FROM app_settings WHERE key = ?", (key,)).fetchone()
+        return json.loads(row[0]) if row else None
+
+    def set_setting(self, key: str, value: Any) -> None:
+        with self.db.transaction() as conn:
+            conn.execute(
+                "INSERT INTO app_settings (key, value, updated_at) VALUES (?, ?, ?) "
+                "ON CONFLICT(key) DO UPDATE SET value = excluded.value, updated_at = excluded.updated_at",
+                (key, json.dumps(value), utcnow_iso()),
+            )
+
+    def delete_setting(self, key: str) -> None:
+        with self.db.transaction() as conn:
+            conn.execute("DELETE FROM app_settings WHERE key = ?", (key,))
+
     # ----------------------------------------------------------- populations
     def replace_populations(self, rows: Sequence[tuple[str, str, int]]) -> None:
         now = utcnow_iso()

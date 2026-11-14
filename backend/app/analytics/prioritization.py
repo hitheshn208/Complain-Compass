@@ -133,6 +133,7 @@ def compute_issue_scores(
     issues: list[dict[str, Any]],
     weights: dict[str, float],
     as_of: pd.Timestamp | None = None,
+    category_weights: dict[str, float] | None = None,
 ) -> list[IssueScore]:
     """Score every issue that has at least one complaint in ``df`` (the analytics frame)."""
     if df.empty:
@@ -168,7 +169,8 @@ def compute_issue_scores(
         meta = issue_meta.get(issue_id, {})
         cats = Counter(c for c in g["category"].dropna())
         category = meta.get("category") or (cats.most_common(1)[0][0] if cats else "Other")
-        cat_weight = BUSINESS_CATEGORY_WEIGHTS.get(category, BUSINESS_CATEGORY_WEIGHTS["Other"])
+        cw = category_weights or BUSINESS_CATEGORY_WEIGHTS
+        cat_weight = cw.get(category, cw.get("Other", BUSINESS_CATEGORY_WEIGHTS["Other"]))
         fin_share = float(np.mean([_has_financial_entity(e, r) for e, r in zip(g["entities"], g["reference_ids"])]))
         b_score = round(0.7 * cat_weight + 0.3 * 100 * fin_share, 2)
 

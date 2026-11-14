@@ -7,6 +7,7 @@ from typing import Any
 
 import pandas as pd
 
+from app.services.priority_settings import PrioritySettings
 from app.analytics.prioritization import compute_issue_scores, unique_affected_customers
 from app.analytics.segmentation import DIMENSIONS, issue_segment_matrix, segment_breakdown
 from app.analytics.severity import severity_distribution
@@ -32,9 +33,10 @@ def _decode_issue(row: dict[str, Any]) -> dict[str, Any]:
 
 
 class AnalyticsService:
-    def __init__(self, repo: Repository, settings: Settings):
+    def __init__(self, repo: Repository, settings: Settings, priority: PrioritySettings | None = None):
         self.repo = repo
         self.settings = settings
+        self.priority = priority
 
     # ---------------------------------------------------------------- helpers
     def _frame(self, filters: ComplaintFilters) -> pd.DataFrame:
@@ -50,7 +52,8 @@ class AnalyticsService:
         issues = {i["issue_id"]: i for i in self.repo.issues_with_metrics()}
         if filters.is_empty():
             return [_decode_issue(i) for i in issues.values() if i.get("calculated_at")]
-        scores = compute_issue_scores(df, list(issues.values()), self.settings.weights)
+        scores = compute_issue_scores(df, list(issues.values()), self.weights(),
+                                      category_weights=self.priority.category_weights() if self.priority else None)
         out = []
         for s in scores:
             base = _decode_issue(issues[s.issue_id]) if s.issue_id in issues else {"issue_id": s.issue_id}
@@ -59,6 +62,10 @@ class AnalyticsService:
             base["filtered"] = True
             out.append(base)
         return out
+
+    def weights(self) -> dict[str, float]:
+        """Formula weights in effect (analyst overrides from the UI, else configuration)."""
+        return self.priority.weights() if self.priority else self.settings.weights
 
     # ---------------------------------------------------------------- views
     def overview(self, filters: ComplaintFilters) -> dict[str, Any]:

@@ -7,6 +7,7 @@ import { useApi } from "../hooks/useApi";
 import { useFilters } from "../hooks/useFilters";
 import { fmtDate, fmtInt, fmtScore, humanize, sourceColor } from "../lib/format";
 import { api } from "../services/api";
+import { UI_DIMENSIONS } from "../lib/dimensions";
 import type { IssueDetail, SegmentBreakdown } from "../types/api";
 
 const COMPONENT_ORDER = ["impact", "severity", "recurrence", "growth", "business"];
@@ -215,8 +216,8 @@ export function IssueDetailPage() {
       </div>
 
       <Card title="Demographic breakdown" subtitle={`Unique affected customers · segments with < ${Object.values(i.demographics)[0]?.min_customers ?? 3} customers suppressed for privacy · counts, not rates`}>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {(["country", "age_group", "student_status", "income_bracket"] as const).map((d) => (
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {UI_DIMENSIONS.map(({ key: d }) => (
             <div key={d}>
               <h3 className="mb-2 text-xs font-semibold text-ink-2">{humanize(d)}</h3>
               {i.demographics[d] && <DemographicTable seg={i.demographics[d]} />}

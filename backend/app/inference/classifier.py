@@ -77,9 +77,9 @@ _CATEGORY_RULES: list[tuple[str, list[str]]] = [
 
 _SEVERITY_RULES: list[tuple[Severity, list[str]]] = [
     (Severity.CRITICAL, ["fraud", "unauthori", "stolen", "hacked", "identity theft", "security breach", "injur", "fire",
-                         "smoke", "lawsuit", "lawyer", "all my savings", "rent money", "medical", "emergency",
+                         "smoke", "all my savings", "rent money", "medical", "emergency",
                          "someone else accessed"]),
-    (Severity.HIGH, ["charged twice", "double charg", "money deducted", "deducted", "lost my money", "can't access",
+    (Severity.HIGH, ["charged twice", "double charg", "money deducted", "deducted", "lost my money", "can't access", "lawsuit", "lawyer",
                      "cannot access", "locked out", "suspended", "weeks", "still no refund", "never arrived",
                      "unacceptable", "furious", "overcharg", "lost all", "business", "urgent", "can't log", "cannot log"]),
     (Severity.MEDIUM, ["delay", "late", "crash", "not working", "failed", "damaged", "broken", "waiting", "days",

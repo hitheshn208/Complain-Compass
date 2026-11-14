@@ -7,6 +7,8 @@ import type {
   Envelope,
   FilterOptions,
   Filters,
+  PrioritySettings,
+  PriorityWeights,
   IssueDetail,
   IssueSummary,
   Overview,
@@ -89,6 +91,14 @@ export const api = {
   batches: () => request<Batch[]>(`/batches`),
   channels: () => request<ChannelInfo[]>(`/ingest/channels`),
   recluster: () => request<{ queued: boolean }>(`/pipeline/recluster`, { method: "POST" }),
+  priority: () => request<PrioritySettings>(`/settings/priority`),
+  savePriority: (body: { weights?: PriorityWeights; category_weights?: Record<string, number> }) =>
+    request<PrioritySettings>(`/settings/priority`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    }),
+  resetPriority: () => request<PrioritySettings>(`/settings/priority`, { method: "DELETE" }),
   process: (batchId: string) => request<{ queued: boolean }>(`/pipeline/process/${encodeURIComponent(batchId)}`, { method: "POST" }),
 };
 

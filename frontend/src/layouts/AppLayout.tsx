@@ -1,4 +1,4 @@
-import { Compass, FileUp, LayoutDashboard, ListOrdered, MessageSquareText, RefreshCw, Users } from "lucide-react";
+import { Compass, FileUp, LayoutDashboard, ListOrdered, MessageSquareText, RefreshCw, SlidersHorizontal, Users } from "lucide-react";
 import { useState } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { ErrorBoundary } from "../components/ErrorBoundary";
@@ -10,6 +10,7 @@ const NAV = [
   { to: "/issues", label: "Issues", icon: ListOrdered },
   { to: "/segments", label: "Segments", icon: Users },
   { to: "/complaints", label: "Complaints", icon: MessageSquareText },
+  { to: "/settings", label: "Priority settings", icon: SlidersHorizontal },
   { to: "/upload", label: "Upload data", icon: FileUp },
 ];
 

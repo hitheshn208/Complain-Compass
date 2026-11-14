@@ -4,6 +4,7 @@ import { ComplaintsPage } from "./pages/ComplaintsPage";
 import { IssueDetailPage } from "./pages/IssueDetailPage";
 import { IssuesPage } from "./pages/IssuesPage";
 import { OverviewPage } from "./pages/OverviewPage";
+import { PrioritySettingsPage } from "./pages/PrioritySettingsPage";
 import { SegmentsPage } from "./pages/SegmentsPage";
 import { UploadPage } from "./pages/UploadPage";
 
@@ -17,6 +18,7 @@ export function App() {
           <Route path="issues/:id" element={<IssueDetailPage />} />
           <Route path="segments" element={<SegmentsPage />} />
           <Route path="complaints" element={<ComplaintsPage />} />
+          <Route path="settings" element={<PrioritySettingsPage />} />
           <Route path="upload" element={<UploadPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>

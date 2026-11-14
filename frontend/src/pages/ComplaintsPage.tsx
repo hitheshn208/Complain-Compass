@@ -130,7 +130,7 @@ export function ComplaintsPage() {
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="text-xl font-semibold tracking-tight">Complaints</h1>
-          <p className="text-sm text-muted">Original text is preserved; PII is masked in the analysed text.</p>
+          {/* <p className="text-sm text-muted">Original text is preserved; PII is masked in the analysed text.</p> */}
         </div>
         <form onSubmit={(e) => { e.preventDefault(); setParam("q", draft.trim() || undefined); }} className="flex items-center gap-2">
           <div className="flex h-8 items-center gap-1.5 rounded-md border border-line bg-surface px-2">

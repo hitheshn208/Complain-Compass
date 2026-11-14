@@ -224,3 +224,37 @@ def test_complaint_detail_lists_every_report_of_the_incident(client):
     assert all(r["upload_channel"] == "CSV" and r["normalized_text"] for r in reports)
     solo = client.get("/api/v1/complaints", params={"search": "crashes"}).json()["data"]
     assert len(solo) == 1 and solo[0]["incident_report_count"] == 1
+
+
+def test_priority_settings_change_the_ranking_and_reset(client):
+    rows = ["complaint_text,customer_id,timestamp"]
+    texts = ["My package has not been delivered, tracking stuck", "The courier keeps rescheduling my delivery",
+             "Order never arrived, shipping delayed", "Delivery is very late again",
+             "I was charged twice on my invoice", "My bill shows an extra charge"]
+    for i, t in enumerate(texts):
+        rows.append(f'"{t}",CUST-{i},2026-09-0{i + 1}T10:00:00Z')
+    assert upload(client, "\n".join(rows) + "\n", name="prio.csv").status_code == 201
+
+    s = client.get("/api/v1/settings/priority").json()["data"]
+    assert s["customized"] is False and abs(sum(s["weights"].values()) - 1) < 1e-9
+    assert s["category_weights"]["Payments"] == 90 and set(s["defaults"]) == {"weights", "category_weights"}
+
+    bad = client.put("/api/v1/settings/priority", json={"weights": {**s["weights"], "impact": 0.9}})
+    assert bad.status_code == 422 and "add up to 1" in bad.text
+
+    # Business impact only, Delivery worth 100 and Billing 0: Delivery must rank first.
+    only_business = {"impact": 0, "severity": 0, "recurrence": 0, "growth": 0, "business": 1}
+    r = client.put("/api/v1/settings/priority", json={
+        "weights": only_business, "category_weights": {"Delivery": 100, "Billing": 0}})
+    assert r.status_code == 200 and r.json()["meta"]["rescored_issues"] >= 2
+    top = client.get("/api/v1/issues/top10").json()
+    assert top["meta"]["weights"]["business"] == 1
+    assert top["data"][0]["category"] == "Delivery"
+    detail = client.get(f"/api/v1/issues/{top['data'][0]['issue_id']}").json()["data"]
+    assert detail["breakdown"]["weights"]["business"] == 1
+    # Filtered views recompute with the same saved weights.
+    filtered = client.get("/api/v1/issues/top10", params={"severity": ["HIGH", "MEDIUM", "LOW", "CRITICAL"]}).json()
+    assert filtered["meta"]["weights"]["business"] == 1
+
+    reset = client.delete("/api/v1/settings/priority").json()
+    assert reset["data"]["customized"] is False and reset["data"]["weights"]["impact"] == 0.35

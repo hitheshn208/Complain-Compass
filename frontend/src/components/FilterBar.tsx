@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useFilters } from "../hooks/useFilters";
 import { useApi } from "../hooks/useApi";
 import { api } from "../services/api";
+import { UI_DIMENSIONS } from "../lib/dimensions";
 import { SEVERITIES, humanize } from "../lib/format";
 import type { Filters } from "../types/api";
 
@@ -65,11 +66,7 @@ function MultiSelect({ label, options, value, onChange, format }: {
 }
 
 const DIMENSIONS: { key: keyof Filters; label: string }[] = [
-  { key: "country", label: "Country" },
-  { key: "state", label: "State" },
-  { key: "age_group", label: "Age group" },
-  { key: "student_status", label: "Student" },
-  { key: "income_bracket", label: "Income" },
+  ...UI_DIMENSIONS,
   { key: "source", label: "Source" },
 ];
 

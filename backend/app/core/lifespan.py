@@ -26,6 +26,7 @@ from app.ingestion.voice_ingestion import VoiceIngestionAdapter
 from app.services.analytics_service import AnalyticsService
 from app.services.ingestion_service import IngestionService
 from app.services.pipeline import PipelineOrchestrator, PipelineState
+from app.services.priority_settings import PrioritySettings
 
 logger = logging.getLogger(__name__)
 
@@ -41,6 +42,7 @@ class Container:
     classifier: LLMClassifier
     llm_cache: LLMCache
     pipeline: PipelineOrchestrator
+    priority: PrioritySettings
     analytics: AnalyticsService
     ingestion: IngestionService
     transcriber: Transcriber
@@ -70,7 +72,8 @@ def build_container(settings: Settings) -> Container:
                                settings.llm_enabled, settings.llm_batch_size, settings.llm_concurrency)
     if not classifier.available:
         logger.warning("OPENAI_API_KEY not set or LLM disabled: using deterministic fallback classification/labels.")
-    pipeline = PipelineOrchestrator(settings, repo, embedder, classifier, PipelineState())
+    priority = PrioritySettings(repo, settings)
+    pipeline = PipelineOrchestrator(settings, repo, embedder, classifier, PipelineState(), priority)
     resolver = ContactResolver(repo.lookup_contacts, settings.identity_salt)
     transcriber = build_transcriber(settings)
     if not transcriber.available:
@@ -91,7 +94,8 @@ def build_container(settings: Settings) -> Container:
         classifier=classifier,
         llm_cache=llm_cache,
         pipeline=pipeline,
-        analytics=AnalyticsService(repo, settings),
+        priority=priority,
+        analytics=AnalyticsService(repo, settings, priority),
         ingestion=IngestionService(repo, CSVIngestionAdapter(int(settings.max_upload_mb * 1024 * 1024)),
                                    channels, resolver),
         transcriber=transcriber,

@@ -26,6 +26,7 @@ from app.inference.classifier import LLMClassifier, fallback_cluster_label
 from app.inference.clustering import ClusteringEngine, cluster_keywords, resolve_stable_ids
 from app.inference.embeddings import EmbeddingEngine
 from app.preprocessing.cleaner import clean_text
+from app.services.priority_settings import PrioritySettings
 
 logger = logging.getLogger(__name__)
 
@@ -58,12 +59,14 @@ class PipelineOrchestrator:
         embedder: EmbeddingEngine,
         classifier: LLMClassifier,
         state: PipelineState | None = None,
+        priority: PrioritySettings | None = None,
     ):
         self.settings = settings
         self.repo = repo
         self.embedder = embedder
         self.classifier = classifier
         self.state = state or PipelineState()
+        self.priority = priority
         self.clusterer = ClusteringEngine(
             min_cluster_size=settings.hdbscan_min_cluster_size,
             min_samples=settings.hdbscan_min_samples,
@@ -317,7 +320,9 @@ class PipelineOrchestrator:
     def _score(self) -> dict[str, Any]:
         frame = self.repo.complaint_frame()
         issues = self.repo.list_all_issues(include_stale=False)
-        scores = compute_issue_scores(frame, issues, self.settings.weights)
+        weights = self.priority.weights() if self.priority else self.settings.weights
+        cats = self.priority.category_weights() if self.priority else None
+        scores = compute_issue_scores(frame, issues, weights, category_weights=cats)
         self.repo.replace_issue_metrics([s.as_metrics_row() for s in scores])
         self.repo.update_issue_scores([(s.issue_id, s.priority_score, s.severity) for s in scores])
         return {"scored_issues": len(scores)}
