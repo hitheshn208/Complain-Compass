@@ -69,6 +69,14 @@ imported, **404** unknown channel, **400** wrong file type, **413** too many / t
 | GET | `/api/v1/analytics/filters` | distinct values for filter dropdowns + date range |
 | POST | `/api/v1/analytics/populations` | multipart CSV `dimension,value,population`. Replaces all denominators and enables rates |
 
+## Priority settings
+
+| Method | Path | Description |
+|---|---|---|
+| GET | `/api/v1/settings/priority` | weights in effect (`impact, severity, recurrence, growth, business`, summing to 1), business value per category (0–100), the configured `defaults`, and `customized` |
+| PUT | `/api/v1/settings/priority` | JSON body with `weights` and/or `category_weights`. Validated (weights 0–1 summing to 1, category values 0–100, known categories only; otherwise 422), stored, then every issue is re-scored. `meta.rescored_issues`. 409 while a pipeline run is in progress |
+| DELETE | `/api/v1/settings/priority` | removes the overrides (back to the configured defaults) and re-scores |
+
 ## Meta
 
 `GET /health` → `{"status": "ok", "llm_available": bool, "embedding_model": str, "vectors": int, "transcriber": {...}}`
